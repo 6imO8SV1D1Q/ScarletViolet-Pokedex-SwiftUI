@@ -1,4 +1,4 @@
-name: iOS Archive (Xcode 26)
+name: Deploy to TestFlight (Xcode 26)
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  archive:
+  deploy:
     runs-on: macos-26
 
     steps:
@@ -77,6 +77,38 @@ jobs:
             -exportPath "$PWD/build" \
             -exportOptionsPlist "$PWD/ExportOptions.plist" \
             -allowProvisioningUpdates
+
+      - name: Prepare App Store Connect API key
+        env:
+          ASC_API_KEY: ${{ secrets.ASC_API_KEY }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+        run: |
+          set -euo pipefail
+          : "${ASC_API_KEY:?Missing ASC_API_KEY secret}"
+          : "${ASC_KEY_ID:?Missing ASC_KEY_ID secret}"
+          KEY_DIR="$HOME/.private_keys"
+          mkdir -p "$KEY_DIR"
+          echo "$ASC_API_KEY" | base64 --decode > "$KEY_DIR/AuthKey_${ASC_KEY_ID}.p8"
+          chmod 600 "$KEY_DIR/AuthKey_${ASC_KEY_ID}.p8"
+
+      - name: Upload to TestFlight
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+        run: |
+          set -euo pipefail
+          : "${ASC_KEY_ID:?Missing ASC_KEY_ID secret}"
+          : "${ASC_ISSUER_ID:?Missing ASC_ISSUER_ID secret}"
+          IPA_PATH=$(ls "$PWD"/build/*.ipa | head -n 1)
+          if [ -z "$IPA_PATH" ]; then
+            echo "IPA not found in build directory" >&2
+            exit 1
+          fi
+          xcrun altool --upload-app \
+            -f "$IPA_PATH" \
+            -t ios \
+            --apiKey "$ASC_KEY_ID" \
+            --apiIssuer "$ASC_ISSUER_ID"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

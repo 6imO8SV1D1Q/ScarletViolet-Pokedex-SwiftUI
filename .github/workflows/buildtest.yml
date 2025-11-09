@@ -1,0 +1,26 @@
+name: iOS build with Xcode 26
+
+on:
+  push:
+    branches:
+      - buildtest
+
+jobs:
+  build:
+    runs-on: macos-26
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Build
+        run: |
+          xcodebuild \
+            -project ScarletViolet-Pokedex-SwiftUI/ScarletViolet-Pokedex-SwiftUI.xcodeproj \
+            -scheme ScarletViolet-Pokedex-SwiftUI \
+            -sdk iphoneos \
+            -configuration Release \
+            clean build \
+            CODE_SIGNING_ALLOWED=NO

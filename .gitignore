@@ -80,6 +80,8 @@ fastlane/test_output
 # Mac
 .DS_Store
 
+.claude/
+
 # Backup and temporary files
 *.bak
 *.log

@@ -19,9 +19,45 @@ jobs:
       - name: Show Xcode version
         run: xcodebuild -version
 
+      - name: Install signing assets
+        env:
+          P12_CERT: ${{ secrets.P12_CERT }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          MOBILEPROVISION: ${{ secrets.MOBILEPROVISION }}
+        run: |
+          set -euo pipefail
+          : "${P12_CERT:?Missing P12_CERT secret}"
+          : "${P12_PASSWORD:?Missing P12_PASSWORD secret}"
+          : "${MOBILEPROVISION:?Missing MOBILEPROVISION secret}"
+
+          PROFILE_DIR="$HOME/Library/MobileDevice/Provisioning Profiles"
+          mkdir -p "$PROFILE_DIR"
+          echo "$MOBILEPROVISION" | base64 --decode > "$PROFILE_DIR/ci.mobileprovision"
+
+          KEYCHAIN_NAME=build.keychain
+          KEYCHAIN_PASSWORD=codex-ci
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_NAME"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN_NAME"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_NAME"
+          KEYCHAIN_PATH="$HOME/Library/Keychains/${KEYCHAIN_NAME}-db"
+          security list-keychain -d user -s "$KEYCHAIN_PATH" login.keychain-db
+          security default-keychain -s "$KEYCHAIN_PATH"
+
+          echo "$P12_CERT" | base64 --decode > cert.p12
+          security import cert.p12 -k "$KEYCHAIN_PATH" \
+            -P "$P12_PASSWORD" -A -T /usr/bin/codesign -T /usr/bin/security
+          rm -f cert.p12
+
       - name: Build and Archive
+        env:
+          DEVELOPMENT_TEAM: ${{ secrets.DEVELOPMENT_TEAM }}
         run: |
           set -o pipefail
+          TEAM_ARG=""
+          if [ -n "${DEVELOPMENT_TEAM:-}" ]; then
+            TEAM_ARG="DEVELOPMENT_TEAM=$DEVELOPMENT_TEAM"
+          fi
+
           xcodebuild \
             -project ScarletViolet-Pokedex-SwiftUI.xcodeproj \
             -scheme "ScarletViolet-Pokedex-SwiftUI" \
@@ -29,9 +65,8 @@ jobs:
             -sdk iphoneos \
             -archivePath "$PWD/build/ScarletViolet-Pokedex-SwiftUI.xcarchive" \
             clean archive \
-            CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_ALLOWED=NO
+            $TEAM_ARG \
+            -allowProvisioningUpdates
 
       - name: Export IPA
         run: |
@@ -40,7 +75,8 @@ jobs:
             -exportArchive \
             -archivePath "$PWD/build/ScarletViolet-Pokedex-SwiftUI.xcarchive" \
             -exportPath "$PWD/build" \
-            -exportOptionsPlist "$PWD/ExportOptions.plist"
+            -exportOptionsPlist "$PWD/ExportOptions.plist" \
+            -allowProvisioningUpdates
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

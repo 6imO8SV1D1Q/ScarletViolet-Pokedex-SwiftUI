@@ -1,0 +1,49 @@
+name: iOS Archive (Xcode 26)
+
+on:
+  push:
+    branches:
+      - buildtest
+  pull_request:
+    branches:
+      - buildtest
+  workflow_dispatch:
+
+jobs:
+  archive:
+    runs-on: macos-26
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Build and Archive
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project ScarletViolet-Pokedex-SwiftUI.xcodeproj \
+            -scheme "ScarletViolet-Pokedex-SwiftUI" \
+            -configuration Release \
+            -sdk iphoneos \
+            -archivePath "$PWD/build/ScarletViolet-Pokedex-SwiftUI.xcarchive" \
+            clean archive \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Export IPA
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -exportArchive \
+            -archivePath "$PWD/build/ScarletViolet-Pokedex-SwiftUI.xcarchive" \
+            -exportPath "$PWD/build" \
+            -exportOptionsPlist "$PWD/ExportOptions.plist"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ScarletViolet-Pokedex-SwiftUI-ipa
+          path: build/*.ipa

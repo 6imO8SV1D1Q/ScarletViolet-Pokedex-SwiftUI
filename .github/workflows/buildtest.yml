@@ -1,12 +1,16 @@
-name: iOS build with Xcode 26
+name: Deploy to TestFlight (Xcode 26)
 
 on:
   push:
     branches:
       - buildtest
+  pull_request:
+    branches:
+      - buildtest
+  workflow_dispatch:
 
 jobs:
-  build:
+  deploy:
     runs-on: macos-26
 
     steps:
@@ -15,12 +19,99 @@ jobs:
       - name: Show Xcode version
         run: xcodebuild -version
 
-      - name: Build
+      - name: Install signing assets
+        env:
+          P12_CERT: ${{ secrets.P12_CERT }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          MOBILEPROVISION: ${{ secrets.MOBILEPROVISION }}
         run: |
+          set -euo pipefail
+          : "${P12_CERT:?Missing P12_CERT secret}"
+          : "${P12_PASSWORD:?Missing P12_PASSWORD secret}"
+          : "${MOBILEPROVISION:?Missing MOBILEPROVISION secret}"
+
+          PROFILE_DIR="$HOME/Library/MobileDevice/Provisioning Profiles"
+          mkdir -p "$PROFILE_DIR"
+          echo "$MOBILEPROVISION" | base64 --decode > "$PROFILE_DIR/ci.mobileprovision"
+
+          KEYCHAIN_NAME=build.keychain
+          KEYCHAIN_PASSWORD=codex-ci
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_NAME"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN_NAME"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_NAME"
+          KEYCHAIN_PATH="$HOME/Library/Keychains/${KEYCHAIN_NAME}-db"
+          security list-keychain -d user -s "$KEYCHAIN_PATH" login.keychain-db
+          security default-keychain -s "$KEYCHAIN_PATH"
+
+          echo "$P12_CERT" | base64 --decode > cert.p12
+          security import cert.p12 -k "$KEYCHAIN_PATH" \
+            -P "$P12_PASSWORD" -A -T /usr/bin/codesign -T /usr/bin/security
+          rm -f cert.p12
+
+      - name: Build and Archive
+        env:
+          DEVELOPMENT_TEAM: ${{ secrets.DEVELOPMENT_TEAM }}
+        run: |
+          set -o pipefail
+          TEAM_ARG=""
+          if [ -n "${DEVELOPMENT_TEAM:-}" ]; then
+            TEAM_ARG="DEVELOPMENT_TEAM=$DEVELOPMENT_TEAM"
+          fi
+
           xcodebuild \
             -project ScarletViolet-Pokedex-SwiftUI/ScarletViolet-Pokedex-SwiftUI.xcodeproj \
-            -scheme ScarletViolet-Pokedex-SwiftUI \
-            -sdk iphoneos \
+            -scheme "ScarletViolet-Pokedex-SwiftUI" \
             -configuration Release \
-            clean build \
-            CODE_SIGNING_ALLOWED=NO
+            -sdk iphoneos \
+            -archivePath "$PWD/build/ScarletViolet-Pokedex-SwiftUI.xcarchive" \
+            clean archive \
+            $TEAM_ARG \
+            -allowProvisioningUpdates
+
+      - name: Export IPA
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -exportArchive \
+            -archivePath "$PWD/build/ScarletViolet-Pokedex-SwiftUI.xcarchive" \
+            -exportPath "$PWD/build" \
+            -exportOptionsPlist "$PWD/ExportOptions.plist" \
+            -allowProvisioningUpdates
+
+      - name: Prepare App Store Connect API key
+        env:
+          ASC_API_KEY: ${{ secrets.ASC_API_KEY }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+        run: |
+          set -euo pipefail
+          : "${ASC_API_KEY:?Missing ASC_API_KEY secret}"
+          : "${ASC_KEY_ID:?Missing ASC_KEY_ID secret}"
+          KEY_DIR="$HOME/.private_keys"
+          mkdir -p "$KEY_DIR"
+          echo "$ASC_API_KEY" | base64 --decode > "$KEY_DIR/AuthKey_${ASC_KEY_ID}.p8"
+          chmod 600 "$KEY_DIR/AuthKey_${ASC_KEY_ID}.p8"
+
+      - name: Upload to TestFlight
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+        run: |
+          set -euo pipefail
+          : "${ASC_KEY_ID:?Missing ASC_KEY_ID secret}"
+          : "${ASC_ISSUER_ID:?Missing ASC_ISSUER_ID secret}"
+          IPA_PATH=$(ls "$PWD"/build/*.ipa | head -n 1)
+          if [ -z "$IPA_PATH" ]; then
+            echo "IPA not found in build directory" >&2
+            exit 1
+          fi
+          xcrun altool --upload-app \
+            -f "$IPA_PATH" \
+            -t ios \
+            --apiKey "$ASC_KEY_ID" \
+            --apiIssuer "$ASC_ISSUER_ID"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ScarletViolet-Pokedex-SwiftUI-ipa
+          path: build/*.ipa

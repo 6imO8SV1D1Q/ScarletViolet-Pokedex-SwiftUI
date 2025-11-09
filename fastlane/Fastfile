@@ -11,10 +11,10 @@ platform :ios do
     )
 
     build_app(
-      scheme: "MyApp", # Replace with your Xcode scheme name.
+      scheme: "ScarletViolet-Pokedex-SwiftUI", # Update if your scheme name differs.
       export_method: "app-store"
-      # Provide either `workspace: "MyApp.xcworkspace"` or `project: "MyApp.xcodeproj"`
-      # if fastlane cannot infer it automatically.
+      # Provide either `workspace: "ScarletViolet-Pokedex-SwiftUI.xcworkspace"` or
+      # `project: "ScarletViolet-Pokedex-SwiftUI.xcodeproj"` if fastlane cannot infer it automatically.
     )
 
     upload_to_testflight

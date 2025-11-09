@@ -1,12 +1,6 @@
 name: Deploy to TestFlight (Xcode 26)
 
 on:
-  push:
-    branches:
-      - buildtest
-  pull_request:
-    branches:
-      - buildtest
   workflow_dispatch:
 
 jobs:

@@ -85,7 +85,6 @@
 				70A3B60C2EC0A23F00174E9C /* ScarletViolet-Pokedex-SwiftUI */,
 				70A3B61C2EC0A24100174E9C /* ScarletViolet-Pokedex-SwiftUITests */,
 				70A3B6262EC0A24200174E9C /* ScarletViolet-Pokedex-SwiftUIUITests */,
-				70A3B8382EC0ABD000174E9C /* Frameworks */,
 				70A3B60B2EC0A23F00174E9C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,13 +97,6 @@
 				70A3B6232EC0A24200174E9C /* ScarletViolet-Pokedex-SwiftUIUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		70A3B8382EC0ABD000174E9C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

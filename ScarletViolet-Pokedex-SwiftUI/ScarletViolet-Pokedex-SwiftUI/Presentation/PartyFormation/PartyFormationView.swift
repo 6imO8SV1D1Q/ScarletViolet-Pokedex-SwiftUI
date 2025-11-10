@@ -33,7 +33,7 @@ struct PartyFormationView: View {
                         } label: {
                             PartyMemberRow(
                                 member: viewModel.party.members[index],
-                                pokemon: viewModel.memberPokemons[index]
+                                pokemon: index < viewModel.memberPokemons.count ? viewModel.memberPokemons[index] : nil
                             )
                         }
                         .buttonStyle(.plain)

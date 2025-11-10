@@ -21,6 +21,7 @@ final class PartyFormationViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var showingPokemonSelector: Bool = false
     @Published var showingMemberEditor: Bool = false
+    @Published var memberPokemons: [Pokemon?] = []
 
     // MARK: - Dependencies
 
@@ -89,5 +90,23 @@ final class PartyFormationViewModel: ObservableObject {
     func selectMember(at index: Int) {
         selectedMemberIndex = index
         showingMemberEditor = true
+    }
+
+    func loadMemberPokemons() async {
+        memberPokemons = await withTaskGroup(of: (Int, Pokemon?).self) { group in
+            for (index, member) in party.members.enumerated() {
+                group.addTask { [pokemonRepository] in
+                    let pokemon = try? await pokemonRepository.fetchPokemonDetail(id: member.pokemonId)
+                    return (index, pokemon)
+                }
+            }
+
+            var results: [Int: Pokemon?] = [:]
+            for await (index, pokemon) in group {
+                results[index] = pokemon
+            }
+
+            return (0..<party.members.count).map { results[$0] ?? nil }
+        }
     }
 }

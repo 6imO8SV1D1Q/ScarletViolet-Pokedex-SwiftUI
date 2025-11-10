@@ -8,6 +8,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct PartyPokemonSelectorSheet: View {
     @Environment(\.dismiss) private var dismiss
@@ -28,25 +29,46 @@ struct PartyPokemonSelectorSheet: View {
                         dismiss()
                     } label: {
                         HStack(spacing: 12) {
-                            // Pokemon number
-                            Text("#\(pokemonWithMatch.pokemon.id)")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                                .frame(width: 50, alignment: .leading)
+                            // Pokemon sprite
+                            if let imageURL = pokemonWithMatch.pokemon.displayImageURL {
+                                KFImage(URL(string: imageURL))
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 60, height: 60)
+                                    .clipShape(Circle())
+                                    .overlay(
+                                        Circle()
+                                            .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                                    )
+                                    .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
+                            } else {
+                                Circle()
+                                    .fill(Color.gray.opacity(0.2))
+                                    .frame(width: 60, height: 60)
+                                    .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 1)
+                            }
 
                             // Pokemon name
                             VStack(alignment: .leading, spacing: 2) {
-                                Text(pokemonWithMatch.pokemon.displayName)
-                                    .font(.body)
+                                // 図鑑番号と名前
+                                HStack(spacing: 8) {
+                                    Text(pokemonWithMatch.pokemon.formattedId)
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                    Text(pokemonWithMatch.pokemon.displayName)
+                                        .font(.body)
+                                        .fontWeight(.medium)
+                                }
 
-                                // Types
+                                // タイプバッジ
                                 HStack(spacing: 4) {
-                                    ForEach(pokemonWithMatch.pokemon.types, id: \.name) { type in
+                                    ForEach(pokemonWithMatch.pokemon.types) { type in
                                         Text(type.nameJa ?? type.japaneseName)
                                             .font(.caption2)
-                                            .padding(.horizontal, 6)
+                                            .padding(.horizontal, 8)
                                             .padding(.vertical, 2)
-                                            .background(Color.gray.opacity(0.2))
+                                            .background(type.color)
+                                            .foregroundColor(type.textColor)
                                             .cornerRadius(4)
                                     }
                                 }

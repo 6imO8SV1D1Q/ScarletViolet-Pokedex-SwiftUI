@@ -8,6 +8,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct PartyFormationView: View {
     @StateObject var viewModel: PartyFormationViewModel
@@ -30,7 +31,10 @@ struct PartyFormationView: View {
                             editingMemberIndex = index
                             showingMemberEditor = true
                         } label: {
-                            PartyMemberRow(member: viewModel.party.members[index])
+                            PartyMemberRow(
+                                member: viewModel.party.members[index],
+                                pokemon: viewModel.memberPokemons[index]
+                            )
                         }
                         .buttonStyle(.plain)
                         .swipeActions(edge: .trailing) {
@@ -104,27 +108,41 @@ struct PartyFormationView: View {
         }
         .task {
             await viewModel.analyzeTypeMatchups()
+            await viewModel.loadMemberPokemons()
+        }
+        .onChange(of: viewModel.party.members) { _, _ in
+            Task {
+                await viewModel.loadMemberPokemons()
+            }
         }
     }
 }
 
 struct PartyMemberRow: View {
     let member: PartyMember
+    let pokemon: Pokemon?
 
     var body: some View {
         HStack(spacing: 12) {
-            // Pokemon icon placeholder
-            Circle()
-                .fill(Color.gray.opacity(0.2))
-                .frame(width: 50, height: 50)
-                .overlay {
-                    Text("#\(member.pokemonId)")
-                        .font(.caption2)
-                }
+            // Pokemon sprite
+            if let pokemon = pokemon, let imageURL = pokemon.displayImageURL {
+                KFImage(URL(string: imageURL))
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50, height: 50)
+            } else {
+                Circle()
+                    .fill(Color.gray.opacity(0.2))
+                    .frame(width: 50, height: 50)
+                    .overlay {
+                        Text("#\(member.pokemonId)")
+                            .font(.caption2)
+                    }
+            }
 
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
-                    Text("Pokemon #\(member.pokemonId)")
+                    Text(pokemon?.displayName ?? "Pokemon #\(member.pokemonId)")
                         .font(.body)
                     if let nickname = member.nickname {
                         Text("(\(nickname))")

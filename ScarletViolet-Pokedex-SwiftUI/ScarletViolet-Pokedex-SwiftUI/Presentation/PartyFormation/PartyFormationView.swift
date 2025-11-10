@@ -14,6 +14,8 @@ struct PartyFormationView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var showingPokemonSelector = false
     @State private var selectedSlotIndex: Int?
+    @State private var showingMemberEditor = false
+    @State private var editingMemberIndex: Int?
 
     var body: some View {
         Form {
@@ -24,14 +26,20 @@ struct PartyFormationView: View {
             Section("Members (\(viewModel.party.members.count)/6)") {
                 ForEach(0..<6, id: \.self) { index in
                     if index < viewModel.party.members.count {
-                        PartyMemberRow(member: viewModel.party.members[index])
-                            .swipeActions(edge: .trailing) {
-                                Button(role: .destructive) {
-                                    viewModel.removePokemon(at: index)
-                                } label: {
-                                    Label("Remove", systemImage: "trash")
-                                }
+                        Button {
+                            editingMemberIndex = index
+                            showingMemberEditor = true
+                        } label: {
+                            PartyMemberRow(member: viewModel.party.members[index])
+                        }
+                        .buttonStyle(.plain)
+                        .swipeActions(edge: .trailing) {
+                            Button(role: .destructive) {
+                                viewModel.removePokemon(at: index)
+                            } label: {
+                                Label("Remove", systemImage: "trash")
                             }
+                        }
                     } else {
                         Button {
                             selectedSlotIndex = index
@@ -78,6 +86,19 @@ struct PartyFormationView: View {
             PokemonSelectorSheet { pokemon in
                 if let index = selectedSlotIndex {
                     viewModel.addPokemon(pokemon, at: index)
+                }
+            }
+        }
+        .sheet(isPresented: $showingMemberEditor) {
+            if let index = editingMemberIndex,
+               index < viewModel.party.members.count {
+                NavigationStack {
+                    PartyMemberEditorView(
+                        viewModel: DIContainer.shared.makePartyMemberEditorViewModel(
+                            member: viewModel.party.members[index]
+                        ),
+                        member: $viewModel.party.members[index]
+                    )
                 }
             }
         }

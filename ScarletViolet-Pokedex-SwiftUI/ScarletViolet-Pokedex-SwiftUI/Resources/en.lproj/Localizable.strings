@@ -749,3 +749,11 @@
 "party.empty_move" = "Empty";
 "party.analysis" = "Analysis";
 "party.coverage_score" = "Coverage Score";
+"party.weaknesses" = "Weaknesses";
+"party.resistances" = "Resistances";
+"party.immunities" = "Immunities";
+"party.no_weaknesses" = "No significant weaknesses";
+"party.no_resistances" = "No resistances";
+"party.no_immunities" = "No immunities";
+"party.suggestions" = "Suggestions";
+"party.add_pokemon_to_analyze" = "Add Pokémon to see analysis";

@@ -749,3 +749,11 @@
 "party.empty_move" = "未設定";
 "party.analysis" = "分析";
 "party.coverage_score" = "カバー率";
+"party.weaknesses" = "弱点";
+"party.resistances" = "耐性";
+"party.immunities" = "無効";
+"party.no_weaknesses" = "大きな弱点なし";
+"party.no_resistances" = "耐性なし";
+"party.no_immunities" = "無効タイプなし";
+"party.suggestions" = "提案";
+"party.add_pokemon_to_analyze" = "ポケモンを追加すると分析が表示されます";

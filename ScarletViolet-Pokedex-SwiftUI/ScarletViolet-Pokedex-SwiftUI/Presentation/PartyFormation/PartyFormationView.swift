@@ -13,6 +13,7 @@ import Kingfisher
 struct PartyFormationView: View {
     @StateObject var viewModel: PartyFormationViewModel
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var localizationManager: LocalizationManager
     @State private var showingPokemonSelector = false
     @State private var selectedSlotIndex: Int?
     @State private var showingMemberEditor = false
@@ -197,58 +198,145 @@ struct PartyFormationView: View {
 struct PartyMemberRow: View {
     let member: PartyMember
     let pokemon: Pokemon?
+    @EnvironmentObject private var localizationManager: LocalizationManager
 
     var body: some View {
-        HStack(spacing: 12) {
-            // Pokemon sprite
+        VStack(alignment: .leading, spacing: DesignConstants.Spacing.small) {
+            HStack(alignment: .top, spacing: DesignConstants.Spacing.small) {
+                pokemonImage
+
+                VStack(alignment: .leading, spacing: DesignConstants.Spacing.xxSmall) {
+                    pokemonInfo
+                }
+
+                Spacer()
+            }
+        }
+        .padding(.vertical, DesignConstants.Spacing.xxSmall)
+    }
+
+    private var pokemonImage: some View {
+        Group {
             if let pokemon = pokemon, let imageURL = pokemon.displayImageURL {
                 KFImage(URL(string: imageURL))
                     .resizable()
-                    .scaledToFit()
-                    .frame(width: 50, height: 50)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: DesignConstants.ImageSize.medium, height: DesignConstants.ImageSize.medium)
+                    .background(Color(.tertiarySystemFill))
+                    .clipShape(Circle())
+                    .shadow(color: Color(.systemGray).opacity(DesignConstants.Shadow.opacity), radius: DesignConstants.Shadow.medium, x: 0, y: 2)
             } else {
                 Circle()
                     .fill(Color.gray.opacity(0.2))
-                    .frame(width: 50, height: 50)
+                    .frame(width: DesignConstants.ImageSize.medium, height: DesignConstants.ImageSize.medium)
                     .overlay {
                         Text("#\(member.pokemonId)")
-                            .font(.caption2)
-                    }
-            }
-
-            VStack(alignment: .leading, spacing: 4) {
-                HStack {
-                    Text(pokemon?.displayName ?? "Pokemon #\(member.pokemonId)")
-                        .font(.body)
-                    if let nickname = member.nickname {
-                        Text("(\(nickname))")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
-                }
+            }
+        }
+    }
 
-                HStack(spacing: 8) {
-                    Label("Lv.\(member.level)", systemImage: "star.fill")
+    private var pokemonInfo: some View {
+        VStack(alignment: .leading, spacing: DesignConstants.Spacing.xxSmall) {
+            pokemonHeader
+            typesBadges
+
+            HStack(spacing: 8) {
+                Label("Lv.\(member.level)", systemImage: "star.fill")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+
+                if let pokemon = pokemon, let ability = pokemon.abilities.first {
+                    Text(localizationManager.displayName(for: ability))
                         .font(.caption)
                         .foregroundColor(.secondary)
-
-                    // Tera type badge
-                    HStack(spacing: 4) {
-                        Image(systemName: "diamond.fill")
-                            .font(.caption2)
-                        Text(member.teraType.capitalized)
-                            .font(.caption2)
-                    }
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 2)
-                    .background(Color.blue.opacity(0.2))
-                    .cornerRadius(4)
                 }
             }
 
-            Spacer()
+            if let pokemon = pokemon {
+                baseStatsView(pokemon)
+            }
+
+            // Tera type and nickname
+            HStack(spacing: 8) {
+                HStack(spacing: 4) {
+                    Image(systemName: "diamond.fill")
+                        .font(.caption2)
+                    Text("テラス: \(member.teraType.capitalized)")
+                        .font(.caption2)
+                }
+                .padding(.horizontal, 6)
+                .padding(.vertical, 2)
+                .background(Color.blue.opacity(0.2))
+                .cornerRadius(4)
+
+                if let nickname = member.nickname {
+                    Text("(\(nickname))")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+            }
         }
-        .padding(.vertical, 4)
+    }
+
+    private var pokemonHeader: some View {
+        HStack(spacing: DesignConstants.Spacing.xSmall) {
+            Text(String(format: "#%04d", member.pokemonId))
+                .font(.caption)
+                .foregroundColor(.secondary)
+
+            if let pokemon = pokemon {
+                Text(localizationManager.displayName(for: pokemon))
+                    .font(.headline)
+            } else {
+                Text("Pokemon #\(member.pokemonId)")
+                    .font(.headline)
+                    .foregroundColor(.secondary)
+            }
+        }
+    }
+
+    private var typesBadges: some View {
+        HStack(spacing: DesignConstants.Spacing.xxSmall) {
+            if let pokemon = pokemon {
+                ForEach(pokemon.types.sorted(by: { $0.slot < $1.slot })) { type in
+                    Text(localizationManager.displayName(for: type))
+                        .typeBadgeStyle(type)
+                }
+            }
+        }
+    }
+
+    private func baseStatsView(_ pokemon: Pokemon) -> some View {
+        let hp = pokemon.stats.first { $0.name == "hp" }?.baseStat ?? 0
+        let attack = pokemon.stats.first { $0.name == "attack" }?.baseStat ?? 0
+        let defense = pokemon.stats.first { $0.name == "defense" }?.baseStat ?? 0
+        let specialAttack = pokemon.stats.first { $0.name == "special-attack" }?.baseStat ?? 0
+        let specialDefense = pokemon.stats.first { $0.name == "special-defense" }?.baseStat ?? 0
+        let speed = pokemon.stats.first { $0.name == "speed" }?.baseStat ?? 0
+        let total = pokemon.totalBaseStat
+
+        return HStack(spacing: 0) {
+            Text("\(hp)")
+            Text("-")
+            Text("\(attack)")
+            Text("-")
+            Text("\(defense)")
+            Text("-")
+            Text("\(specialAttack)")
+            Text("-")
+            Text("\(specialDefense)")
+            Text("-")
+            Text("\(speed)")
+            Text(" (")
+            Text("\(total)")
+            Text(")")
+        }
+        .font(.caption)
+        .foregroundColor(.secondary)
+        .fixedSize(horizontal: true, vertical: false)
     }
 }
 
@@ -256,17 +344,18 @@ struct EmptyMemberSlot: View {
     let position: Int
 
     var body: some View {
-        HStack {
+        HStack(spacing: DesignConstants.Spacing.small) {
             Circle()
                 .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [5]))
                 .foregroundColor(.secondary.opacity(0.3))
-                .frame(width: 50, height: 50)
+                .frame(width: DesignConstants.ImageSize.medium, height: DesignConstants.ImageSize.medium)
 
             Text(String(format: NSLocalizedString("party.empty_slot", comment: ""), position))
                 .foregroundColor(.secondary)
+                .font(.headline)
 
             Spacer()
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, DesignConstants.Spacing.xxSmall)
     }
 }

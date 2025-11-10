@@ -12,6 +12,8 @@ import SwiftUI
 struct PartyFormationView: View {
     @StateObject var viewModel: PartyFormationViewModel
     @Environment(\.dismiss) private var dismiss
+    @State private var showingPokemonSelector = false
+    @State private var selectedSlotIndex: Int?
 
     var body: some View {
         Form {
@@ -31,7 +33,13 @@ struct PartyFormationView: View {
                                 }
                             }
                     } else {
-                        EmptyMemberSlot(position: index + 1)
+                        Button {
+                            selectedSlotIndex = index
+                            showingPokemonSelector = true
+                        } label: {
+                            EmptyMemberSlot(position: index + 1)
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
             }
@@ -64,6 +72,13 @@ struct PartyFormationView: View {
                     }
                 }
                 .disabled(viewModel.party.name.isEmpty)
+            }
+        }
+        .sheet(isPresented: $showingPokemonSelector) {
+            PokemonSelectorSheet { pokemon in
+                if let index = selectedSlotIndex {
+                    viewModel.addPokemon(pokemon, at: index)
+                }
             }
         }
         .task {

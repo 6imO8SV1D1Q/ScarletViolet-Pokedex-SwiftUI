@@ -17,7 +17,7 @@ final class PartyMemberEditorViewModel: ObservableObject {
     @Published var member: PartyMember
     @Published var pokemon: Pokemon?
     @Published var availableForms: [PokemonForm] = []
-    @Published var availableMoves: [Move] = []
+    @Published var availableMoves: [MoveEntity] = []
     @Published var selectedForm: PokemonForm?
 
     // MARK: - Dependencies

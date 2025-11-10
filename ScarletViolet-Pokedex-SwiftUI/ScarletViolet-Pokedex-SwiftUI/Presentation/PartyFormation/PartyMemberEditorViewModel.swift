@@ -44,11 +44,36 @@ final class PartyMemberEditorViewModel: ObservableObject {
             pokemon = try await pokemonRepository.fetchPokemonDetail(id: member.pokemonId)
             if let pokemon = pokemon {
                 availableForms = try await pokemonRepository.fetchPokemonForms(pokemonId: pokemon.id)
-                // TODO: Load available moves from pokemon.moves
+                // Load available moves
+                await loadAvailableMoves(pokemon: pokemon)
             }
         } catch {
             // TODO: Error handling
         }
+    }
+
+    private func loadAvailableMoves(pokemon: Pokemon) async {
+        // Extract unique move names from all learn methods
+        let moveNames = pokemon.moves.map { $0.move.name }
+
+        // Fetch move details
+        let moves = await withTaskGroup(of: MoveEntity?.self) { group in
+            for moveName in moveNames {
+                group.addTask { [moveRepository] in
+                    try? await moveRepository.fetchMoveByName(moveName)
+                }
+            }
+
+            var results: [MoveEntity] = []
+            for await move in group {
+                if let move = move {
+                    results.append(move)
+                }
+            }
+            return results
+        }
+
+        availableMoves = moves.sorted { $0.nameJa < $1.nameJa }
     }
 
     func updateTeraType(_ type: String) {

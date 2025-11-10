@@ -263,13 +263,15 @@ struct PartyMemberRow: View {
             HStack(spacing: 8) {
                 HStack(spacing: 4) {
                     Image(systemName: "diamond.fill")
-                        .font(.caption2)
-                    Text("テラス: \(member.teraType.capitalized)")
-                        .font(.caption2)
+                        .font(.system(size: 10))
+                    Text(teraTypeDisplayName)
+                        .font(.system(size: 12))
+                        .fontWeight(.semibold)
                 }
                 .padding(.horizontal, 6)
                 .padding(.vertical, 2)
-                .background(Color.blue.opacity(0.2))
+                .background(teraTypeColor)
+                .foregroundColor(teraTypeTextColor)
                 .cornerRadius(4)
 
                 if let nickname = member.nickname {
@@ -279,6 +281,21 @@ struct PartyMemberRow: View {
                 }
             }
         }
+    }
+
+    private var teraTypeDisplayName: String {
+        let teraType = PokemonType(slot: 1, name: member.teraType, nameJa: nil)
+        return localizationManager.displayName(for: teraType)
+    }
+
+    private var teraTypeColor: Color {
+        let teraType = PokemonType(slot: 1, name: member.teraType, nameJa: nil)
+        return teraType.color
+    }
+
+    private var teraTypeTextColor: Color {
+        let teraType = PokemonType(slot: 1, name: member.teraType, nameJa: nil)
+        return teraType.textColor
     }
 
     private var pokemonHeader: some View {

@@ -142,6 +142,10 @@ struct PartyMemberEditorView: View {
                     onMoveSelected: { move in
                         let selectedMove = SelectedMove(
                             moveName: move.name,
+                            moveType: move.type.name,
+                            slot: slot,
+                            power: move.power,
+                            accuracy: move.accuracy,
                             pp: move.pp
                         )
                         viewModel.updateMove(selectedMove, at: slot)

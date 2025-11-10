@@ -53,8 +53,8 @@ final class PartyMemberEditorViewModel: ObservableObject {
     }
 
     private func loadAvailableMoves(pokemon: Pokemon) async {
-        // Extract unique move names from all learn methods
-        let moveNames = pokemon.moves.map { $0.move.name }
+        // Extract unique move names from pokemon.moves
+        let moveNames = pokemon.moves.map { $0.name }
 
         // Fetch move details
         let moves = await withTaskGroup(of: MoveEntity?.self) { group in

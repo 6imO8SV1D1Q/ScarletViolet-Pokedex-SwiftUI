@@ -54,7 +54,7 @@ struct PartyMemberEditorView: View {
             Section("Nature") {
                 Picker("Nature", selection: $viewModel.member.nature) {
                     ForEach(Nature.allCases, id: \.self) { nature in
-                        Text(nature.nameJa).tag(nature)
+                        Text(nature.displayName).tag(nature)
                     }
                 }
             }

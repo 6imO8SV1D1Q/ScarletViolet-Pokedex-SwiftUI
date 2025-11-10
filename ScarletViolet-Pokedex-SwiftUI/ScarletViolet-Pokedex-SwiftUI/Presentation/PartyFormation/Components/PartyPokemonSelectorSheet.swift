@@ -1,5 +1,5 @@
 //
-//  PokemonSelectorSheet.swift
+//  PartyPokemonSelectorSheet.swift
 //  ScarletViolet-Pokedex-SwiftUI
 //
 //  Pokemon selector for adding to party
@@ -9,7 +9,7 @@
 
 import SwiftUI
 
-struct PokemonSelectorSheet: View {
+struct PartyPokemonSelectorSheet: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel: PokemonListViewModel
     let onSelect: (Pokemon) -> Void

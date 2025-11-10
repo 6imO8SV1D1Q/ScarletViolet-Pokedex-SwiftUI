@@ -83,7 +83,7 @@ struct PartyFormationView: View {
             }
         }
         .sheet(isPresented: $showingPokemonSelector) {
-            PokemonSelectorSheet { pokemon in
+            PartyPokemonSelectorSheet { pokemon in
                 if let index = selectedSlotIndex {
                     viewModel.addPokemon(pokemon, at: index)
                 }

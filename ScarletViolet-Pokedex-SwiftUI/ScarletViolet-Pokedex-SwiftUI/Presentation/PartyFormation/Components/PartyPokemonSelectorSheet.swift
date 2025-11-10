@@ -42,7 +42,7 @@ struct PartyPokemonSelectorSheet: View {
                                 // Types
                                 HStack(spacing: 4) {
                                     ForEach(pokemonWithMatch.pokemon.types, id: \.name) { type in
-                                        Text(type.displayName)
+                                        Text(type.nameJa ?? type.japaneseName)
                                             .font(.caption2)
                                             .padding(.horizontal, 6)
                                             .padding(.vertical, 2)

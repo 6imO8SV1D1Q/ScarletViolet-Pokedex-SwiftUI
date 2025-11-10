@@ -70,19 +70,32 @@ final class PartyRepository: PartyRepositoryProtocol {
             throw PartyRepositoryError.partyNotFound
         }
 
-        // 新しいIDで複製
-        var duplicated = original
-        duplicated.id = UUID()
-        duplicated.name = "\(original.name) (Copy)"
-        duplicated.createdAt = Date()
-        duplicated.updatedAt = Date()
-
-        // メンバーのIDも再生成
-        duplicated.members = duplicated.members.map { member in
-            var newMember = member
-            newMember.id = UUID()
-            return newMember
+        // メンバーのIDを再生成
+        let newMembers = original.members.map { member in
+            PartyMember(
+                id: UUID(),
+                pokemonId: member.pokemonId,
+                nickname: member.nickname,
+                selectedMoves: member.selectedMoves,
+                ability: member.ability,
+                item: member.item,
+                nature: member.nature,
+                evs: member.evs,
+                ivs: member.ivs,
+                level: member.level,
+                teraType: member.teraType,
+                position: member.position
+            )
         }
+
+        // 新しいIDで複製
+        let duplicated = Party(
+            id: UUID(),
+            name: "\(original.name) (Copy)",
+            members: newMembers,
+            createdAt: Date(),
+            updatedAt: Date()
+        )
 
         try await saveParty(duplicated)
         return duplicated

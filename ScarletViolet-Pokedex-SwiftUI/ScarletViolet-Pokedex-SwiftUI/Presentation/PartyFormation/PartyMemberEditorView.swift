@@ -10,7 +10,7 @@
 import SwiftUI
 
 struct PartyMemberEditorView: View {
-    @StateObject var viewModel: PartyMemberEditorViewModel
+    @ObservedObject var viewModel: PartyMemberEditorViewModel
     @Environment(\.dismiss) private var dismiss
     @Binding var member: PartyMember
 

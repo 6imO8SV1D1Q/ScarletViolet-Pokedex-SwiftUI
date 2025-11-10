@@ -20,11 +20,11 @@ struct PartyFormationView: View {
 
     var body: some View {
         Form {
-            Section("Party Name") {
-                TextField("Party Name", text: $viewModel.party.name)
+            Section(NSLocalizedString("party.party_name", comment: "")) {
+                TextField(NSLocalizedString("party.party_name", comment: ""), text: $viewModel.party.name)
             }
 
-            Section("Members (\(viewModel.party.members.count)/6)") {
+            Section(String(format: NSLocalizedString("party.members", comment: ""), viewModel.party.members.count)) {
                 ForEach(0..<6, id: \.self) { index in
                     if index < viewModel.party.members.count {
                         Button {
@@ -41,7 +41,7 @@ struct PartyFormationView: View {
                             Button(role: .destructive) {
                                 viewModel.removePokemon(at: index)
                             } label: {
-                                Label("Remove", systemImage: "trash")
+                                Label(NSLocalizedString("party.remove", comment: ""), systemImage: "trash")
                             }
                         }
                     } else {
@@ -57,9 +57,9 @@ struct PartyFormationView: View {
             }
 
             if let analysis = viewModel.typeAnalysis {
-                Section("Analysis") {
+                Section(NSLocalizedString("party.analysis", comment: "")) {
                     HStack {
-                        Text("Coverage Score")
+                        Text(NSLocalizedString("party.coverage_score", comment: ""))
                         Spacer()
                         Text("\(Int(analysis.coverageScore * 100))%")
                             .foregroundColor(.secondary)
@@ -67,17 +67,17 @@ struct PartyFormationView: View {
                 }
             }
         }
-        .navigationTitle("Party Formation")
+        .navigationTitle(NSLocalizedString("party.formation_title", comment: ""))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
-                Button("Cancel") {
+                Button(NSLocalizedString("common.cancel", comment: "")) {
                     dismiss()
                 }
             }
 
             ToolbarItem(placement: .confirmationAction) {
-                Button("Save") {
+                Button(NSLocalizedString("common.save", comment: "")) {
                     Task {
                         try? await viewModel.saveParty()
                         dismiss()
@@ -186,7 +186,7 @@ struct EmptyMemberSlot: View {
                 .foregroundColor(.secondary.opacity(0.3))
                 .frame(width: 50, height: 50)
 
-            Text("Empty Slot \(position)")
+            Text(String(format: NSLocalizedString("party.empty_slot", comment: ""), position))
                 .foregroundColor(.secondary)
 
             Spacer()

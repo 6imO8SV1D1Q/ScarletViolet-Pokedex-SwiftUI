@@ -81,16 +81,16 @@ struct PartyPokemonSelectorSheet: View {
                     .buttonStyle(.plain)
                 }
             }
-            .navigationTitle("Select Pokémon")
+            .navigationTitle(NSLocalizedString("party.select_pokemon", comment: ""))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
+                    Button(NSLocalizedString("common.cancel", comment: "")) {
                         dismiss()
                     }
                 }
             }
-            .searchable(text: $viewModel.searchText, prompt: "Search Pokémon")
+            .searchable(text: $viewModel.searchText, prompt: NSLocalizedString("party.search_pokemon", comment: ""))
             .task {
                 await viewModel.loadPokemons()
             }

@@ -128,7 +128,7 @@ struct ContentView: View {
                     }
                     .environmentObject(LocalizationManager.shared)
                     .tabItem {
-                        Label("Party", systemImage: "person.3.fill")
+                        Label(NSLocalizedString("tab.party", comment: "Party tab title"), systemImage: "person.3.fill")
                     }
                 }
             } else {

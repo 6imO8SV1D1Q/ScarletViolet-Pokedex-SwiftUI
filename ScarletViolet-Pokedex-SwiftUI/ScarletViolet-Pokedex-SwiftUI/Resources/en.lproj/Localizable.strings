@@ -720,3 +720,32 @@
 "damage_calc.move_not_found" = "No moves found";
 "damage_calc.ability_not_found" = "No abilities found";
 "damage_calc.item_not_found" = "No items found";
+
+// MARK: - Party Formation
+"tab.party" = "Party";
+"party.title" = "Party";
+"party.list_title" = "Parties";
+"party.formation_title" = "Party Formation";
+"party.new_party" = "New Party";
+"party.party_name" = "Party Name";
+"party.members" = "Members (%d/6)";
+"party.empty_slot" = "Empty Slot %d";
+"party.remove" = "Remove";
+"party.select_pokemon" = "Select Pokémon";
+"party.search_pokemon" = "Search Pokémon";
+"party.edit_member" = "Edit Member";
+"party.basic_info" = "Basic Info";
+"party.pokemon" = "Pokemon";
+"party.nickname" = "Nickname (Optional)";
+"party.level" = "Level: %d";
+"party.tera_type" = "Tera Type";
+"party.nature" = "Nature";
+"party.ability" = "Ability";
+"party.stats" = "Stats";
+"party.evs" = "EVs";
+"party.ivs" = "IVs";
+"party.moves" = "Moves";
+"party.move_slot" = "Move %d";
+"party.empty_move" = "Empty";
+"party.analysis" = "Analysis";
+"party.coverage_score" = "Coverage Score";

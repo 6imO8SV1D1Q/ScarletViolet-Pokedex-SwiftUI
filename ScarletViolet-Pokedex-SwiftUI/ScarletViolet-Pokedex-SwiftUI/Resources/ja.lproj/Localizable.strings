@@ -720,3 +720,32 @@
 "damage_calc.move_not_found" = "わざが見つかりません";
 "damage_calc.ability_not_found" = "特性が見つかりません";
 "damage_calc.item_not_found" = "アイテムが見つかりません";
+
+// MARK: - Party Formation
+"tab.party" = "パーティ";
+"party.title" = "パーティ";
+"party.list_title" = "パーティ一覧";
+"party.formation_title" = "パーティ編成";
+"party.new_party" = "新しいパーティ";
+"party.party_name" = "パーティ名";
+"party.members" = "メンバー (%d/6)";
+"party.empty_slot" = "空き枠 %d";
+"party.remove" = "削除";
+"party.select_pokemon" = "ポケモンを選択";
+"party.search_pokemon" = "ポケモンを検索";
+"party.edit_member" = "メンバーを編集";
+"party.basic_info" = "基本情報";
+"party.pokemon" = "ポケモン";
+"party.nickname" = "ニックネーム (任意)";
+"party.level" = "レベル: %d";
+"party.tera_type" = "テラスタイプ";
+"party.nature" = "性格";
+"party.ability" = "とくせい";
+"party.stats" = "ステータス";
+"party.evs" = "努力値";
+"party.ivs" = "個体値";
+"party.moves" = "わざ";
+"party.move_slot" = "わざ %d";
+"party.empty_move" = "未設定";
+"party.analysis" = "分析";
+"party.coverage_score" = "カバー率";

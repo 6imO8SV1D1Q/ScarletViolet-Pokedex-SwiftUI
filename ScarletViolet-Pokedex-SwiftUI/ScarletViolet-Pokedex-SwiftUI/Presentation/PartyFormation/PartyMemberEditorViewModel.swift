@@ -53,14 +53,14 @@ final class PartyMemberEditorViewModel: ObservableObject {
     }
 
     private func loadAvailableMoves(pokemon: Pokemon) async {
-        // Extract unique move names from pokemon.moves
-        let moveNames = pokemon.moves.map { $0.name }
+        // Extract unique move IDs from pokemon.moves
+        let moveIds = pokemon.moves.map { $0.id }
 
         // Fetch move details
         let moves = await withTaskGroup(of: MoveEntity?.self) { group in
-            for moveName in moveNames {
+            for moveId in moveIds {
                 group.addTask { [moveRepository] in
-                    try? await moveRepository.fetchMoveByName(moveName)
+                    try? await moveRepository.fetchMoveDetail(moveId: moveId, versionGroup: "scarlet-violet")
                 }
             }
 

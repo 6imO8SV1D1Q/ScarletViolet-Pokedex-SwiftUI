@@ -136,7 +136,7 @@ struct PartyMemberEditorView: View {
         }
         .sheet(isPresented: $showingMoveSelector) {
             if let slot = selectedMoveSlot {
-                MoveSelectorSheet(
+                PartyMoveSelectorSheet(
                     availableMoves: viewModel.availableMoves,
                     selectedMoveSlot: slot,
                     onMoveSelected: { move in
@@ -163,9 +163,9 @@ struct PartyMemberEditorView: View {
     }
 }
 
-// MARK: - Move Selector Sheet
+// MARK: - Party Move Selector Sheet
 
-struct MoveSelectorSheet: View {
+struct PartyMoveSelectorSheet: View {
     let availableMoves: [MoveEntity]
     let selectedMoveSlot: Int
     let onMoveSelected: (MoveEntity) -> Void
@@ -213,9 +213,11 @@ struct MoveSelectorSheet: View {
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             }
-                            Text("PP: \(move.pp)")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
+                            if let pp = move.pp {
+                                Text("PP: \(pp)")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
                         }
                     }
                     .foregroundColor(.primary)

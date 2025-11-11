@@ -146,7 +146,7 @@ struct PartyMemberEditorView: View {
                             slot: slot,
                             power: move.power,
                             accuracy: move.accuracy,
-                            pp: move.pp
+                            pp: move.pp ?? 5
                         )
                         viewModel.updateMove(selectedMove, at: slot)
                         showingMoveSelector = false
@@ -238,7 +238,7 @@ struct MoveSelectorSheet: View {
 // MARK: - EV Editor Sheet
 
 struct EVEditorSheet: View {
-    @Binding var evs: PokemonStats
+    @Binding var evs: StatValues
     @Environment(\.dismiss) private var dismiss
 
     var remainingEVs: Int {
@@ -267,7 +267,7 @@ struct EVEditorSheet: View {
 
                 Section {
                     Button("すべてリセット") {
-                        evs = PokemonStats(
+                        evs = StatValues(
                             hp: 0,
                             attack: 0,
                             defense: 0,

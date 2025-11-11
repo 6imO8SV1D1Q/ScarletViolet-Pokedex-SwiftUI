@@ -62,7 +62,14 @@ final class PartyMemberEditorViewModel: ObservableObject {
         do {
             // Load all items and filter for held items
             let allItems = try await itemProvider.fetchAllItems()
+            print("🔍 [PartyMemberEditor] Loaded \(allItems.count) total items")
             availableItems = allItems.filter { $0.category == "held-item" }
+            print("✅ [PartyMemberEditor] Filtered to \(availableItems.count) held items")
+            if availableItems.isEmpty {
+                print("⚠️ [PartyMemberEditor] No held items found!")
+            } else {
+                print("📦 [PartyMemberEditor] Sample items: \(availableItems.prefix(3).map { $0.nameJa })")
+            }
         } catch {
             print("❌ Failed to load items: \(error)")
             availableItems = []

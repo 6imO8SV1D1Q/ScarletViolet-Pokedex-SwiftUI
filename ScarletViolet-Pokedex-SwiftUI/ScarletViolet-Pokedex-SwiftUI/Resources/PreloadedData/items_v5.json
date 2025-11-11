@@ -21,6 +21,254 @@
       "cost": 50000
     },
     {
+      "id": 149,
+      "name": "oran-berry",
+      "nameJa": "オレンのみ",
+      "category": "held-item",
+      "description": "Restores 10 HP when held by a Pokémon.",
+      "descriptionJa": "持たせるとHPが減った時に10だけ回復する。"
+    },
+    {
+      "id": 153,
+      "name": "cheri-berry",
+      "nameJa": "クラボのみ",
+      "category": "held-item",
+      "description": "Cures paralysis.",
+      "descriptionJa": "持たせるとまひ状態を回復する。"
+    },
+    {
+      "id": 154,
+      "name": "chesto-berry",
+      "nameJa": "カゴのみ",
+      "category": "held-item",
+      "description": "Cures sleep.",
+      "descriptionJa": "持たせるとねむり状態を回復する。"
+    },
+    {
+      "id": 155,
+      "name": "pecha-berry",
+      "nameJa": "モモンのみ",
+      "category": "held-item",
+      "description": "Cures poison.",
+      "descriptionJa": "持たせるとどく・もうどく状態を回復する。"
+    },
+    {
+      "id": 156,
+      "name": "rawst-berry",
+      "nameJa": "チーゴのみ",
+      "category": "held-item",
+      "description": "Cures burn.",
+      "descriptionJa": "持たせるとやけど状態を回復する。"
+    },
+    {
+      "id": 157,
+      "name": "lum-berry",
+      "nameJa": "ラムのみ",
+      "category": "held-item",
+      "description": "Cures any status condition.",
+      "descriptionJa": "持たせると状態異常をすべて回復する。"
+    },
+    {
+      "id": 158,
+      "name": "aspear-berry",
+      "nameJa": "ナナシのみ",
+      "category": "held-item",
+      "description": "Cures freeze.",
+      "descriptionJa": "持たせるとこおり状態を回復する。"
+    },
+    {
+      "id": 159,
+      "name": "sitrus-berry",
+      "nameJa": "オボンのみ",
+      "category": "held-item",
+      "description": "Restores 1/4 of max HP when HP drops to 1/2 or below.",
+      "descriptionJa": "HPが半分以下になると最大HPの1/4を回復する。"
+    },
+    {
+      "id": 160,
+      "name": "figy-berry",
+      "nameJa": "フィラのみ",
+      "category": "held-item",
+      "description": "Restores 1/3 max HP when HP is 1/4 or below. Confuses if nature dislikes spicy.",
+      "descriptionJa": "HPが1/4以下で最大HPの1/3回復。辛い味が嫌いな性格だと混乱。"
+    },
+    {
+      "id": 161,
+      "name": "wiki-berry",
+      "nameJa": "ウイのみ",
+      "category": "held-item",
+      "description": "Restores 1/3 max HP when HP is 1/4 or below. Confuses if nature dislikes dry.",
+      "descriptionJa": "HPが1/4以下で最大HPの1/3回復。渋い味が嫌いな性格だと混乱。"
+    },
+    {
+      "id": 162,
+      "name": "mago-berry",
+      "nameJa": "マゴのみ",
+      "category": "held-item",
+      "description": "Restores 1/3 max HP when HP is 1/4 or below. Confuses if nature dislikes sweet.",
+      "descriptionJa": "HPが1/4以下で最大HPの1/3回復。甘い味が嫌いな性格だと混乱。"
+    },
+    {
+      "id": 163,
+      "name": "aguav-berry",
+      "nameJa": "バンジのみ",
+      "category": "held-item",
+      "description": "Restores 1/3 max HP when HP is 1/4 or below. Confuses if nature dislikes bitter.",
+      "descriptionJa": "HPが1/4以下で最大HPの1/3回復。苦い味が嫌いな性格だと混乱。"
+    },
+    {
+      "id": 164,
+      "name": "iapapa-berry",
+      "nameJa": "イアのみ",
+      "category": "held-item",
+      "description": "Restores 1/3 max HP when HP is 1/4 or below. Confuses if nature dislikes sour.",
+      "descriptionJa": "HPが1/4以下で最大HPの1/3回復。酸っぱい味が嫌いな性格だと混乱。"
+    },
+    {
+      "id": 186,
+      "name": "roseli-berry",
+      "nameJa": "ロゼルのみ",
+      "category": "held-item",
+      "description": "Halves damage from a super effective Fairy-type move.",
+      "descriptionJa": "効果抜群のフェアリータイプの技を受けた時にダメージを半減する。一度だけ。"
+    },
+    {
+      "id": 196,
+      "name": "occa-berry",
+      "nameJa": "オッカのみ",
+      "category": "held-item",
+      "description": "Halves damage from a super effective Fire-type move.",
+      "descriptionJa": "効果抜群の炎タイプの技を受けた時にダメージを半減する。一度だけ。"
+    },
+    {
+      "id": 197,
+      "name": "passho-berry",
+      "nameJa": "イトケのみ",
+      "category": "held-item",
+      "description": "Halves damage from a super effective Water-type move.",
+      "descriptionJa": "効果抜群の水タイプの技を受けた時にダメージを半減する。一度だけ。"
+    },
+    {
+      "id": 198,
+      "name": "wacan-berry",
+      "nameJa": "ソクノのみ",
+      "category": "held-item",
+      "description": "Halves damage from a super effective Electric-type move.",
+      "descriptionJa": "効果抜群の電気タイプの技を受けた時にダメージを半減する。一度だけ。"
+    },
+    {
+      "id": 199,
+      "name": "rindo-berry",
+      "nameJa": "リンドのみ",
+      "category": "held-item",
+      "description": "Halves damage from a super effective Grass-type move.",
+      "descriptionJa": "効果抜群の草タイプの技を受けた時にダメージを半減する。一度だけ。"
+    },
+    {
+      "id": 200,
+      "name": "yache-berry",
+      "nameJa": "ヤチェのみ",
+      "category": "held-item",
+      "description": "Halves damage from a super effective Ice-type move.",
+      "descriptionJa": "効果抜群の氷タイプの技を受けた時にダメージを半減する。一度だけ。"
+    },
+    {
+      "id": 201,
+      "name": "chople-berry",
+      "nameJa": "ヨプのみ",
+      "category": "held-item",
+      "description": "Halves damage from a super effective Fighting-type move.",
+      "descriptionJa": "効果抜群の格闘タイプの技を受けた時にダメージを半減する。一度だけ。"
+    },
+    {
+      "id": 202,
+      "name": "kebia-berry",
+      "nameJa": "ビアーのみ",
+      "category": "held-item",
+      "description": "Halves damage from a super effective Poison-type move.",
+      "descriptionJa": "効果抜群の毒タイプの技を受けた時にダメージを半減する。一度だけ。"
+    },
+    {
+      "id": 203,
+      "name": "shuca-berry",
+      "nameJa": "シュカのみ",
+      "category": "held-item",
+      "description": "Halves damage from a super effective Ground-type move.",
+      "descriptionJa": "効果抜群の地面タイプの技を受けた時にダメージを半減する。一度だけ。"
+    },
+    {
+      "id": 204,
+      "name": "coba-berry",
+      "nameJa": "バコウのみ",
+      "category": "held-item",
+      "description": "Halves damage from a super effective Flying-type move.",
+      "descriptionJa": "効果抜群の飛行タイプの技を受けた時にダメージを半減する。一度だけ。"
+    },
+    {
+      "id": 205,
+      "name": "payapa-berry",
+      "nameJa": "ウタンのみ",
+      "category": "held-item",
+      "description": "Halves damage from a super effective Psychic-type move.",
+      "descriptionJa": "効果抜群のエスパータイプの技を受けた時にダメージを半減する。一度だけ。"
+    },
+    {
+      "id": 206,
+      "name": "tanga-berry",
+      "nameJa": "タンガのみ",
+      "category": "held-item",
+      "description": "Halves damage from a super effective Bug-type move.",
+      "descriptionJa": "効果抜群の虫タイプの技を受けた時にダメージを半減する。一度だけ。"
+    },
+    {
+      "id": 207,
+      "name": "charti-berry",
+      "nameJa": "ヨロギのみ",
+      "category": "held-item",
+      "description": "Halves damage from a super effective Rock-type move.",
+      "descriptionJa": "効果抜群の岩タイプの技を受けた時にダメージを半減する。一度だけ。"
+    },
+    {
+      "id": 208,
+      "name": "kasib-berry",
+      "nameJa": "カシブのみ",
+      "category": "held-item",
+      "description": "Halves damage from a super effective Ghost-type move.",
+      "descriptionJa": "効果抜群のゴーストタイプの技を受けた時にダメージを半減する。一度だけ。"
+    },
+    {
+      "id": 209,
+      "name": "haban-berry",
+      "nameJa": "ハバンのみ",
+      "category": "held-item",
+      "description": "Halves damage from a super effective Dragon-type move.",
+      "descriptionJa": "効果抜群のドラゴンタイプの技を受けた時にダメージを半減する。一度だけ。"
+    },
+    {
+      "id": 210,
+      "name": "colbur-berry",
+      "nameJa": "ナモのみ",
+      "category": "held-item",
+      "description": "Halves damage from a super effective Dark-type move.",
+      "descriptionJa": "効果抜群の悪タイプの技を受けた時にダメージを半減する。一度だけ。"
+    },
+    {
+      "id": 211,
+      "name": "babiri-berry",
+      "nameJa": "リリバのみ",
+      "category": "held-item",
+      "description": "Halves damage from a super effective Steel-type move.",
+      "descriptionJa": "効果抜群の鋼タイプの技を受けた時にダメージを半減する。一度だけ。"
+    },
+    {
+      "id": 212,
+      "name": "chilan-berry",
+      "nameJa": "ホズのみ",
+      "category": "held-item",
+      "description": "Halves damage from a Normal-type move.",
+      "descriptionJa": "ノーマルタイプの技を受けた時にダメージを半減する。一度だけ。"
+    },
+    {
       "id": 213,
       "name": "focus-band",
       "nameJa": "きあいのハチマキ",
@@ -29,6 +277,14 @@
       "descriptionJa": "持たせるとひんしになりそうな攻撃を受けても10%の確率でHP1で耐える。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/focus-band.png",
       "cost": 30000
+    },
+    {
+      "id": 214,
+      "name": "mental-herb",
+      "nameJa": "メンタルハーブ",
+      "category": "held-item",
+      "description": "Snaps holder out of infatuation, taunt, encore, torment, disable, and cursed body once.",
+      "descriptionJa": "持たせるとメロメロ、アンコール、ちょうはつ等の状態を一度だけ回復する。"
     },
     {
       "id": 219,
@@ -289,6 +545,14 @@
       "cost": 40000
     },
     {
+      "id": 633,
+      "name": "white-herb",
+      "nameJa": "しろいハーブ",
+      "category": "held-item",
+      "description": "Restores any lowered stats once.",
+      "descriptionJa": "持たせると能力が下がった時に一度だけ元に戻す。"
+    },
+    {
       "id": 640,
       "name": "assault-vest",
       "nameJa": "とつげきチョッキ",
@@ -319,6 +583,14 @@
       "cost": 30000
     },
     {
+      "id": 880,
+      "name": "electric-seed",
+      "nameJa": "エレキシード",
+      "category": "held-item",
+      "description": "Raises Defense by one stage when Electric Terrain is active. Single use.",
+      "descriptionJa": "エレキフィールドの時に防御が1段階上がる。一度だけ。"
+    },
+    {
       "id": 881,
       "name": "protective-pads",
       "nameJa": "ぼうごパッド",
@@ -327,6 +599,22 @@
       "descriptionJa": "持たせると接触技を使っても相手の接触時の効果を受けない。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/protective-pads.png",
       "cost": 30000
+    },
+    {
+      "id": 882,
+      "name": "misty-seed",
+      "nameJa": "ミストシード",
+      "category": "held-item",
+      "description": "Raises Sp. Def by one stage when Misty Terrain is active. Single use.",
+      "descriptionJa": "ミストフィールドの時に特防が1段階上がる。一度だけ。"
+    },
+    {
+      "id": 883,
+      "name": "psychic-seed",
+      "nameJa": "サイコシード",
+      "category": "held-item",
+      "description": "Raises Sp. Def by one stage when Psychic Terrain is active. Single use.",
+      "descriptionJa": "サイコフィールドの時に特防が1段階上がる。一度だけ。"
     },
     {
       "id": 1861,

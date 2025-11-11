@@ -205,43 +205,59 @@ struct PartyMoveSelectorSheet: View {
 
     var body: some View {
         NavigationStack {
-            List(filteredMoves) { move in
-                Button {
-                    onMoveSelected(move)
-                } label: {
-                    VStack(alignment: .leading, spacing: 4) {
-                        HStack {
-                            Text(move.nameJa)
-                                .font(.body)
-                            Spacer()
-                            Text(move.type.nameJa ?? move.type.japaneseName)
-                                .font(.caption2)
-                                .padding(.horizontal, 6)
-                                .padding(.vertical, 2)
-                                .background(move.type.color)
-                                .foregroundColor(move.type.textColor)
-                                .cornerRadius(4)
-                        }
-
-                        HStack(spacing: 12) {
-                            if let power = move.power {
-                                Text("威力: \(power)")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                            }
-                            if let accuracy = move.accuracy {
-                                Text("命中: \(accuracy)")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                            }
-                            if let pp = move.pp {
-                                Text("PP: \(pp)")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                            }
+            Group {
+                if filteredMoves.isEmpty {
+                    VStack(spacing: 16) {
+                        if availableMoves.isEmpty {
+                            ProgressView()
+                            Text("技を読み込み中...")
+                                .foregroundColor(.secondary)
+                        } else {
+                            Text("該当する技がありません")
+                                .foregroundColor(.secondary)
                         }
                     }
-                    .foregroundColor(.primary)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    List(filteredMoves) { move in
+                        Button {
+                            onMoveSelected(move)
+                        } label: {
+                            VStack(alignment: .leading, spacing: 4) {
+                                HStack {
+                                    Text(move.nameJa)
+                                        .font(.body)
+                                    Spacer()
+                                    Text(move.type.nameJa ?? move.type.japaneseName)
+                                        .font(.caption2)
+                                        .padding(.horizontal, 6)
+                                        .padding(.vertical, 2)
+                                        .background(move.type.color)
+                                        .foregroundColor(move.type.textColor)
+                                        .cornerRadius(4)
+                                }
+
+                                HStack(spacing: 12) {
+                                    if let power = move.power {
+                                        Text("威力: \(power)")
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                    }
+                                    if let accuracy = move.accuracy {
+                                        Text("命中: \(accuracy)")
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                    }
+                                    if let pp = move.pp {
+                                        Text("PP: \(pp)")
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                    }
+                                }
+                            }
+                            .foregroundColor(.primary)
+                        }
+                    }
                 }
             }
             .searchable(text: $searchText, prompt: "技を検索")

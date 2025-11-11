@@ -116,6 +116,7 @@ struct PartyMemberEditorView: View {
                         if slot < viewModel.member.selectedMoves.count {
                             // Show move details when selected
                             let move = viewModel.member.selectedMoves[slot]
+                            let moveType = PokemonType(slot: 1, name: move.moveType, nameJa: nil)
                             VStack(alignment: .leading, spacing: 6) {
                                 HStack {
                                     Text(move.moveName)
@@ -123,15 +124,13 @@ struct PartyMemberEditorView: View {
                                         .foregroundColor(.primary)
                                     Spacer()
                                     // Type badge
-                                    if let typeEntity = TypeEntity(name: move.moveType) {
-                                        Text(typeEntity.nameJa ?? typeEntity.japaneseName)
-                                            .font(.caption2)
-                                            .padding(.horizontal, 8)
-                                            .padding(.vertical, 2)
-                                            .background(typeEntity.color)
-                                            .foregroundColor(typeEntity.textColor)
-                                            .cornerRadius(4)
-                                    }
+                                    Text(moveType.nameJa ?? moveType.japaneseName)
+                                        .font(.caption2)
+                                        .padding(.horizontal, 8)
+                                        .padding(.vertical, 2)
+                                        .background(moveType.color)
+                                        .foregroundColor(moveType.textColor)
+                                        .cornerRadius(4)
                                 }
 
                                 // Power, Accuracy, PP

@@ -56,93 +56,6 @@ struct PartyFormationView: View {
                     }
                 }
             }
-
-            if viewModel.party.members.isEmpty {
-                Section(NSLocalizedString("party.analysis", comment: "")) {
-                    Text(NSLocalizedString("party.add_pokemon_to_analyze", comment: ""))
-                        .foregroundColor(.secondary)
-                        .font(.caption)
-                }
-            } else if let analysis = viewModel.typeAnalysis {
-                Section(NSLocalizedString("party.analysis", comment: "")) {
-                    // Coverage Score
-                    HStack {
-                        Text(NSLocalizedString("party.coverage_score", comment: ""))
-                        Spacer()
-                        Text("\(Int(analysis.coverageScore * 100))%")
-                            .foregroundColor(.secondary)
-                    }
-
-                    // Weaknesses
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(NSLocalizedString("party.weaknesses", comment: ""))
-                            .font(.caption)
-                            .fontWeight(.medium)
-                        if analysis.weaknesses.isEmpty {
-                            Text(NSLocalizedString("party.no_weaknesses", comment: ""))
-                                .font(.caption2)
-                                .foregroundColor(.secondary)
-                        } else {
-                            HStack(spacing: 4) {
-                                ForEach(Array(analysis.weaknesses.keys.prefix(6)), id: \.self) { type in
-                                    Text(type.capitalized)
-                                        .font(.caption2)
-                                        .padding(.horizontal, 6)
-                                        .padding(.vertical, 2)
-                                        .background(Color.red.opacity(0.2))
-                                        .cornerRadius(4)
-                                }
-                            }
-                        }
-                    }
-
-                    // Resistances
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(NSLocalizedString("party.resistances", comment: ""))
-                            .font(.caption)
-                            .fontWeight(.medium)
-                        if analysis.resistances.isEmpty {
-                            Text(NSLocalizedString("party.no_resistances", comment: ""))
-                                .font(.caption2)
-                                .foregroundColor(.secondary)
-                        } else {
-                            HStack(spacing: 4) {
-                                ForEach(Array(analysis.resistances.keys.prefix(6)), id: \.self) { type in
-                                    Text(type.capitalized)
-                                        .font(.caption2)
-                                        .padding(.horizontal, 6)
-                                        .padding(.vertical, 2)
-                                        .background(Color.green.opacity(0.2))
-                                        .cornerRadius(4)
-                                }
-                            }
-                        }
-                    }
-
-                    // Immunities
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(NSLocalizedString("party.immunities", comment: ""))
-                            .font(.caption)
-                            .fontWeight(.medium)
-                        if analysis.immunities.isEmpty {
-                            Text(NSLocalizedString("party.no_immunities", comment: ""))
-                                .font(.caption2)
-                                .foregroundColor(.secondary)
-                        } else {
-                            HStack(spacing: 4) {
-                                ForEach(Array(analysis.immunities.prefix(6)), id: \.self) { type in
-                                    Text(type.capitalized)
-                                        .font(.caption2)
-                                        .padding(.horizontal, 6)
-                                        .padding(.vertical, 2)
-                                        .background(Color.gray.opacity(0.2))
-                                        .cornerRadius(4)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         }
         .navigationTitle(NSLocalizedString("party.formation_title", comment: ""))
         .navigationBarTitleDisplayMode(.inline)
@@ -261,18 +174,9 @@ struct PartyMemberRow: View {
 
             // Tera type and nickname
             HStack(spacing: 8) {
-                HStack(spacing: 4) {
-                    Image(systemName: "diamond.fill")
-                        .font(.system(size: 10))
-                    Text(teraTypeDisplayName)
-                        .font(.system(size: 12))
-                        .fontWeight(.semibold)
-                }
-                .padding(.horizontal, 6)
-                .padding(.vertical, 2)
-                .background(teraTypeColor)
-                .foregroundColor(teraTypeTextColor)
-                .cornerRadius(4)
+                Text("テラスタイプ：\(teraTypeDisplayName)")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
 
                 if let nickname = member.nickname {
                     Text("(\(nickname))")
@@ -286,16 +190,6 @@ struct PartyMemberRow: View {
     private var teraTypeDisplayName: String {
         let teraType = PokemonType(slot: 1, name: member.teraType, nameJa: nil)
         return localizationManager.displayName(for: teraType)
-    }
-
-    private var teraTypeColor: Color {
-        let teraType = PokemonType(slot: 1, name: member.teraType, nameJa: nil)
-        return teraType.color
-    }
-
-    private var teraTypeTextColor: Color {
-        let teraType = PokemonType(slot: 1, name: member.teraType, nameJa: nil)
-        return teraType.textColor
     }
 
     private var pokemonHeader: some View {

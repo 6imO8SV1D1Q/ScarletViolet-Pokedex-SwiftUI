@@ -21,8 +21,7 @@ struct TeraTypePicker: View {
             ForEach(TeraType.allCases, id: \.self) { type in
                 TeraTypeButton(
                     teraType: type,
-                    isSelected: selectedTeraType == type.rawValue,
-                    isPokemonOriginalType: pokemonTypes.contains(type.rawValue)
+                    isSelected: selectedTeraType == type.rawValue
                 ) {
                     selectedTeraType = type.rawValue
                 }
@@ -35,7 +34,6 @@ struct TeraTypePicker: View {
 struct TeraTypeButton: View {
     let teraType: TeraType
     let isSelected: Bool
-    let isPokemonOriginalType: Bool
     let action: () -> Void
 
     var body: some View {
@@ -50,14 +48,6 @@ struct TeraTypeButton: View {
                     Image(systemName: "diamond.fill")
                         .foregroundColor(teraType.color)
                         .font(.title2)
-
-                    // Star marker for original type
-                    if isPokemonOriginalType {
-                        Image(systemName: "star.fill")
-                            .font(.caption2)
-                            .foregroundColor(.yellow)
-                            .offset(x: 18, y: -18)
-                    }
                 }
                 .overlay(
                     Circle()

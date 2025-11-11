@@ -113,20 +113,57 @@ struct PartyMemberEditorView: View {
                         selectedMoveSlot = slot
                         showingMoveSelector = true
                     } label: {
-                        HStack {
-                            Text("Move \(slot + 1)")
-                                .foregroundColor(.primary)
-                            Spacer()
-                            if slot < viewModel.member.selectedMoves.count {
-                                Text(viewModel.member.selectedMoves[slot].moveName)
-                                    .foregroundColor(.secondary)
-                            } else {
+                        if slot < viewModel.member.selectedMoves.count {
+                            // Show move details when selected
+                            let move = viewModel.member.selectedMoves[slot]
+                            VStack(alignment: .leading, spacing: 6) {
+                                HStack {
+                                    Text(move.moveName)
+                                        .font(.body)
+                                        .foregroundColor(.primary)
+                                    Spacer()
+                                    // Type badge
+                                    if let typeEntity = TypeEntity(name: move.moveType) {
+                                        Text(typeEntity.nameJa ?? typeEntity.japaneseName)
+                                            .font(.caption2)
+                                            .padding(.horizontal, 8)
+                                            .padding(.vertical, 2)
+                                            .background(typeEntity.color)
+                                            .foregroundColor(typeEntity.textColor)
+                                            .cornerRadius(4)
+                                    }
+                                }
+
+                                // Power, Accuracy, PP
+                                HStack(spacing: 12) {
+                                    if let power = move.power {
+                                        Text("威力: \(power)")
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                    }
+                                    if let accuracy = move.accuracy {
+                                        Text("命中: \(accuracy)")
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                    }
+                                    Text("PP: \(move.pp)")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                            .padding(.vertical, 4)
+                        } else {
+                            // Empty slot
+                            HStack {
+                                Text("Move \(slot + 1)")
+                                    .foregroundColor(.primary)
+                                Spacer()
                                 Text("Empty")
                                     .foregroundColor(.secondary)
+                                Image(systemName: "chevron.right")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
                             }
-                            Image(systemName: "chevron.right")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
                         }
                     }
                 }

@@ -44,6 +44,9 @@ struct PartyListView: View {
                     }
                     .padding()
                 }
+                .refreshable {
+                    await viewModel.loadParties()
+                }
             }
 
             // Floating Action Button
@@ -68,6 +71,11 @@ struct PartyListView: View {
         }
         .navigationTitle("Parties")
         .sheet(isPresented: $showingNewPartySheet) {
+            // Reload parties when sheet is dismissed
+            Task {
+                await viewModel.loadParties()
+            }
+        } content: {
             NavigationStack {
                 PartyFormationView(
                     viewModel: DIContainer.shared.makePartyFormationViewModel()
@@ -98,6 +106,14 @@ struct PartyListView: View {
         }
         .task {
             await viewModel.loadParties()
+        }
+        .onAppear {
+            // Refresh when returning from navigation
+            if !viewModel.parties.isEmpty || viewModel.isLoading {
+                Task {
+                    await viewModel.loadParties()
+                }
+            }
         }
     }
 }

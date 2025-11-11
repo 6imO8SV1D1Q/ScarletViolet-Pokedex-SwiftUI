@@ -157,7 +157,7 @@ struct PartyMemberRow: View {
             typesBadges
 
             HStack(spacing: 8) {
-                Label("Lv.\(member.level)", systemImage: "star.fill")
+                Text("Lv.\(member.level)")
                     .font(.caption)
                     .foregroundColor(.secondary)
 

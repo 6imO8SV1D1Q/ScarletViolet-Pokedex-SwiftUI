@@ -11,7 +11,6 @@ import SwiftUI
 
 struct TeraTypePicker: View {
     @Binding var selectedTeraType: String
-    let pokemonTypes: [String]  // Pokemon's original types
 
     var body: some View {
         // Grid of all 19 Tera Types (18 + Stellar)

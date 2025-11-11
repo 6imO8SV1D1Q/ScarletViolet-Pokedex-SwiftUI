@@ -41,15 +41,12 @@ struct PartyMemberEditorView: View {
 
             // Tera Type
             Section {
-                if let pokemon = viewModel.pokemon {
-                    TeraTypePicker(
-                        selectedTeraType: Binding(
-                            get: { viewModel.member.teraType },
-                            set: { viewModel.updateTeraType($0) }
-                        ),
-                        pokemonTypes: pokemon.types.map { $0.name }
+                TeraTypePicker(
+                    selectedTeraType: Binding(
+                        get: { viewModel.member.teraType },
+                        set: { viewModel.updateTeraType($0) }
                     )
-                }
+                )
             } header: {
                 Text("Tera Type")
             }
@@ -61,6 +58,7 @@ struct PartyMemberEditorView: View {
                         Text(nature.displayName).tag(nature)
                     }
                 }
+                .pickerStyle(.menu)
             }
 
             // Ability
@@ -71,6 +69,7 @@ struct PartyMemberEditorView: View {
                             Text(ability.displayName).tag(ability.name)
                         }
                     }
+                    .pickerStyle(.menu)
                 }
             }
 

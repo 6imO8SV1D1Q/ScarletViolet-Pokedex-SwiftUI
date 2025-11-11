@@ -91,6 +91,9 @@ struct PartyPokemonSelectorSheet: View {
                 }
             }
             .searchable(text: $viewModel.searchText, prompt: NSLocalizedString("party.search_pokemon", comment: ""))
+            .onChange(of: viewModel.searchText) { _, _ in
+                viewModel.applyFilters()
+            }
             .task {
                 await viewModel.loadPokemons()
             }

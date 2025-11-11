@@ -23,6 +23,10 @@ struct ItemEntity: Identifiable, Equatable, Codable {
     let descriptionJa: String?
     /// 効果の詳細
     let effects: ItemEffects?
+    /// スプライト画像URL
+    let spriteUrl: String?
+    /// 購入価格
+    let cost: Int?
 
     /// IDで等価性を判定
     static func == (lhs: ItemEntity, rhs: ItemEntity) -> Bool {

@@ -9,11 +9,11 @@ import Foundation
 
 /// アイテムデータを提供するプロバイダー
 ///
-/// プリバンドルされたJSONファイル（items_v5.json）からアイテム情報を読み込み、
+/// プリバンドルされたJSONファイル（items_v6.json）からアイテム情報を読み込み、
 /// メモリキャッシュで管理します。
 ///
 /// ## 主な責務
-/// - items_v5.jsonの読み込み
+/// - items_v6.jsonの読み込み
 /// - アイテムデータのキャッシュ管理
 /// - ID/名前/カテゴリーによる検索
 ///
@@ -105,7 +105,7 @@ final class ItemProvider: ItemProviderProtocol {
 
     /// JSONファイルからアイテムデータを読み込む
     private func loadItemsFromJSON() throws -> [ItemEntity] {
-        guard let url = bundle.url(forResource: "items_v5", withExtension: "json", subdirectory: "PreloadedData") else {
+        guard let url = bundle.url(forResource: "items_v6", withExtension: "json", subdirectory: "PreloadedData") else {
             throw ItemProviderError.fileNotFound
         }
 
@@ -121,7 +121,7 @@ final class ItemProvider: ItemProviderProtocol {
 
 // MARK: - JSON Response Model
 
-/// items_v5.jsonのレスポンス構造
+/// items_v6.jsonのレスポンス構造
 private struct ItemsResponse: Codable {
     let schemaVersion: Int
     let items: [ItemEntity]
@@ -138,7 +138,7 @@ enum ItemProviderError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .fileNotFound:
-            return "items_v5.json file not found"
+            return "items_v6.json file not found"
         case .itemNotFoundById(let id):
             return "Item not found: id=\(id)"
         case .itemNotFoundByName(let name):

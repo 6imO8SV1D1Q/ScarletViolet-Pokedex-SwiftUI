@@ -264,7 +264,8 @@ final class DIContainer: ObservableObject {
         PartyMemberEditorViewModel(
             member: member,
             pokemonRepository: pokemonRepository,
-            moveRepository: moveRepository
+            moveRepository: moveRepository,
+            itemProvider: itemProvider
         )
     }
 }

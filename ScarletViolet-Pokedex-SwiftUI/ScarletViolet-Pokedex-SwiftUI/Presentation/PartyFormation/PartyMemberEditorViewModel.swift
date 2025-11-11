@@ -18,23 +18,27 @@ final class PartyMemberEditorViewModel: ObservableObject {
     @Published var pokemon: Pokemon?
     @Published var availableForms: [PokemonForm] = []
     @Published var availableMoves: [MoveEntity] = []
+    @Published var availableItems: [ItemEntity] = []
     @Published var selectedForm: PokemonForm?
 
     // MARK: - Dependencies
 
     private let pokemonRepository: PokemonRepositoryProtocol
     private let moveRepository: MoveRepositoryProtocol
+    private let itemProvider: ItemProviderProtocol
 
     // MARK: - Initialization
 
     init(
         member: PartyMember,
         pokemonRepository: PokemonRepositoryProtocol,
-        moveRepository: MoveRepositoryProtocol
+        moveRepository: MoveRepositoryProtocol,
+        itemProvider: ItemProviderProtocol
     ) {
         self.member = member
         self.pokemonRepository = pokemonRepository
         self.moveRepository = moveRepository
+        self.itemProvider = itemProvider
     }
 
     // MARK: - Actions
@@ -47,8 +51,21 @@ final class PartyMemberEditorViewModel: ObservableObject {
                 // Load available moves
                 await loadAvailableMoves(pokemon: pokemon)
             }
+            // Load available items
+            await loadAvailableItems()
         } catch {
             // TODO: Error handling
+        }
+    }
+
+    private func loadAvailableItems() async {
+        do {
+            // Load all items and filter for held items
+            let allItems = try await itemProvider.fetchAllItems()
+            availableItems = allItems.filter { $0.category == "held-item" }
+        } catch {
+            print("❌ Failed to load items: \(error)")
+            availableItems = []
         }
     }
 

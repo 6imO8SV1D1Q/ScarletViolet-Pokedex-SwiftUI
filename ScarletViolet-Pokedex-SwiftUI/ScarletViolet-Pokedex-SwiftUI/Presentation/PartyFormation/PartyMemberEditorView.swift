@@ -73,6 +73,30 @@ struct PartyMemberEditorView: View {
                 }
             }
 
+            // Held Item
+            Section("Held Item") {
+                Picker("Item", selection: Binding(
+                    get: { viewModel.member.item ?? "" },
+                    set: { newValue in
+                        viewModel.member.item = newValue.isEmpty ? nil : newValue
+                    }
+                )) {
+                    Text("None").tag("")
+                    ForEach(viewModel.availableItems, id: \.id) { item in
+                        Text(item.nameJa).tag(item.name)
+                    }
+                }
+                .pickerStyle(.menu)
+
+                // Show item description if selected
+                if let itemName = viewModel.member.item,
+                   let selectedItem = viewModel.availableItems.first(where: { $0.name == itemName }) {
+                    Text(selectedItem.descriptionJa ?? selectedItem.description ?? "")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+            }
+
             // Stats (EVs/IVs)
             Section("Stats") {
                 Button {

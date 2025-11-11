@@ -74,7 +74,7 @@ struct PartyMemberEditorView: View {
             }
 
             // Held Item
-            Section("Held Item") {
+            Section {
                 Picker("Item", selection: Binding(
                     get: { viewModel.member.item ?? "" },
                     set: { newValue in
@@ -95,6 +95,13 @@ struct PartyMemberEditorView: View {
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
+
+                // Debug: Show item count
+                Text("Debug: \(viewModel.availableItems.count) items loaded")
+                    .font(.caption2)
+                    .foregroundColor(.orange)
+            } header: {
+                Text("Held Item")
             }
 
             // Stats (EVs/IVs)

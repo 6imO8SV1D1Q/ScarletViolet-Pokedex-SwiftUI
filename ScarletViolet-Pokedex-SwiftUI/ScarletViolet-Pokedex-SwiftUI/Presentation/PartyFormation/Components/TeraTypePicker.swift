@@ -14,28 +14,21 @@ struct TeraTypePicker: View {
     let pokemonTypes: [String]  // Pokemon's original types
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Tera Type")
-                .font(.headline)
-
-            // Grid of all 19 Tera Types (18 + Stellar)
-            LazyVGrid(columns: [
-                GridItem(.adaptive(minimum: 70), spacing: 12)
-            ], spacing: 12) {
-                ForEach(TeraType.allCases, id: \.self) { type in
-                    TeraTypeButton(
-                        teraType: type,
-                        isSelected: selectedTeraType == type.rawValue,
-                        isPokemonOriginalType: pokemonTypes.contains(type.rawValue)
-                    ) {
-                        selectedTeraType = type.rawValue
-                    }
+        // Grid of all 19 Tera Types (18 + Stellar)
+        LazyVGrid(columns: [
+            GridItem(.adaptive(minimum: 70), spacing: 12)
+        ], spacing: 12) {
+            ForEach(TeraType.allCases, id: \.self) { type in
+                TeraTypeButton(
+                    teraType: type,
+                    isSelected: selectedTeraType == type.rawValue,
+                    isPokemonOriginalType: pokemonTypes.contains(type.rawValue)
+                ) {
+                    selectedTeraType = type.rawValue
                 }
             }
         }
-        .padding()
-        .background(Color(.systemGray6))
-        .cornerRadius(12)
+        .padding(.vertical, 8)
     }
 }
 

@@ -64,7 +64,16 @@ final class PartyFormationViewModel: ObservableObject {
     func removePokemon(at index: Int) {
         guard index < party.members.count else { return }
         party.members.remove(at: index)
-        Task { await analyzeTypeMatchups() }
+
+        // Update position for remaining members
+        for i in 0..<party.members.count {
+            party.members[i].position = i
+        }
+
+        Task {
+            await analyzeTypeMatchups()
+            await loadMemberPokemons()
+        }
     }
 
     func movePokemon(from source: Int, to destination: Int) {

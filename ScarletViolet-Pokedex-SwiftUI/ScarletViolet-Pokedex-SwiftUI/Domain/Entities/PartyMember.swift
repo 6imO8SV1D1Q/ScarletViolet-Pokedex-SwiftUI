@@ -24,6 +24,7 @@ struct PartyMember: Identifiable, Codable, Hashable, Sendable {
     var level: Int  // 1-100
     var teraType: String  // テラスタイプ（19種類から選択）
     var position: Int  // パーティ内の位置（0-5）
+    var notes: String?  // 調整意図・メモ
 
     // MARK: - Initialization
 
@@ -40,7 +41,8 @@ struct PartyMember: Identifiable, Codable, Hashable, Sendable {
         ivs: StatValues = .maxIVs,
         level: Int = 50,
         teraType: String = "normal",
-        position: Int = 0
+        position: Int = 0,
+        notes: String? = nil
     ) {
         self.id = id
         self.pokemonId = pokemonId
@@ -55,6 +57,7 @@ struct PartyMember: Identifiable, Codable, Hashable, Sendable {
         self.level = level
         self.teraType = teraType
         self.position = position
+        self.notes = notes
     }
 }
 

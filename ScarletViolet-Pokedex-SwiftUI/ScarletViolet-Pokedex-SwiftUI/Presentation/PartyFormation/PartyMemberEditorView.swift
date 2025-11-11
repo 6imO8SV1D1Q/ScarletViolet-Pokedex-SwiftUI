@@ -16,6 +16,7 @@ struct PartyMemberEditorView: View {
     @State private var showingMoveSelector = false
     @State private var selectedMoveSlot: Int?
     @State private var showingEVEditor = false
+    @State private var showingIVEditor = false
 
     var body: some View {
         Form {
@@ -90,11 +91,19 @@ struct PartyMemberEditorView: View {
                     }
                 }
 
-                HStack {
-                    Text("IVs")
-                    Spacer()
-                    Text("\(viewModel.member.ivs.total)/186")
-                        .foregroundColor(.secondary)
+                Button {
+                    showingIVEditor = true
+                } label: {
+                    HStack {
+                        Text("IVs")
+                            .foregroundColor(.primary)
+                        Spacer()
+                        Text("\(viewModel.member.ivs.total)/186")
+                            .foregroundColor(.secondary)
+                        Image(systemName: "chevron.right")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
                 }
             }
 
@@ -122,6 +131,15 @@ struct PartyMemberEditorView: View {
                         }
                     }
                 }
+            }
+
+            // Notes
+            Section("調整意図・メモ") {
+                TextEditor(text: Binding(
+                    get: { viewModel.member.notes ?? "" },
+                    set: { viewModel.member.notes = $0.isEmpty ? nil : $0 }
+                ))
+                .frame(minHeight: 100)
             }
         }
         .navigationTitle("Edit Member")
@@ -156,6 +174,9 @@ struct PartyMemberEditorView: View {
         }
         .sheet(isPresented: $showingEVEditor) {
             EVEditorSheet(evs: $viewModel.member.evs)
+        }
+        .sheet(isPresented: $showingIVEditor) {
+            IVEditorSheet(ivs: $viewModel.member.ivs)
         }
         .task {
             await viewModel.loadPokemonData()
@@ -338,6 +359,102 @@ struct EVStatRow: View {
                         .font(.title3)
                 }
                 .disabled(value >= 252 || remaining < 10)
+            }
+        }
+    }
+}
+
+// MARK: - IV Editor Sheet
+
+struct IVEditorSheet: View {
+    @Binding var ivs: StatValues
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section {
+                    Text("個体値 (\(ivs.total)/186)")
+                        .font(.headline)
+                } header: {
+                    Text("個体値の設定")
+                }
+
+                Section {
+                    IVStatRow(label: "HP", value: $ivs.hp)
+                    IVStatRow(label: "攻撃", value: $ivs.attack)
+                    IVStatRow(label: "防御", value: $ivs.defense)
+                    IVStatRow(label: "特攻", value: $ivs.specialAttack)
+                    IVStatRow(label: "特防", value: $ivs.specialDefense)
+                    IVStatRow(label: "素早さ", value: $ivs.speed)
+                }
+
+                Section {
+                    Button("すべて最大 (31)") {
+                        ivs = StatValues.maxIVs
+                    }
+
+                    Button("すべて0") {
+                        ivs = StatValues.zero
+                    }
+                    .foregroundColor(.red)
+                }
+            }
+            .navigationTitle("個体値を編集")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("完了") {
+                        dismiss()
+                    }
+                }
+            }
+        }
+    }
+}
+
+// MARK: - IV Stat Row
+
+struct IVStatRow: View {
+    let label: String
+    @Binding var value: Int
+
+    var body: some View {
+        VStack(spacing: 8) {
+            HStack {
+                Text(label)
+                    .font(.body)
+                Spacer()
+                Text("\(value)")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+            }
+
+            HStack(spacing: 12) {
+                Button {
+                    if value > 0 {
+                        value -= 1
+                    }
+                } label: {
+                    Image(systemName: "minus.circle.fill")
+                        .font(.title3)
+                }
+                .disabled(value == 0)
+
+                Slider(value: Binding(
+                    get: { Double(value) },
+                    set: { value = Int($0) }
+                ), in: 0...31, step: 1)
+
+                Button {
+                    if value < 31 {
+                        value += 1
+                    }
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .font(.title3)
+                }
+                .disabled(value >= 31)
             }
         }
     }

@@ -100,6 +100,13 @@ struct PartyMemberEditorView: View {
                 Text("Debug: \(viewModel.availableItems.count) items loaded")
                     .font(.caption2)
                     .foregroundColor(.orange)
+
+                // Debug: Show error if any
+                if let error = viewModel.itemLoadError {
+                    Text("Error: \(error)")
+                        .font(.caption2)
+                        .foregroundColor(.red)
+                }
             } header: {
                 Text("Held Item")
             }

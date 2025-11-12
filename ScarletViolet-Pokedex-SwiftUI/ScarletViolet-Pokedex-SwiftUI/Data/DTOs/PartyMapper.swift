@@ -16,10 +16,15 @@ enum PartyMapper {
     /// - Parameter model: SwiftDataのPartyModel
     /// - Returns: DomainのPartyエンティティ
     static func toDomain(_ model: PartyModel) -> Party {
-        Party(
+        // membersをpositionでソートして順序を保持
+        let sortedMembers = model.members
+            .map { PartyMemberMapper.toDomain($0) }
+            .sorted { $0.position < $1.position }
+
+        return Party(
             id: model.id,
             name: model.name,
-            members: model.members.map { PartyMemberMapper.toDomain($0) },
+            members: sortedMembers,
             createdAt: model.createdAt,
             updatedAt: model.updatedAt
         )

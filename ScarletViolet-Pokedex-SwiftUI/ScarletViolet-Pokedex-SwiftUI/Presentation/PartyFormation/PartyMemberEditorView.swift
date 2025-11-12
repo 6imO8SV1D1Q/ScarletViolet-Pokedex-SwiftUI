@@ -21,22 +21,22 @@ struct PartyMemberEditorView: View {
     var body: some View {
         Form {
             // Basic Info
-            Section("Basic Info") {
+            Section(NSLocalizedString("party.basic_info", comment: "")) {
                 if let pokemon = viewModel.pokemon {
                     HStack {
-                        Text("Pokemon")
+                        Text(NSLocalizedString("party.pokemon", comment: ""))
                         Spacer()
                         Text(pokemon.displayName)
                             .foregroundColor(.secondary)
                     }
                 }
 
-                TextField("Nickname (Optional)", text: Binding(
+                TextField(NSLocalizedString("party.nickname", comment: ""), text: Binding(
                     get: { viewModel.member.nickname ?? "" },
                     set: { viewModel.member.nickname = $0.isEmpty ? nil : $0 }
                 ))
 
-                Stepper("Level: \(viewModel.member.level)", value: $viewModel.member.level, in: 1...100)
+                Stepper(String(format: NSLocalizedString("party.level", comment: ""), viewModel.member.level), value: $viewModel.member.level, in: 1...100)
             }
 
             // Tera Type
@@ -48,12 +48,12 @@ struct PartyMemberEditorView: View {
                     )
                 )
             } header: {
-                Text("Tera Type")
+                Text(NSLocalizedString("party.tera_type", comment: ""))
             }
 
             // Nature
-            Section("Nature") {
-                Picker("Nature", selection: $viewModel.member.nature) {
+            Section(NSLocalizedString("party.nature", comment: "")) {
+                Picker(NSLocalizedString("party.nature", comment: ""), selection: $viewModel.member.nature) {
                     ForEach(Nature.allCases, id: \.self) { nature in
                         Text(nature.displayName).tag(nature)
                     }
@@ -62,9 +62,9 @@ struct PartyMemberEditorView: View {
             }
 
             // Ability
-            Section("Ability") {
+            Section(NSLocalizedString("party.ability", comment: "")) {
                 if let pokemon = viewModel.pokemon {
-                    Picker("Ability", selection: $viewModel.member.ability) {
+                    Picker(NSLocalizedString("party.ability", comment: ""), selection: $viewModel.member.ability) {
                         ForEach(pokemon.abilities, id: \.name) { ability in
                             Text(ability.displayName).tag(ability.name)
                         }
@@ -75,13 +75,13 @@ struct PartyMemberEditorView: View {
 
             // Held Item
             Section {
-                Picker("Item", selection: Binding(
+                Picker(NSLocalizedString("party.held_item", comment: ""), selection: Binding(
                     get: { viewModel.member.item ?? "" },
                     set: { newValue in
                         viewModel.member.item = newValue.isEmpty ? nil : newValue
                     }
                 )) {
-                    Text("None").tag("")
+                    Text(NSLocalizedString("party.item_none", comment: "")).tag("")
                     ForEach(viewModel.availableItems, id: \.id) { item in
                         Text(item.nameJa).tag(item.name)
                     }
@@ -96,16 +96,16 @@ struct PartyMemberEditorView: View {
                         .foregroundColor(.secondary)
                 }
             } header: {
-                Text("Held Item")
+                Text(NSLocalizedString("party.held_item", comment: ""))
             }
 
             // Stats (EVs/IVs)
-            Section("Stats") {
+            Section(NSLocalizedString("party.stats", comment: "")) {
                 Button {
                     showingEVEditor = true
                 } label: {
                     HStack {
-                        Text("EVs")
+                        Text(NSLocalizedString("party.evs", comment: ""))
                             .foregroundColor(.primary)
                         Spacer()
                         Text("\(viewModel.member.evs.total)/510")
@@ -120,7 +120,7 @@ struct PartyMemberEditorView: View {
                     showingIVEditor = true
                 } label: {
                     HStack {
-                        Text("IVs")
+                        Text(NSLocalizedString("party.ivs", comment: ""))
                             .foregroundColor(.primary)
                         Spacer()
                         Text("\(viewModel.member.ivs.total)/186")
@@ -133,7 +133,7 @@ struct PartyMemberEditorView: View {
             }
 
             // Moves
-            Section("Moves") {
+            Section(NSLocalizedString("party.moves", comment: "")) {
                 ForEach(0..<4, id: \.self) { slot in
                     Button {
                         selectedMoveSlot = slot
@@ -180,10 +180,10 @@ struct PartyMemberEditorView: View {
                         } else {
                             // Empty slot
                             HStack {
-                                Text("Move \(slot + 1)")
+                                Text(String(format: NSLocalizedString("party.move_slot", comment: ""), slot + 1))
                                     .foregroundColor(.primary)
                                 Spacer()
-                                Text("Empty")
+                                Text(NSLocalizedString("party.empty_move", comment: ""))
                                     .foregroundColor(.secondary)
                                 Image(systemName: "chevron.right")
                                     .font(.caption)
@@ -203,11 +203,11 @@ struct PartyMemberEditorView: View {
                 .frame(minHeight: 100)
             }
         }
-        .navigationTitle("Edit Member")
+        .navigationTitle(NSLocalizedString("party.edit_member_title", comment: ""))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
-                Button("Done") {
+                Button(NSLocalizedString("common.done", comment: "")) {
                     member = viewModel.member
                     dismiss()
                 }
@@ -322,12 +322,12 @@ struct PartyMoveSelectorSheet: View {
                     }
                 }
             }
-            .searchable(text: $searchText, prompt: "技を検索")
-            .navigationTitle("Move \(selectedMoveSlot + 1) を選択")
+            .searchable(text: $searchText, prompt: NSLocalizedString("party.search_moves", comment: ""))
+            .navigationTitle(String(format: NSLocalizedString("party.select_move_title", comment: ""), selectedMoveSlot + 1))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
+                    Button(NSLocalizedString("common.cancel", comment: "")) {
                         dismiss()
                     }
                 }
@@ -358,16 +358,16 @@ struct EVEditorSheet: View {
                 }
 
                 Section {
-                    EVStatRow(label: "HP", value: $evs.hp, remaining: remainingEVs)
-                    EVStatRow(label: "攻撃", value: $evs.attack, remaining: remainingEVs)
-                    EVStatRow(label: "防御", value: $evs.defense, remaining: remainingEVs)
-                    EVStatRow(label: "特攻", value: $evs.specialAttack, remaining: remainingEVs)
-                    EVStatRow(label: "特防", value: $evs.specialDefense, remaining: remainingEVs)
-                    EVStatRow(label: "素早さ", value: $evs.speed, remaining: remainingEVs)
+                    EVStatRow(label: NSLocalizedString("stat.hp", comment: ""), value: $evs.hp, remaining: remainingEVs)
+                    EVStatRow(label: NSLocalizedString("stat.attack", comment: ""), value: $evs.attack, remaining: remainingEVs)
+                    EVStatRow(label: NSLocalizedString("stat.defense", comment: ""), value: $evs.defense, remaining: remainingEVs)
+                    EVStatRow(label: NSLocalizedString("stat.special_attack", comment: ""), value: $evs.specialAttack, remaining: remainingEVs)
+                    EVStatRow(label: NSLocalizedString("stat.special_defense", comment: ""), value: $evs.specialDefense, remaining: remainingEVs)
+                    EVStatRow(label: NSLocalizedString("stat.speed", comment: ""), value: $evs.speed, remaining: remainingEVs)
                 }
 
                 Section {
-                    Button("すべてリセット") {
+                    Button(NSLocalizedString("party.reset_all", comment: "")) {
                         evs = StatValues(
                             hp: 0,
                             attack: 0,
@@ -380,11 +380,11 @@ struct EVEditorSheet: View {
                     .foregroundColor(.red)
                 }
             }
-            .navigationTitle("努力値を編集")
+            .navigationTitle(NSLocalizedString("party.edit_evs_title", comment: ""))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("完了") {
+                    Button(NSLocalizedString("common.done", comment: "")) {
                         dismiss()
                     }
                     .disabled(remainingEVs < 0)
@@ -459,30 +459,30 @@ struct IVEditorSheet: View {
                 }
 
                 Section {
-                    IVStatRow(label: "HP", value: $ivs.hp)
-                    IVStatRow(label: "攻撃", value: $ivs.attack)
-                    IVStatRow(label: "防御", value: $ivs.defense)
-                    IVStatRow(label: "特攻", value: $ivs.specialAttack)
-                    IVStatRow(label: "特防", value: $ivs.specialDefense)
-                    IVStatRow(label: "素早さ", value: $ivs.speed)
+                    IVStatRow(label: NSLocalizedString("stat.hp", comment: ""), value: $ivs.hp)
+                    IVStatRow(label: NSLocalizedString("stat.attack", comment: ""), value: $ivs.attack)
+                    IVStatRow(label: NSLocalizedString("stat.defense", comment: ""), value: $ivs.defense)
+                    IVStatRow(label: NSLocalizedString("stat.special_attack", comment: ""), value: $ivs.specialAttack)
+                    IVStatRow(label: NSLocalizedString("stat.special_defense", comment: ""), value: $ivs.specialDefense)
+                    IVStatRow(label: NSLocalizedString("stat.speed", comment: ""), value: $ivs.speed)
                 }
 
                 Section {
-                    Button("すべて最大 (31)") {
+                    Button(NSLocalizedString("party.set_all_max_31", comment: "")) {
                         ivs = StatValues.maxIVs
                     }
 
-                    Button("すべて0") {
+                    Button(NSLocalizedString("party.set_all_0", comment: "")) {
                         ivs = StatValues.zero
                     }
                     .foregroundColor(.red)
                 }
             }
-            .navigationTitle("個体値を編集")
+            .navigationTitle(NSLocalizedString("party.edit_ivs_title", comment: ""))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("完了") {
+                    Button(NSLocalizedString("common.done", comment: "")) {
                         dismiss()
                     }
                 }

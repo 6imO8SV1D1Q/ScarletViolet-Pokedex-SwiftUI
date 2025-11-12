@@ -756,7 +756,16 @@
 "party.no_moves_found" = "No moves found";
 "party.held_item" = "Held Item";
 "party.held_item_label" = "Held Item: ";
+"party.item_none" = "None";
 "party.notes" = "Notes";
+"party.edit_member_title" = "Edit Member";
+"party.edit_evs_title" = "Edit EVs";
+"party.edit_ivs_title" = "Edit IVs";
+"party.select_move_title" = "Select Move %d";
+"party.search_moves" = "Search moves";
+"party.reset_all" = "Reset All";
+"party.set_all_max_31" = "Set All to 31";
+"party.set_all_0" = "Set All to 0";
 "party.analysis" = "Analysis";
 "party.coverage_score" = "Coverage Score";
 "party.weaknesses" = "Weaknesses";

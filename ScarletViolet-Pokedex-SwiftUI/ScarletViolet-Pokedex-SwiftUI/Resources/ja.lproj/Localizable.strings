@@ -756,7 +756,16 @@
 "party.no_moves_found" = "該当する技がありません";
 "party.held_item" = "持ち物";
 "party.held_item_label" = "持ち物：";
+"party.item_none" = "なし";
 "party.notes" = "調整意図・メモ";
+"party.edit_member_title" = "メンバーを編集";
+"party.edit_evs_title" = "努力値を編集";
+"party.edit_ivs_title" = "個体値を編集";
+"party.select_move_title" = "わざ %d を選択";
+"party.search_moves" = "技を検索";
+"party.reset_all" = "すべてリセット";
+"party.set_all_max_31" = "すべて最大 (31)";
+"party.set_all_0" = "すべて0";
 "party.analysis" = "分析";
 "party.coverage_score" = "カバー率";
 "party.weaknesses" = "弱点";

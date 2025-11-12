@@ -197,7 +197,7 @@ struct PartyMemberRow: View {
 
             // Tera type and nickname
             HStack(spacing: 8) {
-                Text("テラスタイプ：\(teraTypeDisplayName)")
+                Text(NSLocalizedString("party.tera_type_label", comment: "") + teraTypeDisplayName)
                     .font(.caption)
                     .foregroundColor(.secondary)
 
@@ -210,7 +210,7 @@ struct PartyMemberRow: View {
 
             // Held item
             if let item = heldItem {
-                Text("持ち物：\(item.nameJa)")
+                Text(NSLocalizedString("party.held_item_label", comment: "") + (localizationManager.currentLanguage == .japanese ? item.nameJa : item.name))
                     .font(.caption)
                     .foregroundColor(.secondary)
             }

@@ -162,12 +162,12 @@ struct PartyMemberEditorView: View {
                                 // Power, Accuracy, PP
                                 HStack(spacing: 12) {
                                     if let power = move.power {
-                                        Text("威力: \(power)")
+                                        Text(NSLocalizedString("move.power_label", comment: "") + " \(power)")
                                             .font(.caption)
                                             .foregroundColor(.secondary)
                                     }
                                     if let accuracy = move.accuracy {
-                                        Text("命中: \(accuracy)")
+                                        Text(NSLocalizedString("move.accuracy_label", comment: "") + " \(accuracy)")
                                             .font(.caption)
                                             .foregroundColor(.secondary)
                                     }
@@ -195,7 +195,7 @@ struct PartyMemberEditorView: View {
             }
 
             // Notes
-            Section("調整意図・メモ") {
+            Section(NSLocalizedString("party.notes", comment: "")) {
                 TextEditor(text: Binding(
                     get: { viewModel.member.notes ?? "" },
                     set: { viewModel.member.notes = $0.isEmpty ? nil : $0 }
@@ -272,10 +272,10 @@ struct PartyMoveSelectorSheet: View {
                     VStack(spacing: 16) {
                         if availableMoves.isEmpty {
                             ProgressView()
-                            Text("技を読み込み中...")
+                            Text(NSLocalizedString("party.moves_loading", comment: ""))
                                 .foregroundColor(.secondary)
                         } else {
-                            Text("該当する技がありません")
+                            Text(NSLocalizedString("party.no_moves_found", comment: ""))
                                 .foregroundColor(.secondary)
                         }
                     }
@@ -301,12 +301,12 @@ struct PartyMoveSelectorSheet: View {
 
                                 HStack(spacing: 12) {
                                     if let power = move.power {
-                                        Text("威力: \(power)")
+                                        Text(NSLocalizedString("move.power_label", comment: "") + " \(power)")
                                             .font(.caption)
                                             .foregroundColor(.secondary)
                                     }
                                     if let accuracy = move.accuracy {
-                                        Text("命中: \(accuracy)")
+                                        Text(NSLocalizedString("move.accuracy_label", comment: "") + " \(accuracy)")
                                             .font(.caption)
                                             .foregroundColor(.secondary)
                                     }
@@ -350,11 +350,11 @@ struct EVEditorSheet: View {
         NavigationStack {
             Form {
                 Section {
-                    Text("残り: \(remainingEVs)")
+                    Text(String(format: NSLocalizedString("party.evs_remaining", comment: ""), remainingEVs))
                         .font(.headline)
                         .foregroundColor(remainingEVs >= 0 ? .primary : .red)
                 } header: {
-                    Text("努力値 (\(evs.total)/510)")
+                    Text(String(format: NSLocalizedString("party.evs_total", comment: ""), evs.total))
                 }
 
                 Section {
@@ -452,10 +452,10 @@ struct IVEditorSheet: View {
         NavigationStack {
             Form {
                 Section {
-                    Text("個体値 (\(ivs.total)/186)")
+                    Text(String(format: NSLocalizedString("party.ivs_total", comment: ""), ivs.total))
                         .font(.headline)
                 } header: {
-                    Text("個体値の設定")
+                    Text(NSLocalizedString("party.ivs_settings", comment: ""))
                 }
 
                 Section {

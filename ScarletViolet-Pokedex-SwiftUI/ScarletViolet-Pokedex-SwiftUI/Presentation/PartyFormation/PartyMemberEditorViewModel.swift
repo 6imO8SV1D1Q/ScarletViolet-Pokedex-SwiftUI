@@ -58,7 +58,7 @@ final class PartyMemberEditorViewModel: ObservableObject {
         }
     }
 
-    private func loadAvailableItems() async {
+    func loadAvailableItems() async {
         do {
             // Load all items and filter for held items
             let allItems = try await itemProvider.fetchAllItems()

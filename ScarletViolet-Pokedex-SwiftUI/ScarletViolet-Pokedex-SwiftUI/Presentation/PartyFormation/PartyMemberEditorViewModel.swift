@@ -60,7 +60,9 @@ final class PartyMemberEditorViewModel: ObservableObject {
     func loadAvailableItems() async {
         do {
             let allItems = try await itemProvider.fetchAllItems()
-            availableItems = allItems.filter { $0.category == "held-item" }
+            availableItems = allItems
+                .filter { $0.category == "held-item" }
+                .sorted { $0.id < $1.id }
         } catch {
             print("❌ [PartyMemberEditor] Failed to load items: \(error)")
             availableItems = []

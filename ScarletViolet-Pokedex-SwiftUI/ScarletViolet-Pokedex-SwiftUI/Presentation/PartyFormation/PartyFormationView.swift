@@ -130,6 +130,11 @@ struct PartyMemberRow: View {
         .task {
             await loadHeldItem()
         }
+        .onChange(of: member.item) { _, _ in
+            Task {
+                await loadHeldItem()
+            }
+        }
     }
 
     private func loadHeldItem() async {
@@ -201,14 +206,9 @@ struct PartyMemberRow: View {
 
             // Held item
             if let item = heldItem {
-                HStack(spacing: 4) {
-                    Image(systemName: "circle.fill")
-                        .font(.system(size: 6))
-                        .foregroundColor(.secondary)
-                    Text("持ち物：\(item.nameJa)")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
+                Text("持ち物：\(item.nameJa)")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
             }
         }
     }

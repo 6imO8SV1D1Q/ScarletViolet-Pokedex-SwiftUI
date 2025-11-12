@@ -246,6 +246,7 @@ struct PartyMemberEditorView: View {
         }
         .task {
             await viewModel.loadPokemonData()
+            await viewModel.loadAvailableItems()
         }
     }
 }

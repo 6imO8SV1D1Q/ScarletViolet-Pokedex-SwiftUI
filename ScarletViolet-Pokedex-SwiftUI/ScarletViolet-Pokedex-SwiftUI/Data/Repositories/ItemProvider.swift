@@ -105,11 +105,31 @@ final class ItemProvider: ItemProviderProtocol {
 
     /// JSONファイルからアイテムデータを読み込む
     private func loadItemsFromJSON() throws -> [ItemEntity] {
-        guard let url = bundle.url(forResource: "items_v6", withExtension: "json", subdirectory: "PreloadedData") else {
+        // Try multiple possible locations for the JSON file
+        var url: URL?
+
+        // Method 1: With subdirectory parameter
+        url = bundle.url(forResource: "items_v6", withExtension: "json", subdirectory: "PreloadedData")
+
+        // Method 2: With path in resource name
+        if url == nil {
+            url = bundle.url(forResource: "PreloadedData/items_v6", withExtension: "json")
+        }
+
+        // Method 3: With full path including Resources
+        if url == nil {
+            url = bundle.url(forResource: "Resources/PreloadedData/items_v6", withExtension: "json")
+        }
+
+        guard let fileURL = url else {
+            print("❌ [ItemProvider] items_v6.json not found in bundle")
+            print("   Bundle path: \(bundle.bundlePath)")
+            print("   Resource path: \(bundle.resourcePath ?? "nil")")
             throw ItemProviderError.fileNotFound
         }
 
-        let data = try Data(contentsOf: url)
+        print("📁 [ItemProvider] Loading from: \(fileURL.path)")
+        let data = try Data(contentsOf: fileURL)
         let response = try JSONDecoder().decode(ItemsResponse.self, from: data)
 
         print("📄 [ItemProvider] JSON schema version: \(response.schemaVersion)")

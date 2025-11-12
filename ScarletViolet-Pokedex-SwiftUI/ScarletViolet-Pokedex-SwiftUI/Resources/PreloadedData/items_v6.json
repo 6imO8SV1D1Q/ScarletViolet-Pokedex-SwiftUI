@@ -8,7 +8,9 @@
       "category": "none",
       "description": "No item held.",
       "descriptionJa": "アイテムを持たせていない。",
-      "effects": null
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 135,
@@ -18,7 +20,8 @@
       "description": "Holder survives any attack with 1 HP remaining if it has full HP.",
       "descriptionJa": "HPが満タンの時に攻撃を受けてひんしになりそうになってもHPを1残して耐える。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/focus-sash.png",
-      "cost": 50000
+      "cost": 50000,
+      "effects": null
     },
     {
       "id": 149,
@@ -26,7 +29,10 @@
       "nameJa": "オレンのみ",
       "category": "held-item",
       "description": "Restores 10 HP when held by a Pokémon.",
-      "descriptionJa": "持たせるとHPが減った時に10だけ回復する。"
+      "descriptionJa": "持たせるとHPが減った時に10だけ回復する。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 153,
@@ -34,7 +40,10 @@
       "nameJa": "クラボのみ",
       "category": "held-item",
       "description": "Cures paralysis.",
-      "descriptionJa": "持たせるとまひ状態を回復する。"
+      "descriptionJa": "持たせるとまひ状態を回復する。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 154,
@@ -42,7 +51,10 @@
       "nameJa": "カゴのみ",
       "category": "held-item",
       "description": "Cures sleep.",
-      "descriptionJa": "持たせるとねむり状態を回復する。"
+      "descriptionJa": "持たせるとねむり状態を回復する。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 155,
@@ -50,7 +62,10 @@
       "nameJa": "モモンのみ",
       "category": "held-item",
       "description": "Cures poison.",
-      "descriptionJa": "持たせるとどく・もうどく状態を回復する。"
+      "descriptionJa": "持たせるとどく・もうどく状態を回復する。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 156,
@@ -58,7 +73,10 @@
       "nameJa": "チーゴのみ",
       "category": "held-item",
       "description": "Cures burn.",
-      "descriptionJa": "持たせるとやけど状態を回復する。"
+      "descriptionJa": "持たせるとやけど状態を回復する。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 157,
@@ -66,7 +84,10 @@
       "nameJa": "ラムのみ",
       "category": "held-item",
       "description": "Cures any status condition.",
-      "descriptionJa": "持たせると状態異常をすべて回復する。"
+      "descriptionJa": "持たせると状態異常をすべて回復する。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 158,
@@ -74,7 +95,10 @@
       "nameJa": "ナナシのみ",
       "category": "held-item",
       "description": "Cures freeze.",
-      "descriptionJa": "持たせるとこおり状態を回復する。"
+      "descriptionJa": "持たせるとこおり状態を回復する。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 159,
@@ -82,7 +106,10 @@
       "nameJa": "オボンのみ",
       "category": "held-item",
       "description": "Restores 1/4 of max HP when HP drops to 1/2 or below.",
-      "descriptionJa": "HPが半分以下になると最大HPの1/4を回復する。"
+      "descriptionJa": "HPが半分以下になると最大HPの1/4を回復する。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 160,
@@ -90,7 +117,10 @@
       "nameJa": "フィラのみ",
       "category": "held-item",
       "description": "Restores 1/3 max HP when HP is 1/4 or below. Confuses if nature dislikes spicy.",
-      "descriptionJa": "HPが1/4以下で最大HPの1/3回復。辛い味が嫌いな性格だと混乱。"
+      "descriptionJa": "HPが1/4以下で最大HPの1/3回復。辛い味が嫌いな性格だと混乱。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 161,
@@ -98,7 +128,10 @@
       "nameJa": "ウイのみ",
       "category": "held-item",
       "description": "Restores 1/3 max HP when HP is 1/4 or below. Confuses if nature dislikes dry.",
-      "descriptionJa": "HPが1/4以下で最大HPの1/3回復。渋い味が嫌いな性格だと混乱。"
+      "descriptionJa": "HPが1/4以下で最大HPの1/3回復。渋い味が嫌いな性格だと混乱。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 162,
@@ -106,7 +139,10 @@
       "nameJa": "マゴのみ",
       "category": "held-item",
       "description": "Restores 1/3 max HP when HP is 1/4 or below. Confuses if nature dislikes sweet.",
-      "descriptionJa": "HPが1/4以下で最大HPの1/3回復。甘い味が嫌いな性格だと混乱。"
+      "descriptionJa": "HPが1/4以下で最大HPの1/3回復。甘い味が嫌いな性格だと混乱。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 163,
@@ -114,7 +150,10 @@
       "nameJa": "バンジのみ",
       "category": "held-item",
       "description": "Restores 1/3 max HP when HP is 1/4 or below. Confuses if nature dislikes bitter.",
-      "descriptionJa": "HPが1/4以下で最大HPの1/3回復。苦い味が嫌いな性格だと混乱。"
+      "descriptionJa": "HPが1/4以下で最大HPの1/3回復。苦い味が嫌いな性格だと混乱。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 164,
@@ -122,7 +161,10 @@
       "nameJa": "イアのみ",
       "category": "held-item",
       "description": "Restores 1/3 max HP when HP is 1/4 or below. Confuses if nature dislikes sour.",
-      "descriptionJa": "HPが1/4以下で最大HPの1/3回復。酸っぱい味が嫌いな性格だと混乱。"
+      "descriptionJa": "HPが1/4以下で最大HPの1/3回復。酸っぱい味が嫌いな性格だと混乱。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 186,
@@ -130,7 +172,10 @@
       "nameJa": "ロゼルのみ",
       "category": "held-item",
       "description": "Halves damage from a super effective Fairy-type move.",
-      "descriptionJa": "効果抜群のフェアリータイプの技を受けた時にダメージを半減する。一度だけ。"
+      "descriptionJa": "効果抜群のフェアリータイプの技を受けた時にダメージを半減する。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 196,
@@ -138,7 +183,10 @@
       "nameJa": "オッカのみ",
       "category": "held-item",
       "description": "Halves damage from a super effective Fire-type move.",
-      "descriptionJa": "効果抜群の炎タイプの技を受けた時にダメージを半減する。一度だけ。"
+      "descriptionJa": "効果抜群の炎タイプの技を受けた時にダメージを半減する。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 197,
@@ -146,7 +194,10 @@
       "nameJa": "イトケのみ",
       "category": "held-item",
       "description": "Halves damage from a super effective Water-type move.",
-      "descriptionJa": "効果抜群の水タイプの技を受けた時にダメージを半減する。一度だけ。"
+      "descriptionJa": "効果抜群の水タイプの技を受けた時にダメージを半減する。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 198,
@@ -154,7 +205,10 @@
       "nameJa": "ソクノのみ",
       "category": "held-item",
       "description": "Halves damage from a super effective Electric-type move.",
-      "descriptionJa": "効果抜群の電気タイプの技を受けた時にダメージを半減する。一度だけ。"
+      "descriptionJa": "効果抜群の電気タイプの技を受けた時にダメージを半減する。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 199,
@@ -162,7 +216,10 @@
       "nameJa": "リンドのみ",
       "category": "held-item",
       "description": "Halves damage from a super effective Grass-type move.",
-      "descriptionJa": "効果抜群の草タイプの技を受けた時にダメージを半減する。一度だけ。"
+      "descriptionJa": "効果抜群の草タイプの技を受けた時にダメージを半減する。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 200,
@@ -170,7 +227,10 @@
       "nameJa": "ヤチェのみ",
       "category": "held-item",
       "description": "Halves damage from a super effective Ice-type move.",
-      "descriptionJa": "効果抜群の氷タイプの技を受けた時にダメージを半減する。一度だけ。"
+      "descriptionJa": "効果抜群の氷タイプの技を受けた時にダメージを半減する。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 201,
@@ -178,7 +238,10 @@
       "nameJa": "ヨプのみ",
       "category": "held-item",
       "description": "Halves damage from a super effective Fighting-type move.",
-      "descriptionJa": "効果抜群の格闘タイプの技を受けた時にダメージを半減する。一度だけ。"
+      "descriptionJa": "効果抜群の格闘タイプの技を受けた時にダメージを半減する。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 202,
@@ -186,7 +249,10 @@
       "nameJa": "ビアーのみ",
       "category": "held-item",
       "description": "Halves damage from a super effective Poison-type move.",
-      "descriptionJa": "効果抜群の毒タイプの技を受けた時にダメージを半減する。一度だけ。"
+      "descriptionJa": "効果抜群の毒タイプの技を受けた時にダメージを半減する。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 203,
@@ -194,7 +260,10 @@
       "nameJa": "シュカのみ",
       "category": "held-item",
       "description": "Halves damage from a super effective Ground-type move.",
-      "descriptionJa": "効果抜群の地面タイプの技を受けた時にダメージを半減する。一度だけ。"
+      "descriptionJa": "効果抜群の地面タイプの技を受けた時にダメージを半減する。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 204,
@@ -202,7 +271,10 @@
       "nameJa": "バコウのみ",
       "category": "held-item",
       "description": "Halves damage from a super effective Flying-type move.",
-      "descriptionJa": "効果抜群の飛行タイプの技を受けた時にダメージを半減する。一度だけ。"
+      "descriptionJa": "効果抜群の飛行タイプの技を受けた時にダメージを半減する。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 205,
@@ -210,7 +282,10 @@
       "nameJa": "ウタンのみ",
       "category": "held-item",
       "description": "Halves damage from a super effective Psychic-type move.",
-      "descriptionJa": "効果抜群のエスパータイプの技を受けた時にダメージを半減する。一度だけ。"
+      "descriptionJa": "効果抜群のエスパータイプの技を受けた時にダメージを半減する。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 206,
@@ -218,7 +293,10 @@
       "nameJa": "タンガのみ",
       "category": "held-item",
       "description": "Halves damage from a super effective Bug-type move.",
-      "descriptionJa": "効果抜群の虫タイプの技を受けた時にダメージを半減する。一度だけ。"
+      "descriptionJa": "効果抜群の虫タイプの技を受けた時にダメージを半減する。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 207,
@@ -226,7 +304,10 @@
       "nameJa": "ヨロギのみ",
       "category": "held-item",
       "description": "Halves damage from a super effective Rock-type move.",
-      "descriptionJa": "効果抜群の岩タイプの技を受けた時にダメージを半減する。一度だけ。"
+      "descriptionJa": "効果抜群の岩タイプの技を受けた時にダメージを半減する。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 208,
@@ -234,7 +315,10 @@
       "nameJa": "カシブのみ",
       "category": "held-item",
       "description": "Halves damage from a super effective Ghost-type move.",
-      "descriptionJa": "効果抜群のゴーストタイプの技を受けた時にダメージを半減する。一度だけ。"
+      "descriptionJa": "効果抜群のゴーストタイプの技を受けた時にダメージを半減する。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 209,
@@ -242,7 +326,10 @@
       "nameJa": "ハバンのみ",
       "category": "held-item",
       "description": "Halves damage from a super effective Dragon-type move.",
-      "descriptionJa": "効果抜群のドラゴンタイプの技を受けた時にダメージを半減する。一度だけ。"
+      "descriptionJa": "効果抜群のドラゴンタイプの技を受けた時にダメージを半減する。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 210,
@@ -250,7 +337,10 @@
       "nameJa": "ナモのみ",
       "category": "held-item",
       "description": "Halves damage from a super effective Dark-type move.",
-      "descriptionJa": "効果抜群の悪タイプの技を受けた時にダメージを半減する。一度だけ。"
+      "descriptionJa": "効果抜群の悪タイプの技を受けた時にダメージを半減する。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 211,
@@ -258,7 +348,10 @@
       "nameJa": "リリバのみ",
       "category": "held-item",
       "description": "Halves damage from a super effective Steel-type move.",
-      "descriptionJa": "効果抜群の鋼タイプの技を受けた時にダメージを半減する。一度だけ。"
+      "descriptionJa": "効果抜群の鋼タイプの技を受けた時にダメージを半減する。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 212,
@@ -266,7 +359,10 @@
       "nameJa": "ホズのみ",
       "category": "held-item",
       "description": "Halves damage from a Normal-type move.",
-      "descriptionJa": "ノーマルタイプの技を受けた時にダメージを半減する。一度だけ。"
+      "descriptionJa": "ノーマルタイプの技を受けた時にダメージを半減する。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 213,
@@ -276,7 +372,8 @@
       "description": "Holder has 10% chance to survive any attack with 1 HP when it would be knocked out.",
       "descriptionJa": "持たせるとひんしになりそうな攻撃を受けても10%の確率でHP1で耐える。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/focus-band.png",
-      "cost": 30000
+      "cost": 30000,
+      "effects": null
     },
     {
       "id": 214,
@@ -284,7 +381,10 @@
       "nameJa": "メンタルハーブ",
       "category": "held-item",
       "description": "Snaps holder out of infatuation, taunt, encore, torment, disable, and cursed body once.",
-      "descriptionJa": "持たせるとメロメロ、アンコール、ちょうはつ等の状態を一度だけ回復する。"
+      "descriptionJa": "持たせるとメロメロ、アンコール、ちょうはつ等の状態を一度だけ回復する。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 219,
@@ -294,7 +394,8 @@
       "description": "Holder's critical hit ratio is raised by 1 stage.",
       "descriptionJa": "持たせると急所に当たりやすくなる。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/scope-lens.png",
-      "cost": 30000
+      "cost": 30000,
+      "effects": null
     },
     {
       "id": 220,
@@ -304,7 +405,8 @@
       "description": "Holder's Attack is 1.5x, but it can only select the first move it executes.",
       "descriptionJa": "持たせると攻撃が1.5倍になるが、同じ技しか出せなくなる。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/choice-band.png",
-      "cost": 100000
+      "cost": 100000,
+      "effects": null
     },
     {
       "id": 229,
@@ -318,7 +420,9 @@
           "stat": "defense",
           "multiplier": 1.5
         }
-      }
+      },
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 234,
@@ -332,7 +436,9 @@
           "stat": "attack",
           "multiplier": 1.5
         }
-      }
+      },
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 235,
@@ -346,7 +452,9 @@
           "stat": "special-attack",
           "multiplier": 1.5
         }
-      }
+      },
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 241,
@@ -356,7 +464,8 @@
       "description": "Holder has 20% chance to move first in its priority bracket.",
       "descriptionJa": "持たせると20%の確率で先制攻撃できる。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/quick-claw.png",
-      "cost": 10000
+      "cost": 10000,
+      "effects": null
     },
     {
       "id": 245,
@@ -370,7 +479,9 @@
           "condition": "all_damaging_moves",
           "baseMultiplier": 1.3
         }
-      }
+      },
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 251,
@@ -384,7 +495,9 @@
           "condition": "super_effective",
           "baseMultiplier": 1.2
         }
-      }
+      },
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 268,
@@ -394,7 +507,8 @@
       "description": "Holder's super effective moves deal 20% more damage.",
       "descriptionJa": "持たせると効果抜群の技の威力が1.2倍になる。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/expert-belt.png",
-      "cost": 10000
+      "cost": 10000,
+      "effects": null
     },
     {
       "id": 270,
@@ -408,7 +522,9 @@
           "stat": "special-defense",
           "multiplier": 1.5
         }
-      }
+      },
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 271,
@@ -418,7 +534,8 @@
       "description": "Holder is immune to Ground-type moves. Pops when hit.",
       "descriptionJa": "持たせると地面タイプの技が当たらなくなる。攻撃を受けると割れる。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/air-balloon.png",
-      "cost": 15000
+      "cost": 15000,
+      "effects": null
     },
     {
       "id": 275,
@@ -428,7 +545,8 @@
       "description": "Holder's physical moves deal 10% more damage.",
       "descriptionJa": "持たせると物理技の威力が1.1倍になる。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/muscle-band.png",
-      "cost": 10000
+      "cost": 10000,
+      "effects": null
     },
     {
       "id": 276,
@@ -438,7 +556,8 @@
       "description": "Holder's special moves deal 10% more damage.",
       "descriptionJa": "持たせると特殊技の威力が1.1倍になる。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/wise-glasses.png",
-      "cost": 10000
+      "cost": 10000,
+      "effects": null
     },
     {
       "id": 278,
@@ -448,7 +567,8 @@
       "description": "Damage of moves used on consecutive turns increases. Max 2x after 5 turns.",
       "descriptionJa": "持たせると同じ技を連続で使うと威力が上がる。最大2倍。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/metronome.png",
-      "cost": 30000
+      "cost": 30000,
+      "effects": null
     },
     {
       "id": 281,
@@ -458,7 +578,8 @@
       "description": "Holder's Speed is halved. Negates immunity to Ground-type moves.",
       "descriptionJa": "持たせると素早さが半分になり、地面タイプの技が当たるようになる。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/iron-ball.png",
-      "cost": 20000
+      "cost": 20000,
+      "effects": null
     },
     {
       "id": 282,
@@ -468,7 +589,8 @@
       "description": "Holder moves last in its priority bracket.",
       "descriptionJa": "持たせると必ず後攻になる。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/lagging-tail.png",
-      "cost": 20000
+      "cost": 20000,
+      "effects": null
     },
     {
       "id": 289,
@@ -478,7 +600,8 @@
       "description": "Forces the attacker to switch out when holder is hit by a move.",
       "descriptionJa": "持たせると攻撃を受けた時に相手を強制的に交代させる。一度だけ。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/red-card.png",
-      "cost": 30000
+      "cost": 30000,
+      "effects": null
     },
     {
       "id": 295,
@@ -488,7 +611,8 @@
       "description": "Holder restores 1/16 of its max HP at the end of each turn.",
       "descriptionJa": "持たせると毎ターン最大HPの1/16を回復する。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/leftovers.png",
-      "cost": 20000
+      "cost": 20000,
+      "effects": null
     },
     {
       "id": 297,
@@ -498,7 +622,8 @@
       "description": "Holder's Special Attack is 1.5x, but it can only select the first move it executes.",
       "descriptionJa": "持たせると特攻が1.5倍になるが、同じ技しか出せなくなる。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/choice-specs.png",
-      "cost": 100000
+      "cost": 100000,
+      "effects": null
     },
     {
       "id": 298,
@@ -508,7 +633,8 @@
       "description": "Holder's Speed is 1.5x, but it can only select the first move it executes.",
       "descriptionJa": "持たせると素早さが1.5倍になるが、同じ技しか出せなくなる。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/choice-scarf.png",
-      "cost": 100000
+      "cost": 100000,
+      "effects": null
     },
     {
       "id": 299,
@@ -522,7 +648,9 @@
           "stat": "speed",
           "multiplier": 1.5
         }
-      }
+      },
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 300,
@@ -532,7 +660,8 @@
       "description": "Holder is badly poisoned at the end of the first turn.",
       "descriptionJa": "持たせると戦闘中最初のターンの終わりにもうどく状態になる。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/toxic-orb.png",
-      "cost": 30000
+      "cost": 30000,
+      "effects": null
     },
     {
       "id": 586,
@@ -542,7 +671,8 @@
       "description": "Defense and Special Defense of holder that can still evolve are 1.5x.",
       "descriptionJa": "進化前のポケモンに持たせると防御と特防が1.5倍になる。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/eviolite.png",
-      "cost": 40000
+      "cost": 40000,
+      "effects": null
     },
     {
       "id": 633,
@@ -550,7 +680,10 @@
       "nameJa": "しろいハーブ",
       "category": "held-item",
       "description": "Restores any lowered stats once.",
-      "descriptionJa": "持たせると能力が下がった時に一度だけ元に戻す。"
+      "descriptionJa": "持たせると能力が下がった時に一度だけ元に戻す。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 640,
@@ -560,7 +693,8 @@
       "description": "Holder's Special Defense is 1.5x, but it can only use damaging moves.",
       "descriptionJa": "持たせると特防が1.5倍になるが、変化技が出せなくなる。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/assault-vest.png",
-      "cost": 50000
+      "cost": 50000,
+      "effects": null
     },
     {
       "id": 648,
@@ -570,7 +704,8 @@
       "description": "Holder is immune to powder moves and damage from weather.",
       "descriptionJa": "持たせると粉系の技と天候ダメージを受けなくなる。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/safety-goggles.png",
-      "cost": 40000
+      "cost": 40000,
+      "effects": null
     },
     {
       "id": 879,
@@ -580,7 +715,8 @@
       "description": "Extends the duration of terrain from 5 turns to 8 turns.",
       "descriptionJa": "持たせるとフィールドの効果が5ターンから8ターンに延長される。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/terrain-extender.png",
-      "cost": 30000
+      "cost": 30000,
+      "effects": null
     },
     {
       "id": 880,
@@ -588,7 +724,10 @@
       "nameJa": "エレキシード",
       "category": "held-item",
       "description": "Raises Defense by one stage when Electric Terrain is active. Single use.",
-      "descriptionJa": "エレキフィールドの時に防御が1段階上がる。一度だけ。"
+      "descriptionJa": "エレキフィールドの時に防御が1段階上がる。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 881,
@@ -598,7 +737,8 @@
       "description": "Holder's contact moves don't trigger the target's contact effects.",
       "descriptionJa": "持たせると接触技を使っても相手の接触時の効果を受けない。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/protective-pads.png",
-      "cost": 30000
+      "cost": 30000,
+      "effects": null
     },
     {
       "id": 882,
@@ -606,7 +746,10 @@
       "nameJa": "ミストシード",
       "category": "held-item",
       "description": "Raises Sp. Def by one stage when Misty Terrain is active. Single use.",
-      "descriptionJa": "ミストフィールドの時に特防が1段階上がる。一度だけ。"
+      "descriptionJa": "ミストフィールドの時に特防が1段階上がる。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 883,
@@ -614,7 +757,10 @@
       "nameJa": "サイコシード",
       "category": "held-item",
       "description": "Raises Sp. Def by one stage when Psychic Terrain is active. Single use.",
-      "descriptionJa": "サイコフィールドの時に特防が1段階上がる。一度だけ。"
+      "descriptionJa": "サイコフィールドの時に特防が1段階上がる。一度だけ。",
+      "effects": null,
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 1861,
@@ -624,7 +770,8 @@
       "description": "Activates the Paradox Pokémon's Protosynthesis or Quark Drive ability.",
       "descriptionJa": "パラドックスポケモンに持たせると古代活性・クォークチャージが発動する。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/booster-energy.png",
-      "cost": 30000
+      "cost": 30000,
+      "effects": null
     },
     {
       "id": 1862,
@@ -634,7 +781,8 @@
       "description": "Prevents the holder's ability from being changed by other Pokémon.",
       "descriptionJa": "持たせると相手から特性を変えられなくなる。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ability-shield.png",
-      "cost": 20000
+      "cost": 20000,
+      "effects": null
     },
     {
       "id": 1863,
@@ -644,7 +792,8 @@
       "description": "Prevents other Pokémon from lowering the holder's stats.",
       "descriptionJa": "持たせると相手から能力を下げられなくなる。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/clear-amulet.png",
-      "cost": 30000
+      "cost": 30000,
+      "effects": null
     },
     {
       "id": 1864,
@@ -654,7 +803,8 @@
       "description": "Copies the opponent's stat increases once, then is consumed.",
       "descriptionJa": "持たせると相手の能力上昇をコピーする。一度だけ。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/mirror-herb.png",
-      "cost": 30000
+      "cost": 30000,
+      "effects": null
     },
     {
       "id": 1865,
@@ -664,7 +814,8 @@
       "description": "Powers up punching moves and removes their contact effects.",
       "descriptionJa": "持たせるとパンチ技の威力が1.1倍になり、接触判定がなくなる。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/punching-glove.png",
-      "cost": 15000
+      "cost": 15000,
+      "effects": null
     },
     {
       "id": 1866,
@@ -674,7 +825,8 @@
       "description": "Protects the holder from the secondary effects of attacks.",
       "descriptionJa": "持たせると技の追加効果を受けなくなる。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/covert-cloak.png",
-      "cost": 20000
+      "cost": 20000,
+      "effects": null
     },
     {
       "id": 1867,
@@ -684,7 +836,8 @@
       "description": "Multi-hit moves always hit at least 4 times.",
       "descriptionJa": "持たせると連続技が必ず4回以上当たる。",
       "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/loaded-dice.png",
-      "cost": 20000
+      "cost": 20000,
+      "effects": null
     },
     {
       "id": 2403,
@@ -706,7 +859,9 @@
             "ogerpon-wellspring-mask"
           ]
         }
-      }
+      },
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 2404,
@@ -728,7 +883,9 @@
             "ogerpon-hearthflame-mask"
           ]
         }
-      }
+      },
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 2405,
@@ -750,7 +907,9 @@
             "ogerpon-cornerstone-mask"
           ]
         }
-      }
+      },
+      "spriteUrl": null,
+      "cost": null
     },
     {
       "id": 2406,
@@ -772,7 +931,9 @@
             "ogerpon-teal-mask"
           ]
         }
-      }
+      },
+      "spriteUrl": null,
+      "cost": null
     }
   ]
 }

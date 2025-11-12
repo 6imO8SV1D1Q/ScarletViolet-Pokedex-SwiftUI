@@ -37,15 +37,18 @@ final class ItemProvider: ItemProviderProtocol {
     /// - Returns: アイテム情報のリスト（ID順にソート済み）
     /// - Throws: データ取得時のエラー
     func fetchAllItems() async throws -> [ItemEntity] {
-        // キャッシュチェック
-        if let cached = await cache.getAll() {
-            print("🔍 [ItemProvider] Cache hit: \(cached.count) items")
-            return cached
-        }
+        // TEMPORARY DEBUG: Skip cache and always load from JSON
+        print("🔍 [ItemProvider] Skipping cache, loading from JSON...")
 
         // JSONファイルから読み込み
         let items = try loadItemsFromJSON()
         print("📦 [ItemProvider] Loaded from JSON: \(items.count) items")
+
+        if items.isEmpty {
+            print("⚠️ [ItemProvider] JSON returned 0 items!")
+        } else {
+            print("📦 [ItemProvider] Sample items: \(items.prefix(3).map { "\($0.nameJa) (category: \($0.category))" })")
+        }
 
         // キャッシュに保存
         await cache.setAll(items: items)

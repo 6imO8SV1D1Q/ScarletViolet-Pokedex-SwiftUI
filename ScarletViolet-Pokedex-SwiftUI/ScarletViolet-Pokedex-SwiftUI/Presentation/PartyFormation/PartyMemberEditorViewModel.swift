@@ -54,16 +54,17 @@ final class PartyMemberEditorViewModel: ObservableObject {
                 // Load available moves
                 await loadAvailableMoves(pokemon: pokemon)
             }
-            // Load available items
-            await loadAvailableItems()
+            // Note: loadAvailableItems() is called separately in .task
         } catch {
             // TODO: Error handling
         }
     }
 
     func loadAvailableItems() async {
+        print("🚀 [PartyMemberEditor] Starting loadAvailableItems...")
         do {
             // Load all items and filter for held items
+            print("🔄 [PartyMemberEditor] Calling itemProvider.fetchAllItems()...")
             let allItems = try await itemProvider.fetchAllItems()
             print("🔍 [PartyMemberEditor] Loaded \(allItems.count) total items")
 
@@ -76,14 +77,21 @@ final class PartyMemberEditorViewModel: ObservableObject {
             itemLoadError = nil
             if availableItems.isEmpty {
                 print("⚠️ [PartyMemberEditor] No held items found!")
+                print("   Total items: \(allItems.count)")
                 print("   Categories found: \(itemCategories)")
-                itemLoadError = "No held-item category found. Categories: \(itemCategories.joined(separator: ", "))"
+                if allItems.count == 0 {
+                    itemLoadError = "JSON file returned 0 items - file may be missing from bundle"
+                } else {
+                    itemLoadError = "No held-item category. Found: \(itemCategories.joined(separator: ", "))"
+                }
             } else {
                 print("📦 [PartyMemberEditor] Sample items: \(availableItems.prefix(3).map { $0.nameJa })")
             }
         } catch {
-            print("❌ Failed to load items: \(error)")
-            itemLoadError = "Error: \(error.localizedDescription)"
+            print("❌ [PartyMemberEditor] Failed to load items: \(error)")
+            print("   Error type: \(type(of: error))")
+            print("   Error description: \(error.localizedDescription)")
+            itemLoadError = "Load failed: \(error.localizedDescription)"
             availableItems = []
             allItemsCount = 0
             itemCategories = []

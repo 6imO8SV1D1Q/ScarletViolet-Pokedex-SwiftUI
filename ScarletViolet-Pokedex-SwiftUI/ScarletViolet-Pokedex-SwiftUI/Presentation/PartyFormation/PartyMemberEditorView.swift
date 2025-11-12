@@ -95,38 +95,6 @@ struct PartyMemberEditorView: View {
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
-
-                // Debug: Show item count
-                Text("Debug: \(viewModel.availableItems.count) items loaded")
-                    .font(.caption2)
-                    .foregroundColor(.orange)
-
-                // Debug: Show total items before filter
-                Text("Total items: \(viewModel.allItemsCount)")
-                    .font(.caption2)
-                    .foregroundColor(.blue)
-
-                // Debug: Show categories found
-                if !viewModel.itemCategories.isEmpty {
-                    Text("Categories: \(viewModel.itemCategories.joined(separator: ", "))")
-                        .font(.caption2)
-                        .foregroundColor(.blue)
-                }
-
-                // Debug: Show error if any
-                if let error = viewModel.itemLoadError {
-                    Text("Error: \(error)")
-                        .font(.caption2)
-                        .foregroundColor(.red)
-                }
-
-                // Debug: Show bundle info
-                if !viewModel.bundleDebugInfo.isEmpty {
-                    Text(viewModel.bundleDebugInfo)
-                        .font(.caption2)
-                        .foregroundColor(.purple)
-                        .lineLimit(nil)
-                }
             } header: {
                 Text("Held Item")
             }

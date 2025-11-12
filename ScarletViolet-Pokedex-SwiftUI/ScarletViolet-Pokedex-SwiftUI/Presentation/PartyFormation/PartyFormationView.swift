@@ -112,6 +112,7 @@ struct PartyMemberRow: View {
     let member: PartyMember
     let pokemon: Pokemon?
     @EnvironmentObject private var localizationManager: LocalizationManager
+    @State private var heldItem: ItemEntity?
 
     var body: some View {
         VStack(alignment: .leading, spacing: DesignConstants.Spacing.small) {
@@ -126,6 +127,19 @@ struct PartyMemberRow: View {
             }
         }
         .padding(.vertical, DesignConstants.Spacing.xxSmall)
+        .task {
+            await loadHeldItem()
+        }
+    }
+
+    private func loadHeldItem() async {
+        guard let itemName = member.item, !itemName.isEmpty else {
+            heldItem = nil
+            return
+        }
+
+        let itemProvider = DIContainer.shared.itemProvider
+        heldItem = try? await itemProvider.fetchItem(name: itemName)
     }
 
     private var pokemonImage: some View {
@@ -180,6 +194,18 @@ struct PartyMemberRow: View {
 
                 if let nickname = member.nickname {
                     Text("(\(nickname))")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+            }
+
+            // Held item
+            if let item = heldItem {
+                HStack(spacing: 4) {
+                    Image(systemName: "circle.fill")
+                        .font(.system(size: 6))
+                        .foregroundColor(.secondary)
+                    Text("持ち物：\(item.nameJa)")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }

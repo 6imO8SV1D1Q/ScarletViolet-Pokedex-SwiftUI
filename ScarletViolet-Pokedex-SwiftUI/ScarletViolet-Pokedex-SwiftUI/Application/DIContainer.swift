@@ -95,9 +95,13 @@ final class DIContainer: ObservableObject {
 
     // MARK: - v5.0 Providers
 
-    private lazy var itemProvider: ItemProviderProtocol = {
+    private lazy var _itemProvider: ItemProviderProtocol = {
         ItemProvider()
     }()
+
+    var itemProvider: ItemProviderProtocol {
+        _itemProvider
+    }
 
     // MARK: - UseCases
     func makeFetchPokemonListUseCase() -> FetchPokemonListUseCaseProtocol {
@@ -234,7 +238,7 @@ final class DIContainer: ObservableObject {
 
     func makeDamageCalculatorStore() -> DamageCalculatorStore {
         DamageCalculatorStore(
-            itemProvider: itemProvider,
+            itemProvider: _itemProvider,
             pokemonRepository: pokemonRepository,
             moveRepository: moveRepository,
             typeRepository: typeRepository,
@@ -265,7 +269,7 @@ final class DIContainer: ObservableObject {
             member: member,
             pokemonRepository: pokemonRepository,
             moveRepository: moveRepository,
-            itemProvider: itemProvider
+            itemProvider: _itemProvider
         )
     }
 }

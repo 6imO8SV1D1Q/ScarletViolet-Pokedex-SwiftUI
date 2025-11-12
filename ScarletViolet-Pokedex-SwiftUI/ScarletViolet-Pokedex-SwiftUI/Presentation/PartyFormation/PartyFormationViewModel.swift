@@ -23,6 +23,12 @@ final class PartyFormationViewModel: ObservableObject {
     @Published var showingMemberEditor: Bool = false
     @Published var memberPokemons: [Pokemon?] = []
 
+    // MARK: - Computed Properties
+
+    var sortedMembers: [PartyMember] {
+        party.members.sorted { $0.position < $1.position }
+    }
+
     // MARK: - Dependencies
 
     private let savePartyUseCase: SavePartyUseCaseProtocol
@@ -46,11 +52,12 @@ final class PartyFormationViewModel: ObservableObject {
     // MARK: - Actions
 
     func addPokemon(_ pokemon: Pokemon, at index: Int) {
-        let member = PartyMember(
+        var member = PartyMember(
             pokemonId: pokemon.id,
             ability: pokemon.abilities.first?.name ?? "",
             teraType: pokemon.types.first?.name ?? "normal"
         )
+        member.position = index
 
         if index < party.members.count {
             party.members[index] = member
@@ -62,12 +69,18 @@ final class PartyFormationViewModel: ObservableObject {
     }
 
     func removePokemon(at index: Int) {
-        guard index < party.members.count else { return }
-        party.members.remove(at: index)
+        let sorted = sortedMembers
+        guard index < sorted.count else { return }
 
-        // Update position for remaining members
-        for i in 0..<party.members.count {
-            party.members[i].position = i
+        // Find the member to remove in the actual array
+        let memberToRemove = sorted[index]
+        if let actualIndex = party.members.firstIndex(where: { $0.id == memberToRemove.id }) {
+            party.members.remove(at: actualIndex)
+
+            // Update positions for remaining members
+            for i in 0..<party.members.count {
+                party.members[i].position = i
+            }
         }
 
         Task {

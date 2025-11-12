@@ -25,15 +25,15 @@ struct PartyFormationView: View {
                 TextField(NSLocalizedString("party.party_name", comment: ""), text: $viewModel.party.name)
             }
 
-            Section(String(format: NSLocalizedString("party.members", comment: ""), viewModel.party.members.count)) {
+            Section(String(format: NSLocalizedString("party.members", comment: ""), viewModel.sortedMembers.count)) {
                 ForEach(0..<6, id: \.self) { index in
-                    if index < viewModel.party.members.count {
+                    if index < viewModel.sortedMembers.count {
                         Button {
                             editingMemberIndex = index
                             showingMemberEditor = true
                         } label: {
                             PartyMemberRow(
-                                member: viewModel.party.members[index],
+                                member: viewModel.sortedMembers[index],
                                 pokemon: index < viewModel.memberPokemons.count ? viewModel.memberPokemons[index] : nil
                             )
                         }
@@ -85,14 +85,18 @@ struct PartyFormationView: View {
         }
         .sheet(isPresented: $showingMemberEditor) {
             if let index = editingMemberIndex,
-               index < viewModel.party.members.count {
-                NavigationStack {
-                    PartyMemberEditorView(
-                        viewModel: DIContainer.shared.makePartyMemberEditorViewModel(
-                            member: viewModel.party.members[index]
-                        ),
-                        member: $viewModel.party.members[index]
-                    )
+               index < viewModel.sortedMembers.count {
+                // Find the actual index in party.members array
+                let sortedMember = viewModel.sortedMembers[index]
+                if let actualIndex = viewModel.party.members.firstIndex(where: { $0.id == sortedMember.id }) {
+                    NavigationStack {
+                        PartyMemberEditorView(
+                            viewModel: DIContainer.shared.makePartyMemberEditorViewModel(
+                                member: viewModel.party.members[actualIndex]
+                            ),
+                            member: $viewModel.party.members[actualIndex]
+                        )
+                    }
                 }
             }
         }

@@ -23,6 +23,7 @@ final class PartyMemberEditorViewModel: ObservableObject {
     @Published var itemLoadError: String?
     @Published var allItemsCount: Int = 0
     @Published var itemCategories: [String] = []
+    @Published var bundleDebugInfo: String = ""
 
     // MARK: - Dependencies
 
@@ -62,6 +63,26 @@ final class PartyMemberEditorViewModel: ObservableObject {
 
     func loadAvailableItems() async {
         print("🚀 [PartyMemberEditor] Starting loadAvailableItems...")
+
+        // Collect bundle debug info
+        var debugInfo = ""
+        if let resourcePath = Bundle.main.resourcePath {
+            debugInfo += "ResourcePath: \(resourcePath)\n"
+            if let contents = try? FileManager.default.contentsOfDirectory(atPath: resourcePath) {
+                debugInfo += "Bundle: \(contents.prefix(5).joined(separator: ", "))\n"
+
+                let preloadedPath = (resourcePath as NSString).appendingPathComponent("PreloadedData")
+                if FileManager.default.fileExists(atPath: preloadedPath) {
+                    if let preloadedContents = try? FileManager.default.contentsOfDirectory(atPath: preloadedPath) {
+                        debugInfo += "PreloadedData: \(preloadedContents.joined(separator: ", "))\n"
+                    }
+                } else {
+                    debugInfo += "PreloadedData: NOT FOUND\n"
+                }
+            }
+        }
+        bundleDebugInfo = debugInfo
+
         do {
             // Load all items and filter for held items
             print("🔄 [PartyMemberEditor] Calling itemProvider.fetchAllItems()...")
@@ -80,9 +101,9 @@ final class PartyMemberEditorViewModel: ObservableObject {
                 print("   Total items: \(allItems.count)")
                 print("   Categories found: \(itemCategories)")
                 if allItems.count == 0 {
-                    itemLoadError = "JSON file returned 0 items - file may be missing from bundle"
+                    itemLoadError = "JSON returned 0 items"
                 } else {
-                    itemLoadError = "No held-item category. Found: \(itemCategories.joined(separator: ", "))"
+                    itemLoadError = "Wrong category: \(itemCategories.joined(separator: ", "))"
                 }
             } else {
                 print("📦 [PartyMemberEditor] Sample items: \(availableItems.prefix(3).map { $0.nameJa })")

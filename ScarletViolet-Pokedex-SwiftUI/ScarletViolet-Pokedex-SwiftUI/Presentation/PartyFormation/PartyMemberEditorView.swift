@@ -119,6 +119,14 @@ struct PartyMemberEditorView: View {
                         .font(.caption2)
                         .foregroundColor(.red)
                 }
+
+                // Debug: Show bundle info
+                if !viewModel.bundleDebugInfo.isEmpty {
+                    Text(viewModel.bundleDebugInfo)
+                        .font(.caption2)
+                        .foregroundColor(.purple)
+                        .lineLimit(nil)
+                }
             } header: {
                 Text("Held Item")
             }

@@ -108,34 +108,81 @@ final class ItemProvider: ItemProviderProtocol {
 
     /// JSONファイルからアイテムデータを読み込む
     private func loadItemsFromJSON() throws -> [ItemEntity] {
+        print("🔍 [ItemProvider] Bundle path: \(bundle.bundlePath)")
+        print("🔍 [ItemProvider] Resource path: \(bundle.resourcePath ?? "nil")")
+
+        // List all files in bundle to debug
+        if let resourcePath = bundle.resourcePath {
+            do {
+                let contents = try FileManager.default.contentsOfDirectory(atPath: resourcePath)
+                print("📂 [ItemProvider] Bundle contents: \(contents)")
+
+                // Check if PreloadedData directory exists
+                let preloadedPath = (resourcePath as NSString).appendingPathComponent("PreloadedData")
+                if FileManager.default.fileExists(atPath: preloadedPath) {
+                    let preloadedContents = try FileManager.default.contentsOfDirectory(atPath: preloadedPath)
+                    print("📂 [ItemProvider] PreloadedData contents: \(preloadedContents)")
+                } else {
+                    print("❌ [ItemProvider] PreloadedData directory does not exist")
+                }
+
+                // Check if Resources directory exists
+                let resourcesPath = (resourcePath as NSString).appendingPathComponent("Resources")
+                if FileManager.default.fileExists(atPath: resourcesPath) {
+                    let resourcesContents = try FileManager.default.contentsOfDirectory(atPath: resourcesPath)
+                    print("📂 [ItemProvider] Resources contents: \(resourcesContents)")
+
+                    let resourcesPreloadedPath = (resourcesPath as NSString).appendingPathComponent("PreloadedData")
+                    if FileManager.default.fileExists(atPath: resourcesPreloadedPath) {
+                        let resourcesPreloadedContents = try FileManager.default.contentsOfDirectory(atPath: resourcesPreloadedPath)
+                        print("📂 [ItemProvider] Resources/PreloadedData contents: \(resourcesPreloadedContents)")
+                    }
+                } else {
+                    print("❌ [ItemProvider] Resources directory does not exist")
+                }
+            } catch {
+                print("❌ [ItemProvider] Failed to list directory: \(error)")
+            }
+        }
+
         // Try multiple possible locations for the JSON file
         var url: URL?
 
         // Method 1: With subdirectory parameter
         url = bundle.url(forResource: "items_v6", withExtension: "json", subdirectory: "PreloadedData")
+        if url != nil {
+            print("✅ [ItemProvider] Found via Method 1: subdirectory parameter")
+        }
 
         // Method 2: With path in resource name
         if url == nil {
             url = bundle.url(forResource: "PreloadedData/items_v6", withExtension: "json")
+            if url != nil {
+                print("✅ [ItemProvider] Found via Method 2: path in resource name")
+            }
         }
 
         // Method 3: With full path including Resources
         if url == nil {
             url = bundle.url(forResource: "Resources/PreloadedData/items_v6", withExtension: "json")
+            if url != nil {
+                print("✅ [ItemProvider] Found via Method 3: full path with Resources")
+            }
         }
 
         guard let fileURL = url else {
             print("❌ [ItemProvider] items_v6.json not found in bundle")
-            print("   Bundle path: \(bundle.bundlePath)")
-            print("   Resource path: \(bundle.resourcePath ?? "nil")")
             throw ItemProviderError.fileNotFound
         }
 
         print("📁 [ItemProvider] Loading from: \(fileURL.path)")
         let data = try Data(contentsOf: fileURL)
+        print("📊 [ItemProvider] Data size: \(data.count) bytes")
+
         let response = try JSONDecoder().decode(ItemsResponse.self, from: data)
 
         print("📄 [ItemProvider] JSON schema version: \(response.schemaVersion)")
+        print("📦 [ItemProvider] JSON items count: \(response.items.count)")
 
         // ID順にソート
         return response.items.sorted { $0.id < $1.id }

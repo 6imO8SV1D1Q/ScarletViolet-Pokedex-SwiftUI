@@ -148,25 +148,33 @@ final class ItemProvider: ItemProviderProtocol {
         // Try multiple possible locations for the JSON file
         var url: URL?
 
-        // Method 1: With subdirectory parameter
-        url = bundle.url(forResource: "items_v6", withExtension: "json", subdirectory: "PreloadedData")
+        // Method 1: Bundle root (Xcode Cloud flattens directory structure)
+        url = bundle.url(forResource: "items_v6", withExtension: "json")
         if url != nil {
-            print("✅ [ItemProvider] Found via Method 1: subdirectory parameter")
+            print("✅ [ItemProvider] Found via Method 1: bundle root")
         }
 
-        // Method 2: With path in resource name
+        // Method 2: With subdirectory parameter
         if url == nil {
-            url = bundle.url(forResource: "PreloadedData/items_v6", withExtension: "json")
+            url = bundle.url(forResource: "items_v6", withExtension: "json", subdirectory: "PreloadedData")
             if url != nil {
-                print("✅ [ItemProvider] Found via Method 2: path in resource name")
+                print("✅ [ItemProvider] Found via Method 2: subdirectory parameter")
             }
         }
 
-        // Method 3: With full path including Resources
+        // Method 3: With path in resource name
+        if url == nil {
+            url = bundle.url(forResource: "PreloadedData/items_v6", withExtension: "json")
+            if url != nil {
+                print("✅ [ItemProvider] Found via Method 3: path in resource name")
+            }
+        }
+
+        // Method 4: With full path including Resources
         if url == nil {
             url = bundle.url(forResource: "Resources/PreloadedData/items_v6", withExtension: "json")
             if url != nil {
-                print("✅ [ItemProvider] Found via Method 3: full path with Resources")
+                print("✅ [ItemProvider] Found via Method 4: full path with Resources")
             }
         }
 

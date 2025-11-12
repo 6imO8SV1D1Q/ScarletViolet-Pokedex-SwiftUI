@@ -101,6 +101,18 @@ struct PartyMemberEditorView: View {
                     .font(.caption2)
                     .foregroundColor(.orange)
 
+                // Debug: Show total items before filter
+                Text("Total items: \(viewModel.allItemsCount)")
+                    .font(.caption2)
+                    .foregroundColor(.blue)
+
+                // Debug: Show categories found
+                if !viewModel.itemCategories.isEmpty {
+                    Text("Categories: \(viewModel.itemCategories.joined(separator: ", "))")
+                        .font(.caption2)
+                        .foregroundColor(.blue)
+                }
+
                 // Debug: Show error if any
                 if let error = viewModel.itemLoadError {
                     Text("Error: \(error)")

@@ -21,6 +21,8 @@ final class PartyMemberEditorViewModel: ObservableObject {
     @Published var availableItems: [ItemEntity] = []
     @Published var selectedForm: PokemonForm?
     @Published var itemLoadError: String?
+    @Published var allItemsCount: Int = 0
+    @Published var itemCategories: [String] = []
 
     // MARK: - Dependencies
 
@@ -64,12 +66,18 @@ final class PartyMemberEditorViewModel: ObservableObject {
             // Load all items and filter for held items
             let allItems = try await itemProvider.fetchAllItems()
             print("🔍 [PartyMemberEditor] Loaded \(allItems.count) total items")
+
+            // Store for debugging
+            allItemsCount = allItems.count
+            itemCategories = Array(Set(allItems.map { $0.category })).sorted()
+
             availableItems = allItems.filter { $0.category == "held-item" }
             print("✅ [PartyMemberEditor] Filtered to \(availableItems.count) held items")
             itemLoadError = nil
             if availableItems.isEmpty {
                 print("⚠️ [PartyMemberEditor] No held items found!")
-                itemLoadError = "No held items found in data"
+                print("   Categories found: \(itemCategories)")
+                itemLoadError = "No held-item category found. Categories: \(itemCategories.joined(separator: ", "))"
             } else {
                 print("📦 [PartyMemberEditor] Sample items: \(availableItems.prefix(3).map { $0.nameJa })")
             }
@@ -77,6 +85,8 @@ final class PartyMemberEditorViewModel: ObservableObject {
             print("❌ Failed to load items: \(error)")
             itemLoadError = "Error: \(error.localizedDescription)"
             availableItems = []
+            allItemsCount = 0
+            itemCategories = []
         }
     }
 

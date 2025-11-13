@@ -776,3 +776,10 @@
 "party.no_immunities" = "無効タイプなし";
 "party.suggestions" = "提案";
 "party.add_pokemon_to_analyze" = "ポケモンを追加すると分析が表示されます";
+"party.loading_parties" = "パーティを読み込み中...";
+"party.delete_party_title" = "パーティを削除しますか？";
+"party.delete_party_message" = "本当に「%@」を削除しますか？";
+"party.no_parties" = "パーティがありません";
+"party.create_first_party" = "最初のパーティを作成しましょう";
+"party.create_party" = "パーティを作成";
+"party.average_level" = "平均Lv. %d";

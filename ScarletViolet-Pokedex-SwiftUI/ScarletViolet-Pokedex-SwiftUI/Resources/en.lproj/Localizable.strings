@@ -776,3 +776,10 @@
 "party.no_immunities" = "No immunities";
 "party.suggestions" = "Suggestions";
 "party.add_pokemon_to_analyze" = "Add Pokémon to see analysis";
+"party.loading_parties" = "Loading parties...";
+"party.delete_party_title" = "Delete Party?";
+"party.delete_party_message" = "Are you sure you want to delete '%@'?";
+"party.no_parties" = "No Parties";
+"party.create_first_party" = "Create your first party to get started";
+"party.create_party" = "Create Party";
+"party.average_level" = "Avg. Lv. %d";

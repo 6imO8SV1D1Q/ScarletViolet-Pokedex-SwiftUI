@@ -16,7 +16,7 @@ struct PartyListView: View {
     var body: some View {
         ZStack {
             if viewModel.isLoading {
-                ProgressView("Loading parties...")
+                ProgressView(NSLocalizedString("party.loading_parties", comment: ""))
             } else if viewModel.parties.isEmpty {
                 EmptyPartyView {
                     showingNewPartySheet = true
@@ -37,7 +37,7 @@ struct PartyListView: View {
                                 Button(role: .destructive) {
                                     viewModel.confirmDelete(party)
                                 } label: {
-                                    Label("Delete", systemImage: "trash")
+                                    Label(NSLocalizedString("common.delete", comment: ""), systemImage: "trash")
                                 }
                             }
                         }
@@ -69,7 +69,7 @@ struct PartyListView: View {
                 }
             }
         }
-        .navigationTitle("Parties")
+        .navigationTitle(NSLocalizedString("party.list_title", comment: ""))
         .sheet(isPresented: $showingNewPartySheet) {
             // Reload parties when sheet is dismissed
             Task {
@@ -83,20 +83,20 @@ struct PartyListView: View {
             }
         }
         .confirmationDialog(
-            "Delete Party?",
+            NSLocalizedString("party.delete_party_title", comment: ""),
             isPresented: $viewModel.showingDeleteConfirmation,
             presenting: viewModel.partyToDelete
         ) { party in
-            Button("Delete", role: .destructive) {
+            Button(NSLocalizedString("common.delete", comment: ""), role: .destructive) {
                 Task {
                     await viewModel.deleteParty(party)
                 }
             }
         } message: { party in
-            Text("Are you sure you want to delete '\(party.name)'?")
+            Text(String(format: NSLocalizedString("party.delete_party_message", comment: ""), party.name))
         }
-        .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
-            Button("OK") {
+        .alert(NSLocalizedString("common.error", comment: ""), isPresented: .constant(viewModel.errorMessage != nil)) {
+            Button(NSLocalizedString("common.ok", comment: "")) {
                 viewModel.errorMessage = nil
             }
         } message: {
@@ -127,16 +127,16 @@ struct EmptyPartyView: View {
                 .font(.system(size: 60))
                 .foregroundColor(.secondary)
 
-            Text("No Parties")
+            Text(NSLocalizedString("party.no_parties", comment: ""))
                 .font(.title2)
                 .fontWeight(.semibold)
 
-            Text("Create your first party to get started")
+            Text(NSLocalizedString("party.create_first_party", comment: ""))
                 .font(.body)
                 .foregroundColor(.secondary)
 
             Button(action: onCreate) {
-                Label("Create Party", systemImage: "plus.circle.fill")
+                Label(NSLocalizedString("party.create_party", comment: ""), systemImage: "plus.circle.fill")
                     .font(.headline)
             }
             .buttonStyle(.borderedProminent)
@@ -167,7 +167,7 @@ struct PartyCardView: View {
                     .font(.caption)
                 Spacer()
                 if !party.members.isEmpty {
-                    Text("Avg. Lv. \(Int(party.averageLevel))")
+                    Text(String(format: NSLocalizedString("party.average_level", comment: ""), Int(party.averageLevel)))
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }

@@ -139,15 +139,16 @@ struct PokemonRow: View {
 
         let normalAbilities = pokemon.abilities.filter { !$0.isHidden }
         let hiddenAbilities = pokemon.abilities.filter { $0.isHidden }
+        let hiddenSuffix = " (\(NSLocalizedString("ability.hidden", comment: "")))"
 
         var parts: [String] = []
 
         if !normalAbilities.isEmpty {
-            parts.append(normalAbilities.map { localizationManager.displayName(for: $0).replacingOccurrences(of: " (隠れ特性)", with: "") }.joined(separator: " "))
+            parts.append(normalAbilities.map { localizationManager.displayName(for: $0).replacingOccurrences(of: hiddenSuffix, with: "") }.joined(separator: " "))
         }
 
         if !hiddenAbilities.isEmpty {
-            parts.append(hiddenAbilities.map { localizationManager.displayName(for: $0).replacingOccurrences(of: " (隠れ特性)", with: "") }.joined(separator: " "))
+            parts.append(hiddenAbilities.map { localizationManager.displayName(for: $0).replacingOccurrences(of: hiddenSuffix, with: "") }.joined(separator: " "))
         }
 
         return parts.isEmpty ? "-" : parts.joined(separator: " ")
@@ -369,7 +370,8 @@ struct PokemonRow: View {
     private func displayNameForAbility(_ abilityName: String) -> String {
         // ポケモンの特性リストから該当する特性の日本語名を探す
         if let ability = pokemon.abilities.first(where: { $0.name == abilityName }) {
-            return localizationManager.displayName(for: ability).replacingOccurrences(of: " (隠れ特性)", with: "")
+            let hiddenSuffix = " (\(NSLocalizedString("ability.hidden", comment: "")))"
+            return localizationManager.displayName(for: ability).replacingOccurrences(of: hiddenSuffix, with: "")
         }
         return abilityName
     }

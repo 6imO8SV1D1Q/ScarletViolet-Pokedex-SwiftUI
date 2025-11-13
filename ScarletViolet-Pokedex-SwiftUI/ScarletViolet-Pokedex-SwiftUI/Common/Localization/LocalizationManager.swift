@@ -129,7 +129,12 @@ class LocalizationManager: ObservableObject {
         case .english:
             baseName = ability.name.capitalized
         }
-        return ability.isHidden ? "\(baseName) (隠れ特性)" : baseName
+        if ability.isHidden {
+            let hiddenText = NSLocalizedString("ability.hidden", comment: "")
+            return "\(baseName) (\(hiddenText))"
+        } else {
+            return baseName
+        }
     }
 
     /// 図鑑名の表示

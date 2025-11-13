@@ -146,7 +146,7 @@
 "filter.terrain_value" = "フィールド: %@";
 "filter.category_value" = "カテゴリ: %@";
 "filter.move_conditions" = "技の条件";
-"filter.ability_conditions" = "特性の条件";
+"filter.ability_conditions" = "とくせいの条件";
 "filter.move_category_header" = "技カテゴリー";
 "filter.move_category_footer" = "各カテゴリーを個別に選択できます。";
 "filter.numeric_conditions" = "数値条件";
@@ -159,15 +159,15 @@
 "filter.damage_class_header" = "分類";
 "filter.effect_type" = "効果タイプ";
 "filter.effect_type_description_empty" = "効果のタイプでフィルタリングできます";
-"filter.effect_type_description" = "選択した効果タイプのいずれかを持つ特性を表示";
+"filter.effect_type_description" = "選択した効果タイプのいずれかを持つとくせいを表示";
 "filter.weather_terrain" = "天候・フィールド";
-"filter.weather_terrain_description_empty" = "天候やフィールドに関連する特性を絞り込みます";
-"filter.weather_terrain_description" = "選択した天候またはフィールドに関連する特性を表示";
+"filter.weather_terrain_description_empty" = "天候やフィールドに関連するとくせいを絞り込みます";
+"filter.weather_terrain_description" = "選択した天候またはフィールドに関連するとくせいを表示";
 "filter.move_target" = "技の対象";
 "filter.move_type" = "技のタイプ";
 "filter.trigger_timing" = "発動タイミング";
 "filter.trigger_timing_description_empty" = "発動タイミングでフィルタリングできます";
-"filter.trigger_timing_description" = "選択したタイミングのいずれかで発動する特性を表示";
+"filter.trigger_timing_description" = "選択したタイミングのいずれかで発動するとくせいを表示";
 
 // MARK: - Pokemon Category
 "category.normal" = "一般";
@@ -200,24 +200,24 @@
 "ability_category.random_effect" = "ランダム効果";
 "ability_category.hp_dependent" = "HP依存";
 
-"ability_category.weather_setter_desc" = "天候を変更する特性";
-"ability_category.weather_dependent_desc" = "天候によって効果が変わる特性";
-"ability_category.terrain_setter_desc" = "フィールドを変更する特性";
-"ability_category.terrain_dependent_desc" = "フィールドによって効果が変わる特性";
-"ability_category.stat_boost_desc" = "自分の能力を上昇させる特性";
-"ability_category.stat_reducer_desc" = "相手の能力を下げる特性";
-"ability_category.type_boost_desc" = "特定タイプの技を強化する特性";
-"ability_category.type_immunity_desc" = "特定タイプを無効化する特性";
-"ability_category.type_defense_desc" = "特定タイプのダメージを軽減する特性";
-"ability_category.status_immunity_desc" = "状態異常を防ぐ特性";
-"ability_category.status_inflictor_desc" = "状態異常を付与する特性";
-"ability_category.damage_reduction_desc" = "受けるダメージを軽減する特性";
-"ability_category.damage_increase_desc" = "与えるダメージを増加させる特性";
-"ability_category.healing_desc" = "HPを回復する特性";
-"ability_category.switch_in_effect_desc" = "場に出たときに効果を発動する特性";
-"ability_category.switch_out_effect_desc" = "交代時に効果を発動する特性";
-"ability_category.random_effect_desc" = "ランダムに効果を発動する特性";
-"ability_category.hp_dependent_desc" = "HPの状態によって効果が変わる特性";
+"ability_category.weather_setter_desc" = "天候を変更するとくせい";
+"ability_category.weather_dependent_desc" = "天候によって効果が変わるとくせい";
+"ability_category.terrain_setter_desc" = "フィールドを変更するとくせい";
+"ability_category.terrain_dependent_desc" = "フィールドによって効果が変わるとくせい";
+"ability_category.stat_boost_desc" = "自分の能力を上昇させるとくせい";
+"ability_category.stat_reducer_desc" = "相手の能力を下げるとくせい";
+"ability_category.type_boost_desc" = "特定タイプの技を強化するとくせい";
+"ability_category.type_immunity_desc" = "特定タイプを無効化するとくせい";
+"ability_category.type_defense_desc" = "特定タイプのダメージを軽減するとくせい";
+"ability_category.status_immunity_desc" = "状態異常を防ぐとくせい";
+"ability_category.status_inflictor_desc" = "状態異常を付与するとくせい";
+"ability_category.damage_reduction_desc" = "受けるダメージを軽減するとくせい";
+"ability_category.damage_increase_desc" = "与えるダメージを増加させるとくせい";
+"ability_category.healing_desc" = "HPを回復するとくせい";
+"ability_category.switch_in_effect_desc" = "場に出たときに効果を発動するとくせい";
+"ability_category.switch_out_effect_desc" = "交代時に効果を発動するとくせい";
+"ability_category.random_effect_desc" = "ランダムに効果を発動するとくせい";
+"ability_category.hp_dependent_desc" = "HPの状態によって効果が変わるとくせい";
 
 "ability_category_group.weather_terrain" = "天候・フィールド";
 "ability_category_group.stat_change" = "能力変化";
@@ -287,11 +287,11 @@
 "effect_type.reflect_status_move" = "変化技反射";
 "effect_type.change_user_type" = "自分タイプ変更";
 "effect_type.change_target_type" = "相手タイプ変更";
-"effect_type.ignore_ability" = "特性無視";
-"effect_type.nullify_abilities" = "全特性無効化";
-"effect_type.copy_ability" = "特性コピー";
-"effect_type.change_ability" = "特性変更";
-"effect_type.swap_ability" = "特性入れ替え";
+"effect_type.ignore_ability" = "とくせい無視";
+"effect_type.nullify_abilities" = "全とくせい無効化";
+"effect_type.copy_ability" = "とくせいコピー";
+"effect_type.change_ability" = "とくせい変更";
+"effect_type.swap_ability" = "とくせい入れ替え";
 "effect_type.prevent_item_loss" = "道具保護";
 "effect_type.steal_item" = "道具奪取";
 "effect_type.disable_item" = "道具無効化";
@@ -321,7 +321,7 @@
 "effect_type.multi_hit_exact" = "連続攻撃回数固定";
 "effect_type.replicate_move" = "技コピー";
 "effect_type.create_hazard" = "設置技設置";
-"effect_type.grant_ability_to_ally" = "味方に特性付与";
+"effect_type.grant_ability_to_ally" = "味方にとくせい付与";
 "effect_type.boost_ally_move_power" = "味方技威力上昇";
 "effect_type.heal_ally" = "味方回復";
 "effect_type.pass_item_to_ally" = "味方に道具渡す";
@@ -456,7 +456,7 @@
 "move.pp_label" = "PP:";
 
 // MARK: - Ability Details
-"ability.hidden" = "隠れとくせい";
+"ability.hidden" = "かくれとくせい";
 "ability.loading" = "とくせいの詳細を読み込み中...";
 
 // MARK: - Sort Options
@@ -568,7 +568,7 @@
 "move_category.stat_change" = "ランク変化";
 "move_category.setup" = "積み技";
 "move_category.type_change" = "タイプ変化";
-"move_category.ability_change" = "特性変化";
+"move_category.ability_change" = "とくせい変化";
 "move_category.counter" = "カウンター";
 "move_category.protect" = "まもる";
 "move_category.healing" = "回復";
@@ -638,7 +638,7 @@
 "damage_calc.tera_type" = "テラスタイプ:";
 "damage_calc.held_item" = "持ち物:";
 "damage_calc.none" = "なし";
-"damage_calc.ability" = "特性:";
+"damage_calc.ability" = "とくせい:";
 "damage_calc.nature" = "性格:";
 "damage_calc.iv" = "個体値";
 "damage_calc.ev" = "努力値";
@@ -718,5 +718,5 @@
 "damage_calc.search_item" = "名前で検索";
 "damage_calc.pokemon_not_found" = "ポケモンが見つかりません";
 "damage_calc.move_not_found" = "わざが見つかりません";
-"damage_calc.ability_not_found" = "特性が見つかりません";
+"damage_calc.ability_not_found" = "とくせいが見つかりません";
 "damage_calc.item_not_found" = "アイテムが見つかりません";

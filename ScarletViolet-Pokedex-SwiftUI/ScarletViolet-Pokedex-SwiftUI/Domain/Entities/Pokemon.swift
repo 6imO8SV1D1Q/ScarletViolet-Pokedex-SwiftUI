@@ -570,11 +570,10 @@ struct PokemonAbility: Codable, Identifiable, Hashable {
         case isHidden = "is_hidden"
     }
 
-    /// 表示用の名前（隠れ特性の場合は注釈付き）
-    /// - Returns: 表示用の特性名
+    /// 表示用の名前
+    /// - Returns: 表示用の特性名（注釈なし。隠れ特性の注釈が必要な場合はLocalizationManagerを使用してください）
     var displayName: String {
-        let baseName = nameJa ?? name.capitalized
-        return isHidden ? "\(baseName) (隠れ特性)" : baseName
+        return nameJa ?? name.capitalized
     }
 
     // Hashable conformance

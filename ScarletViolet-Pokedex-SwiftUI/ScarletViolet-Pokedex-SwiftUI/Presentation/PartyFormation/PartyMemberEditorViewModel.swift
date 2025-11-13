@@ -60,9 +60,11 @@ final class PartyMemberEditorViewModel: ObservableObject {
     func loadAvailableItems() async {
         do {
             let allItems = try await itemProvider.fetchAllItems()
+            print("📦 [PartyMemberEditor] Loaded \(allItems.count) total items")
             availableItems = allItems
                 .filter { $0.category == "held-item" }
                 .sorted { $0.id < $1.id }
+            print("✅ [PartyMemberEditor] Filtered to \(availableItems.count) held items")
         } catch {
             print("❌ [PartyMemberEditor] Failed to load items: \(error)")
             availableItems = []
@@ -72,12 +74,19 @@ final class PartyMemberEditorViewModel: ObservableObject {
     private func loadAvailableMoves(pokemon: Pokemon) async {
         // Extract unique move IDs from pokemon.moves
         let moveIds = pokemon.moves.map { $0.id }
+        print("📦 [PartyMemberEditor] Loading \(moveIds.count) moves for \(pokemon.displayName)")
 
         // Fetch move details
         let moves = await withTaskGroup(of: MoveEntity?.self) { group in
             for moveId in moveIds {
                 group.addTask { [moveRepository] in
-                    try? await moveRepository.fetchMoveDetail(moveId: moveId, versionGroup: "scarlet-violet")
+                    do {
+                        let move = try await moveRepository.fetchMoveDetail(moveId: moveId, versionGroup: "scarlet-violet")
+                        return move
+                    } catch {
+                        print("⚠️ [PartyMemberEditor] Failed to load move \(moveId): \(error)")
+                        return nil
+                    }
                 }
             }
 
@@ -91,6 +100,7 @@ final class PartyMemberEditorViewModel: ObservableObject {
         }
 
         availableMoves = moves.sorted { $0.nameJa < $1.nameJa }
+        print("✅ [PartyMemberEditor] Loaded \(availableMoves.count) moves successfully")
     }
 
     func updateTeraType(_ type: String) {

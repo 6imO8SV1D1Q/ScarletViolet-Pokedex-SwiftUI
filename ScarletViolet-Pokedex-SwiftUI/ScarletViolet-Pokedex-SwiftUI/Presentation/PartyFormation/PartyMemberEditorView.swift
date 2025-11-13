@@ -84,7 +84,8 @@ struct PartyMemberEditorView: View {
                 )) {
                     Text(NSLocalizedString("party.item_none", comment: "")).tag("")
                     ForEach(viewModel.availableItems, id: \.id) { item in
-                        Text(item.nameJa).tag(item.name)
+                        let itemName = localizationManager.currentLanguage == .japanese ? item.nameJa : item.name
+                        Text(itemName).tag(item.name)
                     }
                 }
                 .pickerStyle(.navigationLink)
@@ -92,7 +93,10 @@ struct PartyMemberEditorView: View {
                 // Show item description if selected
                 if let itemName = viewModel.member.item,
                    let selectedItem = viewModel.availableItems.first(where: { $0.name == itemName }) {
-                    Text(selectedItem.descriptionJa ?? selectedItem.description ?? "")
+                    let description = localizationManager.currentLanguage == .japanese
+                        ? (selectedItem.descriptionJa ?? selectedItem.description ?? "")
+                        : (selectedItem.description ?? selectedItem.descriptionJa ?? "")
+                    Text(description)
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -149,7 +153,7 @@ struct PartyMemberEditorView: View {
                                     // Display move name from availableMoves if possible, otherwise use stored name
                                     let displayName: String = {
                                         if let moveEntity = viewModel.availableMoves.first(where: { $0.name == move.moveName }) {
-                                            return moveEntity.nameJa
+                                            return localizationManager.currentLanguage == .japanese ? moveEntity.nameJa : moveEntity.name
                                         }
                                         return move.moveName
                                     }()
@@ -158,7 +162,10 @@ struct PartyMemberEditorView: View {
                                         .foregroundColor(.primary)
                                     Spacer()
                                     // Type badge
-                                    Text(moveType.nameJa ?? moveType.japaneseName)
+                                    let typeName = localizationManager.currentLanguage == .japanese
+                                        ? (moveType.nameJa ?? moveType.japaneseName)
+                                        : moveType.name.capitalized
+                                    Text(typeName)
                                         .font(.caption2)
                                         .padding(.horizontal, 8)
                                         .padding(.vertical, 2)
@@ -299,10 +306,14 @@ struct PartyMoveSelectorSheet: View {
                         } label: {
                             VStack(alignment: .leading, spacing: 4) {
                                 HStack {
-                                    Text(move.nameJa)
+                                    let moveName = localizationManager.currentLanguage == .japanese ? move.nameJa : move.name
+                                    Text(moveName)
                                         .font(.body)
                                     Spacer()
-                                    Text(move.type.nameJa ?? move.type.japaneseName)
+                                    let typeName = localizationManager.currentLanguage == .japanese
+                                        ? (move.type.nameJa ?? move.type.japaneseName)
+                                        : move.type.name.capitalized
+                                    Text(typeName)
                                         .font(.caption2)
                                         .padding(.horizontal, 6)
                                         .padding(.vertical, 2)

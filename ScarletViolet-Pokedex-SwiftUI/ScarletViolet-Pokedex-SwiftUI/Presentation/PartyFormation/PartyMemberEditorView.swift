@@ -11,6 +11,7 @@ import SwiftUI
 
 struct PartyMemberEditorView: View {
     @ObservedObject var viewModel: PartyMemberEditorViewModel
+    @EnvironmentObject var localizationManager: LocalizationManager
     @Environment(\.dismiss) private var dismiss
     @Binding var member: PartyMember
     @State private var showingMoveSelector = false
@@ -83,20 +84,24 @@ struct PartyMemberEditorView: View {
                 )) {
                     Text(NSLocalizedString("party.item_none", comment: "")).tag("")
                     ForEach(viewModel.availableItems, id: \.id) { item in
-                        Text(item.nameJa).tag(item.name)
+                        let itemName = localizationManager.currentLanguage == .japanese ? item.nameJa : item.name
+                        Text(itemName).tag(item.name)
                     }
                 }
-                .pickerStyle(.menu)
+                .pickerStyle(.navigationLink)
 
                 // Show item description if selected
                 if let itemName = viewModel.member.item,
                    let selectedItem = viewModel.availableItems.first(where: { $0.name == itemName }) {
-                    Text(selectedItem.descriptionJa ?? selectedItem.description ?? "")
+                    let description = localizationManager.currentLanguage == .japanese
+                        ? (selectedItem.descriptionJa ?? selectedItem.description ?? "")
+                        : (selectedItem.description ?? selectedItem.descriptionJa ?? "")
+                    Text(description)
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
             } header: {
-                Text(NSLocalizedString("party.held_item", comment: ""))
+                Text(NSLocalizedString("party.held_item", comment: "") + " (\(viewModel.availableItems.count))")
             }
 
             // Stats (EVs/IVs)
@@ -133,7 +138,7 @@ struct PartyMemberEditorView: View {
             }
 
             // Moves
-            Section(NSLocalizedString("party.moves", comment: "")) {
+            Section {
                 ForEach(0..<4, id: \.self) { slot in
                     Button {
                         selectedMoveSlot = slot
@@ -145,12 +150,22 @@ struct PartyMemberEditorView: View {
                             let moveType = PokemonType(slot: 1, name: move.moveType, nameJa: nil)
                             VStack(alignment: .leading, spacing: 6) {
                                 HStack {
-                                    Text(move.moveName)
+                                    // Display move name from availableMoves if possible, otherwise use stored name
+                                    let displayName: String = {
+                                        if let moveEntity = viewModel.availableMoves.first(where: { $0.name == move.moveName }) {
+                                            return localizationManager.currentLanguage == .japanese ? moveEntity.nameJa : moveEntity.name
+                                        }
+                                        return move.moveName
+                                    }()
+                                    Text(displayName)
                                         .font(.body)
                                         .foregroundColor(.primary)
                                     Spacer()
                                     // Type badge
-                                    Text(moveType.nameJa ?? moveType.japaneseName)
+                                    let typeName = localizationManager.currentLanguage == .japanese
+                                        ? (moveType.nameJa ?? moveType.japaneseName)
+                                        : moveType.name.capitalized
+                                    Text(typeName)
                                         .font(.caption2)
                                         .padding(.horizontal, 8)
                                         .padding(.vertical, 2)
@@ -192,6 +207,8 @@ struct PartyMemberEditorView: View {
                         }
                     }
                 }
+            } header: {
+                Text(NSLocalizedString("party.moves", comment: "") + " (\(viewModel.availableMoves.count))")
             }
 
             // Notes
@@ -231,6 +248,7 @@ struct PartyMemberEditorView: View {
                         showingMoveSelector = false
                     }
                 )
+                .environmentObject(localizationManager)
             }
         }
         .sheet(isPresented: $showingEVEditor) {
@@ -252,6 +270,7 @@ struct PartyMoveSelectorSheet: View {
     let availableMoves: [MoveEntity]
     let selectedMoveSlot: Int
     let onMoveSelected: (MoveEntity) -> Void
+    @EnvironmentObject var localizationManager: LocalizationManager
     @Environment(\.dismiss) private var dismiss
     @State private var searchText = ""
 
@@ -287,10 +306,14 @@ struct PartyMoveSelectorSheet: View {
                         } label: {
                             VStack(alignment: .leading, spacing: 4) {
                                 HStack {
-                                    Text(move.nameJa)
+                                    let moveName = localizationManager.currentLanguage == .japanese ? move.nameJa : move.name
+                                    Text(moveName)
                                         .font(.body)
                                     Spacer()
-                                    Text(move.type.nameJa ?? move.type.japaneseName)
+                                    let typeName = localizationManager.currentLanguage == .japanese
+                                        ? (move.type.nameJa ?? move.type.japaneseName)
+                                        : move.type.name.capitalized
+                                    Text(typeName)
                                         .font(.caption2)
                                         .padding(.horizontal, 6)
                                         .padding(.vertical, 2)

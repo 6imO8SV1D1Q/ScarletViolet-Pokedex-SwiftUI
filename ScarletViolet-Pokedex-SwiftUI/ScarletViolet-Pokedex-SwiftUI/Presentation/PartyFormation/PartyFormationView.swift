@@ -84,6 +84,9 @@ struct PartyFormationView: View {
             }
         }
         .sheet(isPresented: $showingMemberEditor) {
+            // Reset editing index when dismissed
+            editingMemberIndex = nil
+        } content: {
             if let index = editingMemberIndex,
                index < viewModel.sortedMembers.count {
                 // Find the actual index in party.members array
@@ -97,6 +100,7 @@ struct PartyFormationView: View {
                             member: $viewModel.party.members[actualIndex]
                         )
                     }
+                    .id(sortedMember.id) // Force recreation when member changes
                 }
             }
         }

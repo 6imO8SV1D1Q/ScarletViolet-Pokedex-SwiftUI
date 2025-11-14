@@ -74,7 +74,7 @@ enum PreloadedDataLoader {
         var abilityMap: [Int: (name: String, nameJa: String)] = [:]
         for ability in gameData.abilities {
             let name = ability.name ?? "ability-\(ability.id)"
-            let nameJa = ability.nameJa ?? "特性\(ability.id)"
+            let nameJa = ability.nameJa ?? "とくせい\(ability.id)"
             abilityMap[ability.id] = (name: name, nameJa: nameJa)
         }
 
@@ -84,7 +84,7 @@ enum PreloadedDataLoader {
             let model = AbilityModel(
                 id: abilityData.id,
                 name: abilityData.name ?? "ability-\(abilityData.id)",
-                nameJa: abilityData.nameJa ?? "特性\(abilityData.id)",
+                nameJa: abilityData.nameJa ?? "とくせい\(abilityData.id)",
                 effect: abilityData.effect ?? "",
                 effectJa: abilityData.effectJa ?? ""
             )

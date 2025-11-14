@@ -99,7 +99,7 @@ struct AbilityCard: View {
     private var hiddenBadgeText: String {
         switch currentLanguage {
         case .japanese:
-            return "隠れ特性"
+            return NSLocalizedString("ability.hidden", comment: "")
         case .english:
             return "Hidden"
         }

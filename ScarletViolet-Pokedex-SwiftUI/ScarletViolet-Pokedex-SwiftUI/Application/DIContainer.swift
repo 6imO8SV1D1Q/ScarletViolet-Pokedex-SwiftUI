@@ -24,6 +24,7 @@ final class DIContainer: ObservableObject {
         _pokemonRepository = nil
         _abilityRepository = nil
         _moveRepository = nil
+        _partyRepository = nil
     }
 
     // MARK: - Repositories
@@ -77,11 +78,30 @@ final class DIContainer: ObservableObject {
         TypeRepository()
     }()
 
+    private var _partyRepository: PartyRepositoryProtocol?
+    private var partyRepository: PartyRepositoryProtocol {
+        if let repository = _partyRepository {
+            return repository
+        }
+
+        guard let modelContext = modelContext else {
+            fatalError("❌ ModelContext not set. Call setModelContext(_:) first.")
+        }
+
+        let repository = PartyRepository(modelContext: modelContext)
+        _partyRepository = repository
+        return repository
+    }
+
     // MARK: - v5.0 Providers
 
-    private lazy var itemProvider: ItemProviderProtocol = {
+    private lazy var _itemProvider: ItemProviderProtocol = {
         ItemProvider()
     }()
+
+    var itemProvider: ItemProviderProtocol {
+        _itemProvider
+    }
 
     // MARK: - UseCases
     func makeFetchPokemonListUseCase() -> FetchPokemonListUseCaseProtocol {
@@ -162,6 +182,24 @@ final class DIContainer: ObservableObject {
         FilterPokemonByAbilityMetadataUseCase()
     }
 
+    // MARK: - Party UseCases
+
+    func makeFetchPartiesUseCase() -> FetchPartiesUseCaseProtocol {
+        FetchPartiesUseCase(repository: partyRepository)
+    }
+
+    func makeSavePartyUseCase() -> SavePartyUseCaseProtocol {
+        SavePartyUseCase(repository: partyRepository)
+    }
+
+    func makeDeletePartyUseCase() -> DeletePartyUseCaseProtocol {
+        DeletePartyUseCase(repository: partyRepository)
+    }
+
+    func makeAnalyzePartyUseCase() -> AnalyzePartyUseCaseProtocol {
+        AnalyzePartyUseCase()
+    }
+
     // MARK: - Repositories Factory Methods
 
     func makeMoveRepository() -> MoveRepositoryProtocol {
@@ -200,11 +238,38 @@ final class DIContainer: ObservableObject {
 
     func makeDamageCalculatorStore() -> DamageCalculatorStore {
         DamageCalculatorStore(
-            itemProvider: itemProvider,
+            itemProvider: _itemProvider,
             pokemonRepository: pokemonRepository,
             moveRepository: moveRepository,
             typeRepository: typeRepository,
             abilityRepository: abilityRepository
+        )
+    }
+
+    // MARK: - Party ViewModels
+
+    func makePartyListViewModel() -> PartyListViewModel {
+        PartyListViewModel(
+            fetchPartiesUseCase: makeFetchPartiesUseCase(),
+            deletePartyUseCase: makeDeletePartyUseCase()
+        )
+    }
+
+    func makePartyFormationViewModel(party: Party? = nil) -> PartyFormationViewModel {
+        PartyFormationViewModel(
+            party: party,
+            savePartyUseCase: makeSavePartyUseCase(),
+            analyzePartyUseCase: makeAnalyzePartyUseCase(),
+            pokemonRepository: pokemonRepository
+        )
+    }
+
+    func makePartyMemberEditorViewModel(member: PartyMember) -> PartyMemberEditorViewModel {
+        PartyMemberEditorViewModel(
+            member: member,
+            pokemonRepository: pokemonRepository,
+            moveRepository: moveRepository,
+            itemProvider: _itemProvider
         )
     }
 }

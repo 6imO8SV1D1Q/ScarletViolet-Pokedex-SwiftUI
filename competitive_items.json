@@ -1,0 +1,375 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "id": 135,
+      "name": "focus-sash",
+      "nameJa": "きあいのタスキ",
+      "category": "held-item",
+      "description": "Holder survives any attack with 1 HP remaining if it has full HP.",
+      "descriptionJa": "HPが満タンの時に攻撃を受けてひんしになりそうになってもHPを1残して耐える。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/focus-sash.png",
+      "cost": 50000
+    },
+    {
+      "id": 234,
+      "name": "life-orb",
+      "nameJa": "いのちのたま",
+      "category": "held-item",
+      "description": "Holder's moves deal 30% more damage, but holder loses 10% HP on each attack.",
+      "descriptionJa": "持たせると技の威力が1.3倍になるが、攻撃する度に最大HPの1/10のダメージを受ける。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/life-orb.png",
+      "cost": 50000
+    },
+    {
+      "id": 220,
+      "name": "choice-band",
+      "nameJa": "こだわりハチマキ",
+      "category": "held-item",
+      "description": "Holder's Attack is 1.5x, but it can only select the first move it executes.",
+      "descriptionJa": "持たせると攻撃が1.5倍になるが、同じ技しか出せなくなる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/choice-band.png",
+      "cost": 100000
+    },
+    {
+      "id": 297,
+      "name": "choice-specs",
+      "nameJa": "こだわりメガネ",
+      "category": "held-item",
+      "description": "Holder's Special Attack is 1.5x, but it can only select the first move it executes.",
+      "descriptionJa": "持たせると特攻が1.5倍になるが、同じ技しか出せなくなる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/choice-specs.png",
+      "cost": 100000
+    },
+    {
+      "id": 298,
+      "name": "choice-scarf",
+      "nameJa": "こだわりスカーフ",
+      "category": "held-item",
+      "description": "Holder's Speed is 1.5x, but it can only select the first move it executes.",
+      "descriptionJa": "持たせると素早さが1.5倍になるが、同じ技しか出せなくなる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/choice-scarf.png",
+      "cost": 100000
+    },
+    {
+      "id": 640,
+      "name": "assault-vest",
+      "nameJa": "とつげきチョッキ",
+      "category": "held-item",
+      "description": "Holder's Special Defense is 1.5x, but it can only use damaging moves.",
+      "descriptionJa": "持たせると特防が1.5倍になるが、変化技が出せなくなる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/assault-vest.png",
+      "cost": 50000
+    },
+    {
+      "id": 268,
+      "name": "expert-belt",
+      "nameJa": "たつじんのおび",
+      "category": "held-item",
+      "description": "Holder's super effective moves deal 20% more damage.",
+      "descriptionJa": "持たせると効果抜群の技の威力が1.2倍になる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/expert-belt.png",
+      "cost": 10000
+    },
+    {
+      "id": 295,
+      "name": "leftovers",
+      "nameJa": "たべのこし",
+      "category": "held-item",
+      "description": "Holder restores 1/16 of its max HP at the end of each turn.",
+      "descriptionJa": "持たせると毎ターン最大HPの1/16を回復する。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/leftovers.png",
+      "cost": 20000
+    },
+    {
+      "id": 275,
+      "name": "muscle-band",
+      "nameJa": "ちからのハチマキ",
+      "category": "held-item",
+      "description": "Holder's physical moves deal 10% more damage.",
+      "descriptionJa": "持たせると物理技の威力が1.1倍になる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/muscle-band.png",
+      "cost": 10000
+    },
+    {
+      "id": 276,
+      "name": "wise-glasses",
+      "nameJa": "ものしりメガネ",
+      "category": "held-item",
+      "description": "Holder's special moves deal 10% more damage.",
+      "descriptionJa": "持たせると特殊技の威力が1.1倍になる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/wise-glasses.png",
+      "cost": 10000
+    },
+    {
+      "id": 245,
+      "name": "rocky-helmet",
+      "nameJa": "ゴツゴツメット",
+      "category": "held-item",
+      "description": "Damages the attacker by 1/6 of its max HP when hit by contact moves.",
+      "descriptionJa": "持たせると直接攻撃を受けた時に相手の最大HPの1/6のダメージを与える。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/rocky-helmet.png",
+      "cost": 50000
+    },
+    {
+      "id": 270,
+      "name": "weakness-policy",
+      "nameJa": "じゃくてんほけん",
+      "category": "held-item",
+      "description": "Raises holder's Attack and Special Attack by 2 stages when hit by a super effective move.",
+      "descriptionJa": "持たせると効果抜群の技を受けた時に攻撃と特攻が2段階上がる。一度だけ。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/weakness-policy.png",
+      "cost": 50000
+    },
+    {
+      "id": 271,
+      "name": "air-balloon",
+      "nameJa": "ふうせん",
+      "category": "held-item",
+      "description": "Holder is immune to Ground-type moves. Pops when hit.",
+      "descriptionJa": "持たせると地面タイプの技が当たらなくなる。攻撃を受けると割れる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/air-balloon.png",
+      "cost": 15000
+    },
+    {
+      "id": 289,
+      "name": "red-card",
+      "nameJa": "レッドカード",
+      "category": "held-item",
+      "description": "Forces the attacker to switch out when holder is hit by a move.",
+      "descriptionJa": "持たせると攻撃を受けた時に相手を強制的に交代させる。一度だけ。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/red-card.png",
+      "cost": 30000
+    },
+    {
+      "id": 213,
+      "name": "focus-band",
+      "nameJa": "きあいのハチマキ",
+      "category": "held-item",
+      "description": "Holder has 10% chance to survive any attack with 1 HP when it would be knocked out.",
+      "descriptionJa": "持たせるとひんしになりそうな攻撃を受けても10%の確率でHP1で耐える。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/focus-band.png",
+      "cost": 30000
+    },
+    {
+      "id": 219,
+      "name": "scope-lens",
+      "nameJa": "ピントレンズ",
+      "category": "held-item",
+      "description": "Holder's critical hit ratio is raised by 1 stage.",
+      "descriptionJa": "持たせると急所に当たりやすくなる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/scope-lens.png",
+      "cost": 30000
+    },
+    {
+      "id": 241,
+      "name": "quick-claw",
+      "nameJa": "せんせいのツメ",
+      "category": "held-item",
+      "description": "Holder has 20% chance to move first in its priority bracket.",
+      "descriptionJa": "持たせると20%の確率で先制攻撃できる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/quick-claw.png",
+      "cost": 10000
+    },
+    {
+      "id": 278,
+      "name": "metronome",
+      "nameJa": "メトロノーム",
+      "category": "held-item",
+      "description": "Damage of moves used on consecutive turns increases. Max 2x after 5 turns.",
+      "descriptionJa": "持たせると同じ技を連続で使うと威力が上がる。最大2倍。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/metronome.png",
+      "cost": 30000
+    },
+    {
+      "id": 281,
+      "name": "iron-ball",
+      "nameJa": "くろいてっきゅう",
+      "category": "held-item",
+      "description": "Holder's Speed is halved. Negates immunity to Ground-type moves.",
+      "descriptionJa": "持たせると素早さが半分になり、地面タイプの技が当たるようになる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/iron-ball.png",
+      "cost": 20000
+    },
+    {
+      "id": 282,
+      "name": "lagging-tail",
+      "nameJa": "こうこうのしっぽ",
+      "category": "held-item",
+      "description": "Holder moves last in its priority bracket.",
+      "descriptionJa": "持たせると必ず後攻になる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/lagging-tail.png",
+      "cost": 20000
+    },
+    {
+      "id": 299,
+      "name": "flame-orb",
+      "nameJa": "かえんだま",
+      "category": "held-item",
+      "description": "Holder is burned at the end of the first turn.",
+      "descriptionJa": "持たせると戦闘中最初のターンの終わりにやけど状態になる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/flame-orb.png",
+      "cost": 30000
+    },
+    {
+      "id": 300,
+      "name": "toxic-orb",
+      "nameJa": "どくどくだま",
+      "category": "held-item",
+      "description": "Holder is badly poisoned at the end of the first turn.",
+      "descriptionJa": "持たせると戦闘中最初のターンの終わりにもうどく状態になる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/toxic-orb.png",
+      "cost": 30000
+    },
+    {
+      "id": 648,
+      "name": "safety-goggles",
+      "nameJa": "ぼうじんゴーグル",
+      "category": "held-item",
+      "description": "Holder is immune to powder moves and damage from weather.",
+      "descriptionJa": "持たせると粉系の技と天候ダメージを受けなくなる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/safety-goggles.png",
+      "cost": 40000
+    },
+    {
+      "id": 881,
+      "name": "protective-pads",
+      "nameJa": "ぼうごパッド",
+      "category": "held-item",
+      "description": "Holder's contact moves don't trigger the target's contact effects.",
+      "descriptionJa": "持たせると接触技を使っても相手の接触時の効果を受けない。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/protective-pads.png",
+      "cost": 30000
+    },
+    {
+      "id": 879,
+      "name": "terrain-extender",
+      "nameJa": "グランドコート",
+      "category": "held-item",
+      "description": "Extends the duration of terrain from 5 turns to 8 turns.",
+      "descriptionJa": "持たせるとフィールドの効果が5ターンから8ターンに延長される。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/terrain-extender.png",
+      "cost": 30000
+    },
+    {
+      "id": 586,
+      "name": "eviolite",
+      "nameJa": "しんかのきせき",
+      "category": "held-item",
+      "description": "Defense and Special Defense of holder that can still evolve are 1.5x.",
+      "descriptionJa": "進化前のポケモンに持たせると防御と特防が1.5倍になる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/eviolite.png",
+      "cost": 40000
+    },
+    {
+      "id": 1861,
+      "name": "booster-energy",
+      "nameJa": "ブーストエナジー",
+      "category": "held-item",
+      "description": "Activates the Paradox Pokémon's Protosynthesis or Quark Drive ability.",
+      "descriptionJa": "パラドックスポケモンに持たせると古代活性・クォークチャージが発動する。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/booster-energy.png",
+      "cost": 30000
+    },
+    {
+      "id": 1862,
+      "name": "ability-shield",
+      "nameJa": "とくせいガード",
+      "category": "held-item",
+      "description": "Prevents the holder's ability from being changed by other Pokémon.",
+      "descriptionJa": "持たせると相手から特性を変えられなくなる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ability-shield.png",
+      "cost": 20000
+    },
+    {
+      "id": 1863,
+      "name": "clear-amulet",
+      "nameJa": "クリアチャーム",
+      "category": "held-item",
+      "description": "Prevents other Pokémon from lowering the holder's stats.",
+      "descriptionJa": "持たせると相手から能力を下げられなくなる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/clear-amulet.png",
+      "cost": 30000
+    },
+    {
+      "id": 1864,
+      "name": "mirror-herb",
+      "nameJa": "ものまねハーブ",
+      "category": "held-item",
+      "description": "Copies the opponent's stat increases once, then is consumed.",
+      "descriptionJa": "持たせると相手の能力上昇をコピーする。一度だけ。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/mirror-herb.png",
+      "cost": 30000
+    },
+    {
+      "id": 1865,
+      "name": "punching-glove",
+      "nameJa": "パンチグローブ",
+      "category": "held-item",
+      "description": "Powers up punching moves and removes their contact effects.",
+      "descriptionJa": "持たせるとパンチ技の威力が1.1倍になり、接触判定がなくなる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/punching-glove.png",
+      "cost": 15000
+    },
+    {
+      "id": 1866,
+      "name": "covert-cloak",
+      "nameJa": "おんみつマント",
+      "category": "held-item",
+      "description": "Protects the holder from the secondary effects of attacks.",
+      "descriptionJa": "持たせると技の追加効果を受けなくなる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/covert-cloak.png",
+      "cost": 20000
+    },
+    {
+      "id": 1867,
+      "name": "loaded-dice",
+      "nameJa": "いかさまダイス",
+      "category": "held-item",
+      "description": "Multi-hit moves always hit at least 4 times.",
+      "descriptionJa": "持たせると連続技が必ず4回以上当たる。",
+      "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/loaded-dice.png",
+      "cost": 20000
+    },
+    {
+      "id": 2403,
+      "name": "wellspring-mask",
+      "nameJa": "いどのめん",
+      "category": "held-item",
+      "description": "Ogerpon's mask. It boosts the power of the holder's Water-type moves.",
+      "descriptionJa": "オーガポンのお面。持たせると水タイプの技の威力が上がる。",
+      "spriteUrl": "",
+      "cost": 0
+    },
+    {
+      "id": 2404,
+      "name": "hearthflame-mask",
+      "nameJa": "かまどのめん",
+      "category": "held-item",
+      "description": "Ogerpon's mask. It boosts the power of the holder's Fire-type moves.",
+      "descriptionJa": "オーガポンのお面。持たせると炎タイプの技の威力が上がる。",
+      "spriteUrl": "",
+      "cost": 0
+    },
+    {
+      "id": 2405,
+      "name": "cornerstone-mask",
+      "nameJa": "いしずえのめん",
+      "category": "held-item",
+      "description": "Ogerpon's mask. It boosts the power of the holder's Rock-type moves.",
+      "descriptionJa": "オーガポンのお面。持たせると岩タイプの技の威力が上がる。",
+      "spriteUrl": "",
+      "cost": 0
+    },
+    {
+      "id": 2406,
+      "name": "teal-mask",
+      "nameJa": "みどりのめん",
+      "category": "held-item",
+      "description": "Ogerpon's mask. It slightly boosts the power of the holder's moves.",
+      "descriptionJa": "オーガポンのお面。持たせると技の威力が少し上がる。",
+      "spriteUrl": "",
+      "cost": 0
+    }
+  ]
+}

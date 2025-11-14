@@ -9,11 +9,11 @@ import Foundation
 
 /// アイテムデータを提供するプロバイダー
 ///
-/// プリバンドルされたJSONファイル（items_v5.json）からアイテム情報を読み込み、
+/// プリバンドルされたJSONファイル（items_v6.json）からアイテム情報を読み込み、
 /// メモリキャッシュで管理します。
 ///
 /// ## 主な責務
-/// - items_v5.jsonの読み込み
+/// - items_v6.jsonの読み込み
 /// - アイテムデータのキャッシュ管理
 /// - ID/名前/カテゴリーによる検索
 ///
@@ -39,13 +39,11 @@ final class ItemProvider: ItemProviderProtocol {
     func fetchAllItems() async throws -> [ItemEntity] {
         // キャッシュチェック
         if let cached = await cache.getAll() {
-            print("🔍 [ItemProvider] Cache hit: \(cached.count) items")
             return cached
         }
 
         // JSONファイルから読み込み
         let items = try loadItemsFromJSON()
-        print("📦 [ItemProvider] Loaded from JSON: \(items.count) items")
 
         // キャッシュに保存
         await cache.setAll(items: items)
@@ -105,14 +103,33 @@ final class ItemProvider: ItemProviderProtocol {
 
     /// JSONファイルからアイテムデータを読み込む
     private func loadItemsFromJSON() throws -> [ItemEntity] {
-        guard let url = bundle.url(forResource: "items_v5", withExtension: "json", subdirectory: "PreloadedData") else {
+        // Try multiple possible locations for the JSON file
+        var url: URL?
+
+        // Method 1: Bundle root (Xcode Cloud flattens directory structure)
+        url = bundle.url(forResource: "items_v6", withExtension: "json")
+
+        // Method 2: With subdirectory parameter (for local development)
+        if url == nil {
+            url = bundle.url(forResource: "items_v6", withExtension: "json", subdirectory: "PreloadedData")
+        }
+
+        // Method 3: With path in resource name
+        if url == nil {
+            url = bundle.url(forResource: "PreloadedData/items_v6", withExtension: "json")
+        }
+
+        // Method 4: With full path including Resources
+        if url == nil {
+            url = bundle.url(forResource: "Resources/PreloadedData/items_v6", withExtension: "json")
+        }
+
+        guard let fileURL = url else {
             throw ItemProviderError.fileNotFound
         }
 
-        let data = try Data(contentsOf: url)
+        let data = try Data(contentsOf: fileURL)
         let response = try JSONDecoder().decode(ItemsResponse.self, from: data)
-
-        print("📄 [ItemProvider] JSON schema version: \(response.schemaVersion)")
 
         // ID順にソート
         return response.items.sorted { $0.id < $1.id }
@@ -121,7 +138,7 @@ final class ItemProvider: ItemProviderProtocol {
 
 // MARK: - JSON Response Model
 
-/// items_v5.jsonのレスポンス構造
+/// items_v6.jsonのレスポンス構造
 private struct ItemsResponse: Codable {
     let schemaVersion: Int
     let items: [ItemEntity]
@@ -138,7 +155,7 @@ enum ItemProviderError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .fileNotFound:
-            return "items_v5.json file not found"
+            return "items_v6.json file not found"
         case .itemNotFoundById(let id):
             return "Item not found: id=\(id)"
         case .itemNotFoundByName(let name):

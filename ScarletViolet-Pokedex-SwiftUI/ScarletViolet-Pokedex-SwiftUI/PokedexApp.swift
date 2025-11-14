@@ -20,7 +20,8 @@ struct PokedexApp: App {
                 MoveModel.self,
                 MoveMetaModel.self,
                 AbilityModel.self,
-                PokedexModel.self
+                PokedexModel.self,
+                PartyModel.self
             ])
 
             // ModelConfiguration（ディスク永続化）
@@ -89,13 +90,15 @@ struct ContentView: View {
     @State private var pokemonListViewModel: PokemonListViewModel?
     @State private var statsCalculatorViewModel: StatsCalculatorViewModel?
     @State private var damageCalculatorStore: DamageCalculatorStore?
+    @State private var partyListViewModel: PartyListViewModel?
     @State private var isInitialized = false
 
     var body: some View {
         Group {
             if let pokemonListViewModel = pokemonListViewModel,
                let statsCalculatorViewModel = statsCalculatorViewModel,
-               let damageCalculatorStore = damageCalculatorStore {
+               let damageCalculatorStore = damageCalculatorStore,
+               let partyListViewModel = partyListViewModel {
                 // タブ構成
                 TabView {
                     // 図鑑タブ
@@ -118,6 +121,15 @@ struct ContentView: View {
                         .tabItem {
                             Label(NSLocalizedString("damage_calc.title", comment: "Damage Calculator tab title"), systemImage: "bolt.fill")
                         }
+
+                    // パーティ編成タブ
+                    NavigationStack {
+                        PartyListView(viewModel: partyListViewModel)
+                    }
+                    .environmentObject(LocalizationManager.shared)
+                    .tabItem {
+                        Label(NSLocalizedString("tab.party", comment: "Party tab title"), systemImage: "person.3.fill")
+                    }
                 }
             } else {
                 ProgressView("初期化中...")
@@ -133,6 +145,7 @@ struct ContentView: View {
                         pokemonListViewModel = DIContainer.shared.makePokemonListViewModel()
                         statsCalculatorViewModel = DIContainer.shared.makeStatsCalculatorViewModel()
                         damageCalculatorStore = DIContainer.shared.makeDamageCalculatorStore()
+                        partyListViewModel = DIContainer.shared.makePartyListViewModel()
 
                         print("✅ App initialization completed")
                     }

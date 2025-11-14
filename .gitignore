@@ -86,3 +86,4 @@ fastlane/test_output
 *.bak
 *.log
 build.log
+RULES.md
